@@ -4,7 +4,7 @@ const nextConfig = {
         serverActions: true,
       },
       images: {
-        domains: ['https://unsplash.com/']
+        domains: ['images.unsplash.com']
       }
 }
 

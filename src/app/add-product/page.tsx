@@ -23,7 +23,8 @@ const addProduct = async (formData: FormData) => {
   await prisma.product.create({
     data: { name, description, imageUrl, price },
   });
-  redirect('/')
+  redirect('http://localhost:3000/add-product')
+  
 
 
  
