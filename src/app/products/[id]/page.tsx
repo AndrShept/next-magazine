@@ -5,28 +5,34 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import React, { cache } from 'react';
+import { incrementProductQuantity } from './actions';
 
-export const getProduct = cache( async({ params }: { params: { id: string } }) => {
-  const product = await prisma.product.findUnique({where:{id: params.id}})
-  return product
-}) 
-
-
-export const generateMetadata = async ({ params }: { params: { id: string } }):Promise<Metadata> => {
-
- const product =  await getProduct({params})
-return {
-  title : product?.name,
-  description : product?.description,
-  openGraph:{
-    images:[{url: product?.imageUrl ?? ''}]
+export const getProduct = cache(
+  async ({ params }: { params: { id: string } }) => {
+    const product = await prisma.product.findUnique({
+      where: { id: params.id },
+    });
+    return product;
   }
-}
+);
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> => {
+  const product = await getProduct({ params });
+  return {
+    title: product?.name,
+    description: product?.description,
+    openGraph: {
+      images: [{ url: product?.imageUrl ?? '' }],
+    },
+  };
 };
 
 const ProductPageById = async ({ params }: { params: { id: string } }) => {
-  const product =  await getProduct({params})
+  const product = await getProduct({ params });
   if (!product) notFound();
   return (
     <div className='flex flex-col lg:flex-row gap-4'>
@@ -38,12 +44,17 @@ const ProductPageById = async ({ params }: { params: { id: string } }) => {
         className='rounded-lg'
         priority
       />
-      <div>
-        <h1 className='text-5xl font-bold'>{product.name} </h1>
-        <PriceTag price={product.price} />
-        <p className='py-6'>{product.description}</p>
+      <div className='flex flex-col justify-between'>
+        <div>
+          <h1 className='text-5xl font-bold'>{product.name} </h1>
+          <PriceTag price={product.price} />
+          <p className='py-6'>{product.description}</p>
+        </div>
+        <AddToCartButton
+          incrementProductQuantity={incrementProductQuantity}
+          productId={product.id}
+        />
       </div>
-      <AddToCartButton  productId={product.id}/>
     </div>
   );
 };
