@@ -21,7 +21,7 @@ export const AddToCartButton = ({ productId, incrementProductQuantity }: AddToCa
           await incrementProductQuantity(productId)
           setSuccess(true)
         })
-      }} className='btn btn-primary text-white'>
+      }} className='btn btn-primary text-white font-normal '>
         Add to Cart{' '}
         <svg
           xmlns='http://www.w3.org/2000/svg'
