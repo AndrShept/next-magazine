@@ -1,11 +1,17 @@
 'use client';
 import { prisma } from '@/lib/db/prisma';
-import React from 'react';
+import React, { useTransition } from 'react';
 
-export const AddToCartButton = ({ productId }: { productId: string }) => {
-  return (
+interface AddToCartButtonProps {
+    productId : string
+    incrementProductQuantity : (productId: string) => Promise<void>
+}
+
+export const AddToCartButton = ({ productId, incrementProductQuantity }: AddToCartButtonProps) => {
+  const [isPending, startTransition] = useTransition()
+    return (
     <div className='flex items-center gap-2'>
-      <button className='btn btn-primary text-white'>
+      <button onClick={() => incrementProductQuantity(productId)} className='btn btn-primary text-white'>
         Add to Cart{' '}
         <svg
           xmlns='http://www.w3.org/2000/svg'

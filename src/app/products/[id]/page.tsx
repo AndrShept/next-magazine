@@ -43,7 +43,7 @@ const ProductPageById = async ({ params }: { params: { id: string } }) => {
         <PriceTag price={product.price} />
         <p className='py-6'>{product.description}</p>
       </div>
-      <AddToCartButton productId={product.id}/>
+      <AddToCartButton  productId={product.id}/>
     </div>
   );
 };
