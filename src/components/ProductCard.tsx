@@ -15,13 +15,15 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link
       href={'/products/' + product.id}
-      className=' card w-full bg-base-100 hover:shadow-xl transition-shadow group'
+      className='card   w-full bg-base-100 hover:shadow-xl transition-shadow group duration-200'
     >
-      <figure>
+      <figure className='flex items-center justify-center '>
         <Image
+          blurDataURL={product.imageUrl}
+          placeholder='blur'
           src={product.imageUrl}
           alt={product.imageUrl}
-          className=' object-cover h-48 group-hover:scale-105 duration-200'
+          className=' object-cover h-48 group-hover:scale-105 duration-300'
           width={800}
           height={400}
         />

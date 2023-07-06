@@ -2,6 +2,8 @@ import { Toaster } from 'react-hot-toast'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { ToastProvider } from '@/components/ToastProvider'
+import { Footer } from '@/components/Footer'
+import { Navbar } from '@/components/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,10 +23,11 @@ export default function RootLayout({
       <body className={inter.className}>
           <ToastProvider/>
        
-        <main className='p-4 container max-w-7xl mx-auto min-w-[300px]'>
+          <Navbar/>
+        <main className='p-4 container max-w-7xl mx-auto min-w-[300px] min-h-screen'>
         {children}
         </main>
-        
+        <Footer/>
         
         </body>
     </html>
