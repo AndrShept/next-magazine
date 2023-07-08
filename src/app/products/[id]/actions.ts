@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db/prisma';
 import { revalidatePath } from 'next/cache';
 
 export const incrementProductQuantity = async (productId: string) => {
+  // await new Promise(resolve => setTimeout(resolve, 3000))
   const cart = (await getCart()) ?? (await createCart());
   const articleInCart = cart.items.find((item) => item.productId === productId);
 

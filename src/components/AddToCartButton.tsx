@@ -39,7 +39,7 @@ export const AddToCartButton = ({ productId, incrementProductQuantity }: AddToCa
         </svg>
       </button>
       {isPending && <span className='loading loading-spinner'/>}
-      { !isPending && success && <span className='text-success'>Added to Cart</span>}
+      { !isPending && success && <span className='text-success animate-in duration-500 fade-in slide-in-from-right-20  '>Added to Cart</span>}
     </div>
   );
 };

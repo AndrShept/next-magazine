@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "daisyui": "^3.1.7",
-    "prisma": "^4.16.2"
+    "prisma": "^4.16.2",
+    "tailwindcss-animate": "^1.0.6"
   }
 }

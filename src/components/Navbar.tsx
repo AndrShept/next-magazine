@@ -1,56 +1,53 @@
 import React from 'react';
-import { UserCircleIcon } from "@heroicons/react/24/solid";
+import { UserCircleIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import { prisma } from '@/lib/db/prisma';
+import { redirect } from 'next/navigation';
+import { getCart } from '@/lib/db/cart';
+import { ShoppingCartButton } from './ShoppingCartButton';
 
-export const Navbar = async() => {
-  const product = await prisma.cartItem.findMany()
+export const searchProducts = async (formData: FormData) => {
+  'use server';
+  const searchQuery = formData.get('searchQuery')?.toString();
+  if(searchQuery){
+    redirect(`/search?query=${searchQuery}`)
+  }
+  console.log(searchQuery);
+};
+
+export const Navbar = async () => {
+  const cart = await getCart()
+  const product = await prisma.cartItem.findMany();
   return (
-    <div className='bg-white drop-shadow-lg border-b '>
-      <div className='navbar bg-base-100 p-4 container max-w-7xl mx-auto min-w-[300px]'>
+    <div className='bg-base-100 drop-shadow-sm border-b '>
+      <div className='navbar bg-base-100 p-4 container max-w-7xl mx-auto min-w-[300px] '>
         <div className='flex-1'>
-          <Link href='/' className='normal-case text-xl font-bold hover:text-purple-700 duration-200'>daisyUI</Link>
+          <Link
+            href='/'
+            className='normal-case text-xl font-bold hover:text-purple-700 duration-200'
+          >
+            MAGAZINE
+          </Link>
+        </div>
+        <div className='flex-none gap-2'>
+          <form action={searchProducts}>
+            <div className='form-control mr-0 md:mr-4'>
+              <input
+                placeholder='search'
+                name='searchQuery'
+                type='text'
+                className='input input-bordered w-full min-w-[50px]'
+              />
+            </div>
+          </form>
+          <ShoppingCartButton cart={cart}/>
         </div>
         <div className='flex-none'>
-          <div className='dropdown dropdown-end'>
-            <label tabIndex={0} className='btn btn-ghost btn-circle'>
-              <div className='indicator'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  stroke='currentColor'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'
-                  />
-                </svg>
-                <span className='badge badge-sm indicator-item'>{product.length}</span>
-              </div>
-            </label>
-            <div
-              tabIndex={0}
-              className='mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow'
-            >
-              <div className='card-body'>
-                <span className='font-bold text-lg'>{product.length} Items</span>
-                <span className='text-info'>Subtotal: $999</span>
-                <div className='card-actions'>
-                  <button className='btn btn-primary btn-block'>
-                    View cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div className='dropdown dropdown-end '>
-            <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
-              <div className='w-10 rounded-full '>
-              <UserCircleIcon className="h-10 w-10 text-gray-500" />
+            <label tabIndex={0} className='btn btn-ghost btn-circle avatar '>
+              <div className='w-10 rounded-full  '>
+                <UserCircleIcon className='h-10 w-10 text-gray-500' />
                 {/* <img src='/images/stock/photo-1534528741775-53994a69daeb.jpg' /> */}
               </div>
             </label>
