@@ -21,8 +21,8 @@ export const FormSubmitButton = ({
       type='submit'
       className={`btn btn-neutral ${className}`}
     >
-      {pending && <span className='loading loading-spinner ' />}
       {children}
+      {pending && <span className='loading loading-spinner ' />}
     </button>
   );
 };

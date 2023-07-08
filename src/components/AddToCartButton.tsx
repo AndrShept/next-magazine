@@ -11,7 +11,7 @@ export const AddToCartButton = ({ productId, incrementProductQuantity }: AddToCa
   const [isPending, startTransition] = useTransition()
   const [success, setSuccess] = useState(false)
     return (
-    <div className='flex items-center gap-2'>
+    <div className='flex items-center gap-2  self-end'>
       <button
       disabled={isPending}
       onClick={() =>
@@ -21,7 +21,7 @@ export const AddToCartButton = ({ productId, incrementProductQuantity }: AddToCa
           await incrementProductQuantity(productId)
           setSuccess(true)
         })
-      }} className='btn btn-primary text-white font-normal '>
+      }} className='btn btn-secondary text-white font-normal rounded-full '>
         Add to Cart{' '}
         <svg
           xmlns='http://www.w3.org/2000/svg'

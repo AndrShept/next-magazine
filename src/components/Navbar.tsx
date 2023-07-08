@@ -24,7 +24,7 @@ export const Navbar = async () => {
         <div className='flex-1'>
           <Link
             href='/'
-            className='normal-case text-xl font-bold hover:text-purple-700 duration-200'
+            className='normal-case text-xl font-bold hover:text-secondary duration-200'
           >
             MAGAZINE
           </Link>

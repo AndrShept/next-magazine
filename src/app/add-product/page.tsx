@@ -32,10 +32,12 @@ const addProduct = async (formData: FormData) => {
 };
 
 const AddProductPage = () => {
+
+
   return (
-    <div className=''>
+    <div className='flex flex-col items-center'>
       <h1 className='text-xl font-bold mb-4'>Add Product</h1>
-      <form action={addProduct}>
+      <form action={addProduct} className='max-w-2xl '>
         <input
           required
           name='name'
@@ -48,7 +50,7 @@ const AddProductPage = () => {
           name='description'
           placeholder='description'
           className='textarea-bordered textarea w-full mt-4 '
-        ></textarea>
+        />
         <input
           required
           name='imageUrl'

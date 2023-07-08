@@ -26,7 +26,7 @@ export default async function Home() {
 
           <Link
             href={`/products/${products[0].id}`}
-            className='btn btn-primary text-white font-normal max-w-full'
+            className='btn btn-secondary rounded-full text-white font-normal max-w-full'
           >
             Details
           </Link>

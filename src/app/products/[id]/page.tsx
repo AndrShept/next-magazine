@@ -47,8 +47,8 @@ const ProductPageById = async ({ params }: { params: { id: string } }) => {
       <div className='flex flex-col justify-between'>
         <div>
           <h1 className='text-5xl font-bold'>{product.name} </h1>
-          <PriceTag price={product.price} />
           <p className='py-6'>{product.description}</p>
+          <PriceTag price={product.price} />
         </div>
         <AddToCartButton
           incrementProductQuantity={incrementProductQuantity}

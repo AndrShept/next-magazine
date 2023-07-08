@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { ChangeEvent, useState, useTransition } from 'react';
 import { setProductQuantity } from './actions';
-import { useRouter } from 'next/navigation';
 import { CheckIcon } from '@heroicons/react/24/solid';
 
 interface CartEntryProps {
@@ -15,7 +14,6 @@ interface CartEntryProps {
 export const CartEntry = ({ cartItem }: CartEntryProps) => {
   const [pending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
-  const router = useRouter();
   const quantityOptions = [...new Array(20)].map(
     (item, index) => (item = index)
   );
@@ -30,14 +28,15 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
 
   return (
     <div>
-      <div className='flex flex-wrap  gap-4 '>
-        <Image
-          src={cartItem.product.imageUrl}
-          alt={cartItem.product.name}
-          width={300}
-          height={300}
-          className='rounded-lg'
-        />
+      <div className='flex flex-col   sm:flex-row sm:items-stretch items-center  gap-4 '>
+        <div className='w-96 relative h-60'>
+          <Image
+            src={cartItem.product.imageUrl}
+            alt={cartItem.product.name}
+            fill
+            className=' object-cover object-center rounded-lg  '
+          />
+        </div>
 
         <div className='flex flex-col justify-between'>
           <div className='flex flex-col'>
@@ -45,10 +44,10 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
               className='font-bold'
               href={'/products/' + cartItem.product.id}
             >
-             {cartItem.product.name}
+              {cartItem.product.name}
             </Link>
             <span className='text-gray-500'>
-            Price: {formatPrice(cartItem.product.price)}
+              Price: {formatPrice(cartItem.product.price)}
             </span>
             <span className='text-gray-500'>
               Total: {formatPrice(cartItem.product.price * cartItem.quantity)}
