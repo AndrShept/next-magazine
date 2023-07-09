@@ -1,7 +1,9 @@
 import { FormSubmitButton } from '@/components/FormSubmitButton';
 import { prisma } from '@/lib/db/prisma';
+import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
 export const metadata = {
   title: 'Add Product',
@@ -22,18 +24,15 @@ const addProduct = async (formData: FormData) => {
   await prisma.product.create({
     data: { name, description, imageUrl, price },
   });
-  redirect('http://localhost:3000/add-product')
-  
-
-
- 
-   
-  
+  redirect('http://localhost:3000/add-product');
 };
 
-const AddProductPage = () => {
+const AddProductPage = async() => {
+  const session = await getServerSession(authOptions)
 
-
+  if(session?.user?.email !== 'lolokos1986@gmail.com'){
+    redirect('/api/auth/signin?callbackUrl')
+  }
   return (
     <div className='flex flex-col items-center'>
       <h1 className='text-xl font-bold mb-4'>Add Product</h1>
@@ -65,9 +64,7 @@ const AddProductPage = () => {
           placeholder='Price'
           className='input input-bordered w-full mt-4 '
         />
-        <FormSubmitButton  className='mt-4 w-full'>
-          Add Product
-        </FormSubmitButton>
+        <FormSubmitButton className='mt-4 w-full'>Add Product</FormSubmitButton>
       </form>
     </div>
   );

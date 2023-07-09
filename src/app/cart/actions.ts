@@ -22,7 +22,7 @@ export const setProductQuantity = async (
   if ( quantity !== 0 && articleInCart) {
     await prisma.cartItem.update({
       where: { id: articleInCart?.id },
-      data: {quantity},
+      data: {quantity: {set : quantity}},
     });
   } 
 

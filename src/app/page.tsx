@@ -5,11 +5,11 @@ import Link from 'next/link';
 
 export default async function Home() {
   const products = await prisma.product.findMany({
-    orderBy: { id: 'desc' },
+    orderBy: { id: 'desc' }
   });
   return (
     <main className=''>
-      <div className='flex  flex-col md:flex-row items-center  md:max-w-full max-w-md mx-auto    rounded-xl bg-base-200 p-4   gap-4 '>
+      <div className='flex  flex-col md:flex-row items-center  md:max-w-full max-w-md mx-auto    rounded-xl bg-base-100 p-4   gap-4 '>
         <Image
           src={products[0].imageUrl}
           alt={products[0].name}

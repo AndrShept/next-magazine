@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { experimental_useFormStatus as useFormStatus } from 'react-dom';
+import { toast } from 'react-hot-toast';
 
 type FormSubmitButtonProps = {
   children: React.ReactNode;
@@ -12,7 +13,12 @@ export const FormSubmitButton = ({
   className,
   ...props
 }: FormSubmitButtonProps) => {
-  const { pending } = useFormStatus();
+  const { pending, method  } = useFormStatus();
+  if (method){
+    toast.success('Product added !')
+  }
+
+ 
 
   return (
     <button

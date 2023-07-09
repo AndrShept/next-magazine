@@ -1,10 +1,12 @@
 import React from 'react';
-import { UserCircleIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import { prisma } from '@/lib/db/prisma';
 import { redirect } from 'next/navigation';
 import { getCart } from '@/lib/db/cart';
 import { ShoppingCartButton } from './ShoppingCartButton';
+import { UserMenuButton } from './UserMenuButton';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export const searchProducts = async (formData: FormData) => {
   'use server';
@@ -18,6 +20,7 @@ export const searchProducts = async (formData: FormData) => {
 export const Navbar = async () => {
   const cart = await getCart()
   const product = await prisma.cartItem.findMany();
+  const session = await getServerSession(authOptions)
   return (
     <div className='bg-base-100 drop-shadow-sm border-b '>
       <div className='navbar bg-base-100 p-4 container max-w-7xl mx-auto min-w-[300px] '>
@@ -41,34 +44,11 @@ export const Navbar = async () => {
             </div>
           </form>
           <ShoppingCartButton cart={cart}/>
+          <UserMenuButton session={session!}/>
         </div>
         <div className='flex-none'>
 
-          <div className='dropdown dropdown-end '>
-            <label tabIndex={0} className='btn btn-ghost btn-circle avatar '>
-              <div className='w-10 rounded-full  '>
-                <UserCircleIcon className='h-10 w-10 text-gray-500' />
-                {/* <img src='/images/stock/photo-1534528741775-53994a69daeb.jpg' /> */}
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
-            >
-              <li>
-                <a className='justify-between'>
-                  Profile
-                  <span className='badge'>New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+
         </div>
       </div>
     </div>

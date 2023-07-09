@@ -44,7 +44,7 @@ const ProductPageById = async ({ params }: { params: { id: string } }) => {
         className='rounded-lg'
         priority
       />
-      <div className='flex flex-col justify-between'>
+      <div className='flex flex-col '>
         <div>
           <h1 className='text-5xl font-bold'>{product.name} </h1>
           <p className='py-6'>{product.description}</p>

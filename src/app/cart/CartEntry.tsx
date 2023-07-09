@@ -34,6 +34,7 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
             src={cartItem.product.imageUrl}
             alt={cartItem.product.name}
             fill
+            sizes="100vw"
             className=' object-cover object-center rounded-lg  '
           />
         </div>
