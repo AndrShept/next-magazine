@@ -1,13 +1,14 @@
-import { Cart, CartItem, Prisma } from '@prisma/client';
-import { cookies } from 'next/dist/client/components/headers';
-import { prisma } from './prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { Cart, CartItem, Prisma } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import { cookies } from "next/dist/client/components/headers";
+import { prisma } from "./prisma";
 
 export type CartWithProducts = Prisma.CartGetPayload<{
   include: { items: { include: { product: true } } };
 }>;
-export type CartItemWithProducts = Prisma.CartItemGetPayload<{
+
+export type CartItemWithProduct = Prisma.CartItemGetPayload<{
   include: { product: true };
 }>;
 
@@ -18,17 +19,17 @@ export type ShoppingCart = CartWithProducts & {
 
 export async function getCart(): Promise<ShoppingCart | null> {
   const session = await getServerSession(authOptions);
+
   let cart: CartWithProducts | null = null;
+
   if (session) {
     cart = await prisma.cart.findFirst({
-      where: {
-        userId: session.user.id,
-      },
+      where: { userId: session.user.id },
       include: { items: { include: { product: true } } },
     });
   } else {
-    const localCartId = cookies().get('localCartId')?.value;
-    const cart = localCartId
+    const localCartId = cookies().get("localCartId")?.value;
+    cart = localCartId
       ? await prisma.cart.findUnique({
           where: { id: localCartId },
           include: { items: { include: { product: true } } },
@@ -52,6 +53,7 @@ export async function getCart(): Promise<ShoppingCart | null> {
 
 export async function createCart(): Promise<ShoppingCart> {
   const session = await getServerSession(authOptions);
+
   let newCart: Cart;
 
   if (session) {
@@ -62,10 +64,10 @@ export async function createCart(): Promise<ShoppingCart> {
     newCart = await prisma.cart.create({
       data: {},
     });
-  }
 
-  // Note: Needs encryption + secure settings in real production app
-  cookies().set('localCartId', newCart.id);
+    // Note: Needs encryption + secure settings in real production app
+    cookies().set("localCartId", newCart.id);
+  }
 
   return {
     ...newCart,
@@ -75,8 +77,9 @@ export async function createCart(): Promise<ShoppingCart> {
   };
 }
 
-export const mergeAnonymCartIntoUserCart = async (userId: string) => {
-  const localCartId = cookies().get('localCartId')?.value;
+export async function mergeAnonymCartIntoUserCart(userId: string) {
+  const localCartId = cookies().get("localCartId")?.value;
+
   const localCart = localCartId
     ? await prisma.cart.findUnique({
         where: { id: localCartId },
@@ -87,10 +90,9 @@ export const mergeAnonymCartIntoUserCart = async (userId: string) => {
   if (!localCart) return;
 
   const userCart = await prisma.cart.findFirst({
-    where:{userId},
-    include: {items: true}
-  })
-
+    where: { userId },
+    include: { items: true },
+  });
 
   await prisma.$transaction(async (tx) => {
     if (userCart) {
@@ -100,12 +102,18 @@ export const mergeAnonymCartIntoUserCart = async (userId: string) => {
         where: { cartId: userCart.id },
       });
 
-      await tx.cartItem.createMany({
-        data: mergedCartItems.map((item) => ({
-          cartId: userCart.id,
-          productId: item.productId,
-          quantity: item.quantity,
-        })),
+      await tx.cart.update({
+        where: { id: userCart.id },
+        data: {
+          items: {
+            createMany: {
+              data: mergedCartItems.map((item) => ({
+                productId: item.productId,
+                quantity: item.quantity,
+              })),
+            },
+          },
+        },
       });
     } else {
       await tx.cart.create({
@@ -131,7 +139,6 @@ export const mergeAnonymCartIntoUserCart = async (userId: string) => {
   });
 }
 
-
 function mergeCartItems(...cartItems: CartItem[][]): CartItem[] {
   return cartItems.reduce((acc, items) => {
     items.forEach((item) => {
@@ -145,7 +152,3 @@ function mergeCartItems(...cartItems: CartItem[][]): CartItem[] {
     return acc;
   }, [] as CartItem[]);
 }
-
-
-
-

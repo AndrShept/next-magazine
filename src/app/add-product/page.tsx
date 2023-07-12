@@ -11,23 +11,18 @@ export const metadata = {
 };
 const addProduct = async (formData: FormData) => {
   'use server';
-
-  const name = formData.get('name')?.toString();
-  const description = formData.get('description')?.toString();
-  const imageUrl = formData.get('imageUrl')?.toString();
+  const name = formData.get('name')!.toString();
+  const description = formData.get('description')!.toString();
+  const imageUrl = formData.get('imageUrl')!.toString();
   const price = Number(formData.get('price') || 0);
 
-  if (!name || !description || !imageUrl || !price) {
+  if (!name && !description && !imageUrl && !price) {
     throw Error('Missing required fields');
   }
 
-
-   
-    await prisma.product.create({
-      data: { name, description, imageUrl, price },
-    });
-    
-  
+  await prisma.product.create({
+    data: { name, description, imageUrl, price },
+  });
 
   redirect('http://localhost:3000/add-product');
 };
