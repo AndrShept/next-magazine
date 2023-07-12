@@ -21,17 +21,22 @@ const addProduct = async (formData: FormData) => {
     throw Error('Missing required fields');
   }
 
-  await prisma.product.create({
-    data: { name, description, imageUrl, price },
-  });
+
+   
+    await prisma.product.create({
+      data: { name, description, imageUrl, price },
+    });
+    
+  
+
   redirect('http://localhost:3000/add-product');
 };
 
-const AddProductPage = async() => {
-  const session = await getServerSession(authOptions)
+const AddProductPage = async () => {
+  const session = await getServerSession(authOptions);
 
-  if(session?.user?.email !== 'lolokos1986@gmail.com'){
-    redirect('/api/auth/signin?callbackUrl')
+  if (session?.user?.email !== 'lolokos1986@gmail.com') {
+    redirect('/api/auth/signin?callbackUrl');
   }
   return (
     <div className='flex flex-col items-center'>

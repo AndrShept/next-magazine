@@ -22,7 +22,7 @@ export const Navbar = async () => {
   const product = await prisma.cartItem.findMany();
   const session = await getServerSession(authOptions)
   return (
-    <div className='bg-base-100 drop-shadow-sm border-b '>
+    <div className='bg-base-100 drop-shadow-sm border-b  '>
       <div className='navbar bg-base-100 p-4 container max-w-7xl mx-auto min-w-[300px] '>
         <div className='flex-1'>
           <Link
@@ -32,7 +32,7 @@ export const Navbar = async () => {
             MAGAZINE
           </Link>
         </div>
-        <div className='flex-none gap-2'>
+        <div className='  '>
           <form action={searchProducts}>
             <div className='form-control mr-0 md:mr-4'>
               <input

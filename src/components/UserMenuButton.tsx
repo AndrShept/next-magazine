@@ -11,14 +11,11 @@ interface UserMenuButtonProps {
 }
 
 export const UserMenuButton = ({ session }: UserMenuButtonProps) => {
-  const [success, setSuccess] = useState(false);
   const user = session?.user;
-  const { status } = useSession();
   const [isPending, startTransition] = useTransition();
   const handleSignIn = () => {
     startTransition(async () => {
       await signIn('google');
-      setSuccess(true);
       toast.success('Login Success');
     });
   };
@@ -33,7 +30,7 @@ export const UserMenuButton = ({ session }: UserMenuButtonProps) => {
     <div>
       <div className='dropdown dropdown-end '>
         <label tabIndex={0} className='btn btn-ghost btn-circle avatar '>
-          <div className='w-10 rounded-full  '>
+          <div className='w-9 h-9 rounded-full text-center flex items-center justify-center '>
             {user ? (
               <Image
                 src={user?.image || ''}
@@ -43,7 +40,7 @@ export const UserMenuButton = ({ session }: UserMenuButtonProps) => {
                 className='rounded-full'
               />
             ) : (
-              <UserCircleIcon className='h-10 w-10 text-gray-500' />
+              <UserCircleIcon className='h-9 w-9 text-gray-500' />
             )}
 
             {/* <img src='/images/stock/photo-1534528741775-53994a69daeb.jpg' /> */}

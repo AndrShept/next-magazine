@@ -1,5 +1,5 @@
 'use client';
-import { CartItemWithProducts } from '@/lib/db/cart';
+import { CartItemWithProducts, createCart, getCart } from '@/lib/db/cart';
 import { formatPrice } from '@/lib/format';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,16 +28,18 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
 
   return (
     <div>
-      <div className='flex flex-col   sm:flex-row sm:items-stretch items-center  gap-4 '>
-        <div className='w-96 relative h-60'>
+      <div className='flex flex-col   sm:flex-row sm:items-stretch items-center  gap-4  '>
+        
           <Image
             src={cartItem.product.imageUrl}
             alt={cartItem.product.name}
-            fill
-            sizes="100vw"
-            className=' object-cover object-center rounded-lg  '
+         width={500}
+         height={500}
+         
+            className=' object-cover object-center rounded-lg  w-96  h-60 '
+            
           />
-        </div>
+    
 
         <div className='flex flex-col justify-between'>
           <div className='flex flex-col'>
