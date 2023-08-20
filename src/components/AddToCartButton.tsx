@@ -1,28 +1,33 @@
 'use client';
 import { prisma } from '@/lib/db/prisma';
-import React, { useTransition ,useState} from 'react';
+import { CheckIcon } from '@heroicons/react/24/outline';
+import React, { useTransition, useState } from 'react';
 
 interface AddToCartButtonProps {
-    productId : string
-    incrementProductQuantity : (productId: string) => Promise<void>
+  productId: string;
+  incrementProductQuantity: (productId: string) => Promise<void>;
 }
 
-export const AddToCartButton = ({ productId, incrementProductQuantity }: AddToCartButtonProps) => {
-  const [isPending, startTransition] = useTransition()
-  const [success, setSuccess] = useState(false)
-    return (
-    <div className='flex items-center gap-2  self-end'>
+export const AddToCartButton = ({
+  productId,
+  incrementProductQuantity,
+}: AddToCartButtonProps) => {
+  const [isPending, startTransition] = useTransition();
+  const [success, setSuccess] = useState(false);
+  return (
+    <div className='flex items-center gap-2   mt-6 '>
       <button
-      disabled={isPending}
-      onClick={() =>
-      {
-        setSuccess(false)
-        startTransition(async ()=> {
-          await incrementProductQuantity(productId)
-          setSuccess(true)
-        })
-      }} className='btn btn-secondary text-white font-normal rounded-full '>
-        Add to Cart{' '}
+        disabled={isPending}
+        onClick={() => {
+          setSuccess(false);
+          startTransition(async () => {
+            await incrementProductQuantity(productId);
+            setSuccess(true);
+          });
+        }}
+        className='btn btn-secondary text-white font-normal rounded-full  '
+      >
+        Добавити
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-5 w-5'
@@ -38,8 +43,12 @@ export const AddToCartButton = ({ productId, incrementProductQuantity }: AddToCa
           />
         </svg>
       </button>
-      {isPending && <span className='loading loading-spinner'/>}
-      { !isPending && success && <span className='text-success animate-in duration-500 fade-in slide-in-from-right-20  '>Added to Cart</span>}
+      {isPending && <span className='loading loading-spinner' />}
+      {!isPending && success && (
+        <span className='text-success animate-in duration-500 fade-in slide-in-from-right-20  '>
+        <CheckIcon className="h-6 w-6 text-green-500" />
+        </span>
+      )}
     </div>
   );
 };

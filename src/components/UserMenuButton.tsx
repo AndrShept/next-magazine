@@ -5,6 +5,11 @@ import { UserCircleIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { toast } from 'react-hot-toast';
+import {
+  ArrowLeftOnRectangleIcon,
+  WrenchScrewdriverIcon,
+} from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 interface UserMenuButtonProps {
   session: Session;
@@ -57,19 +62,22 @@ export const UserMenuButton = ({ session }: UserMenuButtonProps) => {
             </a>
           </li>
           <li>
-            <a>Settings</a>
+            <Link href='/add-product'>
+              <WrenchScrewdriverIcon className='h-5 w-5 text-gray-500' />{' '}
+              Settings
+            </Link>
           </li>
           <li>
             {user ? (
-              <button  onClick={handleSingOut}>
-
+              <button onClick={handleSingOut}>
+                <ArrowLeftOnRectangleIcon className='h-5 w-5 text-gray-500' />{' '}
                 Sign Out{' '}
                 {isPending && (
                   <span className='loading loading-spinner loading-sm' />
                 )}
               </button>
             ) : (
-              <button  onClick={handleSignIn}>
+              <button onClick={handleSignIn}>
                 Login{' '}
                 {isPending && (
                   <span className='loading loading-spinner loading-sm' />

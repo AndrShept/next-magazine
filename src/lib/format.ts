@@ -1,6 +1,6 @@
 export const formatPrice = (price:number) => {
-    return (price/37).toLocaleString('en-US',{
+    return (price).toLocaleString('uk-UA',{
         style: 'currency',
-        currency: 'USD'
+        currency: 'UAH'
     })
 } 

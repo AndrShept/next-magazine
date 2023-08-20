@@ -8,6 +8,6 @@ interface PriceTagProps {
 
 export const PriceTag = ({price, className}:PriceTagProps) => {
   return (
-    <span className={`badge ${className} font-bold text-base`}>Price: {formatPrice(price)}</span>
+    <span className={`badge ${className} p-4 text-white bg-[#f000b8]/80 mt-6  text-base`}>Ціна: {formatPrice(price)}</span>
   )
 }

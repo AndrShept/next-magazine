@@ -44,20 +44,20 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
         <div className='flex flex-col justify-between'>
           <div className='flex flex-col'>
             <Link
-              className='font-bold'
+              className='font-bold hover:underline text-[#f000b8]/80'
               href={'/products/' + cartItem.product.id}
             >
               {cartItem.product.name}
             </Link>
             <span className='text-gray-500'>
-              Price: {formatPrice(cartItem.product.price)}
+              Ціна: {formatPrice(cartItem.product.price)}
             </span>
             <span className='text-gray-500'>
-              Total: {formatPrice(cartItem.product.price * cartItem.quantity)}
+              Загальна ціна: {formatPrice(cartItem.product.price * cartItem.quantity)}
             </span>
           </div>
           <div className='my-1 flex items-center gap-3'>
-            <span className='font-bold'>quantity</span>
+            <span className='font-bold text-black/70'>кількість</span>
             <select
               disabled={pending}
               onChange={onChange}

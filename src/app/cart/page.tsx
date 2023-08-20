@@ -21,11 +21,11 @@ const CartPage = async () => {
         ))}
         <span className='text-center mb-4  text-xl'>
           {' '}
-          Total Price <strong>{formatPrice(cart?.subtotal || 0)}</strong>
+          Загальна вартість замолення <strong>{formatPrice(cart?.subtotal || 0)}</strong>
         </span>
         <Link
           href='#'
-          className='btn btn-secondary mx-auto text-white rounded-full'
+          className='btn btn-secondary mx-auto text-white rounded-full '
         >
           CHECKOUT
         </Link>

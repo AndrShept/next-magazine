@@ -52,12 +52,16 @@ const ProductPageById = async ({ params }: { params: { id: string } }) => {
         <div>
           <h1 className='text-5xl font-bold'>{product.name} </h1>
           <p className='py-6'>{product.description}</p>
+          <div className='flex justify-between items-center'>
+
           <PriceTag price={product.price} />
-        </div>
-        <AddToCartButton
+          <AddToCartButton
           incrementProductQuantity={incrementProductQuantity}
           productId={product.id}
         />
+          </div>
+        </div>
+
       </div>
     </div>
   );

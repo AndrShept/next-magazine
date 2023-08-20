@@ -4,18 +4,28 @@ import { formatPrice } from '@/lib/format';
 import Link from 'next/link';
 import React from 'react';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect } from 'react';
 
 interface ShoppingCartButtonProps {
   cart: ShoppingCart | null;
 }
 
 export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
+  const [isClient, setIsClient] = useState(false);
   const closeDropDown = () => {
     const elem = document.activeElement as HTMLElement;
     if (elem) {
       elem.blur();
     }
   };
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <div className='dropdown dropdown-end  '>
       <label tabIndex={1} className='btn btn-ghost btn-circle  '>
@@ -36,7 +46,7 @@ export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
               />
             </svg> */}
           {cart?.size ? (
-            <span className='badge badge-sm indicator-item bg-secondary font-normal text-white '>
+            <span className='badge badge-sm indicator-item bg-[#f000b8] font-normal text-white '>
               {cart?.size ?? 0}
             </span>
           ) : null}
@@ -46,18 +56,21 @@ export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
         tabIndex={1}
         className='   card card-bordered dropdown-content w-52 bg-base-100 shadow  '
       >
-        <div className='card-body gap-4 '>
-          <span className='font-bold text-lg'>{cart?.size || 0} Items</span>
-          <span className=''>
-            Total Price: {formatPrice(cart?.subtotal || 0)}
-          </span>
+        <div className='card-body gap-4 flex  '>
+          {/* <span className='font-bold text-lg'>{cart?.size || 0} кількість</span> */}
+          <div className='flex flex-col text-center'>
+            <span> Загальна вартість:</span>
+            <span className='mt-2 font-bold'>
+              {formatPrice(cart?.subtotal || 0)}
+            </span>
+          </div>
           <div className='card-actions'>
             <Link
               onClick={closeDropDown}
               href='/cart'
               className='btn btn-secondary rounded-full btn-block text-white font-normal'
             >
-              View cart
+              До корзини
             </Link>
           </div>
         </div>
