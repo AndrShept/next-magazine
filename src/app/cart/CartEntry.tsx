@@ -1,5 +1,5 @@
 'use client';
-import { CartItemWithProducts, createCart, getCart } from '@/lib/db/cart';
+import { CartItemWithProduct, createCart, getCart } from '@/lib/db/cart';
 import { formatPrice } from '@/lib/format';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import { setProductQuantity } from './actions';
 import { CheckIcon } from '@heroicons/react/24/solid';
 
 interface CartEntryProps {
-  cartItem: CartItemWithProducts;
+  cartItem: CartItemWithProduct;
 }
 
 export const CartEntry = ({ cartItem }: CartEntryProps) => {
