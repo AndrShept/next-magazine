@@ -61,14 +61,15 @@ export const UserMenuButton = ({ session }: UserMenuButtonProps) => {
           </li>
           <li>
             {user ? (
-              <button onClick={handleSingOut}>
+              <button  onClick={handleSingOut}>
+
                 Sign Out{' '}
                 {isPending && (
                   <span className='loading loading-spinner loading-sm' />
                 )}
               </button>
             ) : (
-              <button onClick={handleSignIn}>
+              <button  onClick={handleSignIn}>
                 Login{' '}
                 {isPending && (
                   <span className='loading loading-spinner loading-sm' />

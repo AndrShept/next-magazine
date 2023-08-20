@@ -1,3 +1,4 @@
+import { FormSubmitButton } from './../../../../components/FormSubmitButton';
 import { env } from './../../../../lib/env';
 import  { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
@@ -21,8 +22,10 @@ export const authOptions:NextAuthOptions = {
   callbacks: {
     session({session,user}){
       session.user.id = user.id
+      session.user.username = session.user.name!.split(' ').join('').toLocaleLowerCase();
       return session
-    }
+    },
+
   },
   events: {
     async signIn({user}){
