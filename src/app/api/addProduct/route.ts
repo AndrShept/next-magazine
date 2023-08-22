@@ -14,7 +14,8 @@ export const POST = async (req: Request) => {
       data: {
         name,
         description,
-        imageUrl: image,
+        imageUrl: image[0],
+        imageArrUrl: image,
         price: Number(price),
         category,
       },

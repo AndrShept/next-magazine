@@ -62,9 +62,9 @@ export const UserMenuButton = ({ session }: UserMenuButtonProps) => {
             </a>
           </li>
           <li>
-            <Link href='/add-product'>
+            <Link href='/dashboard'>
               <WrenchScrewdriverIcon className='h-5 w-5 text-gray-500' />{' '}
-              Settings
+              Dashboard
             </Link>
           </li>
           <li>

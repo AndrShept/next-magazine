@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -22,7 +22,7 @@ import {
 } from './ui/select';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { Flower, Flower2, Loader2, Wand2 } from 'lucide-react';
+import { ArrowLeft, Flower, Flower2, Loader2, Wand2 } from 'lucide-react';
 import z from 'zod';
 import { ImageUpload } from './ImageUpload';
 import { Category } from '@prisma/client';
@@ -47,6 +47,7 @@ export const formSchema = z.object({
 });
 
 export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
+  const [imageArr, setImageArr] = useState<any>([]);
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,10 +63,11 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
 
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const newValues = { ...values, image: imageArr };
     try {
       const res = await fetch('/api/addProduct', {
         method: 'POST',
-        body: JSON.stringify(values),
+        body: JSON.stringify(newValues),
       });
       if (res.ok) {
         toast({
@@ -77,6 +79,10 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
       }
     } catch (error) {
       console.log(error);
+      toast({
+        title: 'Продукт створено успішно!',
+        variant: 'destructive',
+      });
     }
   };
   return (
@@ -87,11 +93,16 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
           className='space-y-8 pb-10'
         >
           <div className='space-y-2 w-full  '>
-            <div>
-              <h3 className='text-lg font-medium'>General Information</h3>
-              <p className='text-sm text-muted-foreground'>
-                General information about your Product
-              </p>
+            <div className='flex items-center gap-2'>
+              <div onClick={()=> router.back()} className='cursor-pointer rounded-full p-2 hover:bg-zinc-300'>
+              <ArrowLeft className='text-gray-600' />
+              </div>
+              <div>
+                <h3 className='text-lg font-medium'>Назад</h3>
+                <p className='text-sm text-muted-foreground'>
+                  General information about your Product
+                </p>
+              </div>
             </div>
             <Separator className='bg-primary/10' />
           </div>
@@ -102,6 +113,8 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
               <FormItem className='flex flex-col items-center justify-center space-y-4 '>
                 <FormControl>
                   <ImageUpload
+                    imageArr={imageArr}
+                    setImageArr={setImageArr}
                     disabled={isLoading}
                     onChange={field.onChange}
                     value={field.value}
@@ -212,13 +225,13 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
           <div className='w-full flex justify-center'>
             {isLoading ? (
               <Button size='lg' disabled={isLoading}>
-                <Flower  className='animate-spin mr-3' />
+                <Flower className='animate-spin mr-3' />
                 Загрузка...
               </Button>
             ) : (
               <Button size='lg' disabled={isLoading}>
                 Створити продукт
-                <Flower2  className='w-6 h-6 ml-3' />
+                <Flower2 className='w-6 h-6 ml-3' />
               </Button>
             )}
           </div>
