@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { formatPrice } from '@/lib/format';
+import { TableIcons } from './TableIcons';
 
 interface ProductListProps {
   products: Product[];
@@ -60,7 +61,7 @@ export const ProductList = ({ products }: ProductListProps) => {
           <TableRow>
             <TableHead className='w-[100px]'>Name</TableHead>
             <TableHead className='w-[150px]'>Image</TableHead>
-            <TableHead className='w-[10px]'>Price</TableHead>
+            <TableHead className='w-[1px]' >Price</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Button</TableHead>
           </TableRow>
@@ -78,7 +79,7 @@ export const ProductList = ({ products }: ProductListProps) => {
                   alt={'img'}
                 />
               </TableCell>
-              <TableCell className='font-medium'>
+              <TableCell >
                 {formatPrice(product.price)}
               </TableCell>
               <TableCell className='font-medium'>
@@ -95,12 +96,7 @@ export const ProductList = ({ products }: ProductListProps) => {
                 </Select>
               </TableCell>
               <TableCell className='font-medium flex  '>
-                <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer'>
-                  <FileEdit />
-                </div>
-                <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer'>
-                  <Trash2 />
-                </div>
+                <TableIcons productId= {product.id} />
               </TableCell>
             </TableRow>
           ))}

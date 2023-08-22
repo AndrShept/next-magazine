@@ -30,7 +30,7 @@ export const Navbar = async () => {
             href='/'
             className='normal-case text-xl font-bold hover:text-secondary duration-200'
           >
-           <Image src={'/logo.png'} height={60} width={60} alt='logo'/>
+           <Image priority src={'/logo.png'} height={60} width={60} alt='logo'/>
           </Link>
         </div>
         <div className=' '>
