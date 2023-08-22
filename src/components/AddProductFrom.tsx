@@ -65,7 +65,7 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const newValues = { ...values, image: imageArr };
     try {
-      const res = await fetch('/api/addProduct', {
+      const res = await fetch('/api/product', {
         method: 'POST',
         body: JSON.stringify(newValues),
       });
@@ -76,11 +76,16 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
         });
         router.refresh();
         router.push('/');
+      } else {
+        toast({
+          title: 'Щось пішло не так!',
+          variant: 'destructive',
+        });
       }
     } catch (error) {
       console.log(error);
       toast({
-        title: 'Продукт створено успішно!',
+        title: 'Щось пішло не так!',
         variant: 'destructive',
       });
     }
@@ -94,8 +99,11 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
         >
           <div className='space-y-2 w-full  '>
             <div className='flex items-center gap-2'>
-              <div onClick={()=> router.back()} className='cursor-pointer rounded-full p-2 hover:bg-zinc-300'>
-              <ArrowLeft className='text-gray-600' />
+              <div
+                onClick={() => router.back()}
+                className='cursor-pointer rounded-full p-2 hover:bg-zinc-300'
+              >
+                <ArrowLeft className='text-gray-600' />
               </div>
               <div>
                 <h3 className='text-lg font-medium'>Назад</h3>

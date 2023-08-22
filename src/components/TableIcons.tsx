@@ -26,21 +26,19 @@ export const TableIcons = ({ productId }: { productId: string }) => {
 
       if (res.ok) {
         toast({
-          title: 'product success deleted',
+          title: 'Продукт успішно видалено!',
         });
         router.refresh();
         router.push('/product-list');
       }
-      if(!res.ok){
+      if (!res.ok) {
         toast({
-            title: 'SOMETHING WRONG',
-            variant: 'destructive',
-          });
+          title: 'Щось пішло не так!',
+          variant: 'destructive',
+        });
       }
-
     } catch (error) {
       console.log(error);
-
     }
   };
   return (

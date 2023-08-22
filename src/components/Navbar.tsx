@@ -35,7 +35,7 @@ export const Navbar = async () => {
         </div>
         <div className=' '>
           <form action={searchProducts}>
-            <div className='form-control mr-2 md:mr-4'>
+            <div className='form-control pr-2 md:pr-4'>
               <input
                 placeholder='search'
                 name='searchQuery'
