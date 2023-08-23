@@ -5,10 +5,11 @@ import { NextResponse } from 'next/server';
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { name, description, imageUrl, price, category, categoryId } = body;
+    const { name, description, imageUrl, price, category, categoryId, status } =
+      body;
     console.log(body);
 
-    if (!name && !description && !imageUrl && !price && !category) {
+    if (!name && !description && !imageUrl && !price && !category && !status) {
       return new NextResponse('Missing required fields');
     }
     const newProduct = await prisma.product.create({
@@ -20,6 +21,7 @@ export const POST = async (req: Request) => {
         price: Number(price),
         category,
         categoryId,
+        status,
       },
     });
     revalidatePath('/');

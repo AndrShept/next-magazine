@@ -32,23 +32,21 @@ interface ProductListProps {
 }
 
 export const ProductList = ({ products }: ProductListProps) => {
-
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
 
-  const handleClick = async() => {
+  const handleClick = async () => {
     try {
-      const res = await fetch('/api/product',{
-        method: "DELETE"
-      })
-      if(res.ok){
-        router.refresh()
+      const res = await fetch('/api/product', {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        router.refresh();
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-  }
+  };
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -78,16 +76,20 @@ export const ProductList = ({ products }: ProductListProps) => {
         <TableCaption>Весь асортимент товарів</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className='w-[100px]'>Name</TableHead>
-            <TableHead className='w-[150px]'>Image</TableHead>
-            <TableHead className='w-[1px]' >Price</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Button</TableHead>
+            <TableHead className=''>Name</TableHead>
+            <TableHead className='w-[200px] '>Image</TableHead>
+            <TableHead className=''>Price</TableHead>
+            <TableHead className='w-[50px] '>Button</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {products.map((product) => (
-            <TableRow key={product.id}>
+            <TableRow
+              className={`rounded-md ${
+                product.status === 'inactive' ? 'bg-red-100' : ''
+              } `}
+              key={product.id}
+            >
               <TableCell className='font-medium'>{product.name}</TableCell>
               <TableCell className=' relative'>
                 <Image
@@ -98,24 +100,10 @@ export const ProductList = ({ products }: ProductListProps) => {
                   alt={'img'}
                 />
               </TableCell>
-              <TableCell >
-                {formatPrice(product.price)}
-              </TableCell>
+              <TableCell>{formatPrice(product.price)}</TableCell>
               <TableCell className='font-medium'>
-                <Select>
-                  <SelectTrigger className='w-[100px]'>
-                    <SelectValue placeholder='select status' />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value='true'>Включити</SelectItem>
-                      <SelectItem value='false'>Виключити</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </TableCell>
-              <TableCell className='font-medium flex  '>
-                <TableIcons productId= {product.id} />
+                {' '}
+                <TableIcons productId={product.id} />
               </TableCell>
             </TableRow>
           ))}

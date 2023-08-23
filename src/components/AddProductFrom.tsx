@@ -16,6 +16,7 @@ import { Button } from './ui/button';
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -44,6 +45,9 @@ export const formSchema = z.object({
   categoryId: z.string().min(1, {
     message: 'Категорія продукту обовязкова поле',
   }),
+  status: z.string().min(1, {
+    message: 'Статус продукту обовязкова поле',
+  }),
 });
 
 interface AddProductFromProps {
@@ -55,7 +59,6 @@ export const AddProductFrom = ({
   categories,
   product,
 }: AddProductFromProps) => {
-  console.log(product);
   const [imageArr, setImageArr] = useState<any>([]);
   const router = useRouter();
   const { toast } = useToast();
@@ -67,6 +70,7 @@ export const AddProductFrom = ({
       imageUrl: '',
       price: 0,
       categoryId: undefined,
+      status: '',
     },
   });
 
@@ -103,7 +107,7 @@ export const AddProductFrom = ({
             description: new Date().toLocaleString(),
           });
           router.refresh();
-          router.push('/product-list')
+          router.push('/product-list');
         } else {
           toast({
             title: 'Щось пішло не так з оновленням продукту!',
@@ -250,6 +254,31 @@ export const AddProductFrom = ({
                   </Select>
 
                   {/* <FormDescription>Select companion category</FormDescription> */}
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name='status'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Статус</FormLabel>
+
+                  <Select
+                    disabled={isLoading}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder='select status' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value='active'>Включити</SelectItem>
+                      <SelectItem value='inactive'>Виключити</SelectItem>
+                    </SelectContent>
+                  </Select>
+
                   <FormMessage />
                 </FormItem>
               )}
