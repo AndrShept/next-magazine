@@ -14,15 +14,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { formatPrice } from '@/lib/format';
 import { TableIcons } from './TableIcons';
 import { Button } from './ui/button';

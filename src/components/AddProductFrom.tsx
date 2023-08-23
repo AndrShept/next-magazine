@@ -70,7 +70,7 @@ export const AddProductFrom = ({
       imageUrl: '',
       price: 0,
       categoryId: undefined,
-      status: '',
+      status: 'active',
     },
   });
 
