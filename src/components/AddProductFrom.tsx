@@ -25,7 +25,7 @@ import { Textarea } from './ui/textarea';
 import { ArrowLeft, Flower, Flower2, Loader2, Wand2 } from 'lucide-react';
 import z from 'zod';
 import { ImageUpload } from './ImageUpload';
-import { Category } from '@prisma/client';
+import { Category, Product } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useToast } from './ui/use-toast';
 
@@ -37,8 +37,8 @@ export const formSchema = z.object({
     message: ' Описання продукту обовязкове поле',
   }),
 
-  price: z.string().min(1, { message: 'Ціна обовязове поле' }),
-  image: z.string().min(1, {
+  price: z.any(),
+  imageUrl: z.string().min(1, {
     message: 'Фото продукту обовязкове поле',
   }),
   categoryId: z.string().min(1, {
@@ -46,41 +46,70 @@ export const formSchema = z.object({
   }),
 });
 
-export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
+interface AddProductFromProps {
+  categories: Category[];
+  product: Product | null;
+}
+
+export const AddProductFrom = ({
+  categories,
+  product,
+}: AddProductFromProps) => {
+  console.log(product);
   const [imageArr, setImageArr] = useState<any>([]);
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: product || {
       name: '',
       description: '',
-      image: '',
-      price: '',
+      imageUrl: '',
+      price: 0,
       categoryId: undefined,
     },
   });
 
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const newValues = { ...values, image: imageArr };
+    const newValues = { ...values, imageUrl: imageArr };
     try {
-      const res = await fetch('/api/product', {
-        method: 'POST',
-        body: JSON.stringify(newValues),
-      });
-      if (res.ok) {
-        toast({
-          title: 'Продукт створено успішно!',
-          description: new Date().toLocaleString(),
+      if (!product) {
+        const res = await fetch('/api/product', {
+          method: 'POST',
+          body: JSON.stringify(newValues),
         });
-        router.refresh();
-        router.push('/');
+        if (res.ok) {
+          toast({
+            title: 'Продукт створено успішно!',
+            description: new Date().toLocaleString(),
+          });
+          router.refresh();
+          router.push('/');
+        } else {
+          toast({
+            title: 'Щось пішло не так при створені продукту!',
+            variant: 'destructive',
+          });
+        }
       } else {
-        toast({
-          title: 'Щось пішло не так!',
-          variant: 'destructive',
+        const res = await fetch(`/api/product/${product.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(newValues),
         });
+        if (res.ok) {
+          toast({
+            title: 'Продукт оновлено успішно!',
+            description: new Date().toLocaleString(),
+          });
+          router.refresh();
+          router.push('/product-list')
+        } else {
+          toast({
+            title: 'Щось пішло не так з оновленням продукту!',
+            variant: 'destructive',
+          });
+        }
       }
     } catch (error) {
       console.log(error);
@@ -115,7 +144,7 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
             <Separator className='bg-primary/10' />
           </div>
           <FormField
-            name='image'
+            name='imageUrl'
             control={form.control}
             render={({ field }) => (
               <FormItem className='flex flex-col items-center justify-center space-y-4 '>
@@ -238,7 +267,7 @@ export const AddProductFrom = ({ categories }: { categories: Category[] }) => {
               </Button>
             ) : (
               <Button size='lg' disabled={isLoading}>
-                Створити продукт
+                {product ? 'Оновити продукт' : 'Створити продукт'}
                 <Flower2 className='w-6 h-6 ml-3' />
               </Button>
             )}

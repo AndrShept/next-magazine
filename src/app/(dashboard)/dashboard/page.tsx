@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { BadgeAlert, LayoutList, Plus } from 'lucide-react';
+import { BadgeAlert, CircleDollarSign, LayoutList, Plus } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -8,19 +8,19 @@ const page = () => {
     <div className='flex justify-center items-center  '>
       <div className='flex flex-col gap-4  mt-[100px] '>
         <Button asChild>
-          <Link href='/add-product'>
-            <Plus className='mr-2 w-6 h-6 ' /> ADD Product
+          <Link href='/add-product/new'>
+            <Plus className='mr-2 w-6 h-6 '  /> ADD продукт
           </Link>
         </Button>
         <Button asChild>
           <Link href='/product-list'>
             <LayoutList className='mr-2 w-6 h-6 ' />
-            Product List
+            Список продукту
           </Link>
         </Button>
         <Button asChild>
           <Link href='/order'>
-            <BadgeAlert className='mr-2  ' /> Order
+          <CircleDollarSign className='mr-2' /> Замолення
           </Link>
         </Button>
       </div>

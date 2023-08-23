@@ -16,6 +16,7 @@ model Product {
   price       Int
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+  categoryId  String
   CartItem    CartItem[]
   category    Category[]
 

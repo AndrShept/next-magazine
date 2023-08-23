@@ -25,14 +25,30 @@ import {
 } from '@/components/ui/select';
 import { formatPrice } from '@/lib/format';
 import { TableIcons } from './TableIcons';
+import { Button } from './ui/button';
 
 interface ProductListProps {
   products: Product[];
 }
 
 export const ProductList = ({ products }: ProductListProps) => {
+
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
+
+  const handleClick = async() => {
+    try {
+      const res = await fetch('/api/product',{
+        method: "DELETE"
+      })
+      if(res.ok){
+        router.refresh()
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -52,6 +68,9 @@ export const ProductList = ({ products }: ProductListProps) => {
           <p className='text-sm text-muted-foreground'>
             General information about your Product
           </p>
+        </div>
+        <div className='ml-6'>
+          <Button onClick={handleClick}>Delete ALL</Button>
         </div>
       </div>
       <Separator className='bg-primary/10' />

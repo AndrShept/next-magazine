@@ -18,7 +18,8 @@ import { useRouter } from 'next/navigation';
 export const TableIcons = ({ productId }: { productId: string }) => {
   const router = useRouter();
   const { toast } = useToast();
-  const handleClick = async () => {
+
+  const handleClickDelete = async () => {
     try {
       const res = await fetch(`/api/product/${productId}`, {
         method: 'DELETE',
@@ -44,7 +45,7 @@ export const TableIcons = ({ productId }: { productId: string }) => {
   return (
     <>
       <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer'>
-        <FileEdit />
+        <FileEdit onClick={() => router.push('/add-product/' + productId)} />
       </div>
       <>
         <AlertDialog>
@@ -62,7 +63,7 @@ export const TableIcons = ({ productId }: { productId: string }) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleClick}>
+              <AlertDialogAction onClick={handleClickDelete}>
                 Continue
               </AlertDialogAction>
             </AlertDialogFooter>

@@ -9,10 +9,12 @@ interface ImageUploadProps {
   disabled: boolean;
   imageArr: string[];
   setImageArr: any;
+  
 }
 
 export const ImageUpload = ({
   imageArr,
+  
   setImageArr,
   value,
   onChange,
@@ -43,7 +45,7 @@ export const ImageUpload = ({
                 className='object-cover rounded-lg'
                 fill
                 alt='Upload'
-                src={imageArr[index] || '/placeholder.svg'}
+                src={imageArr[index]  || '/placeholder.svg'}
               />
             </div>
           </div>
