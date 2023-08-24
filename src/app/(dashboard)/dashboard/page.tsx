@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { BadgeAlert, CircleDollarSign, LayoutList, Plus } from 'lucide-react';
+import { BadgeAlert, CircleDollarSign, LayoutList, Plus, ReplyAll } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -21,6 +21,11 @@ const page = () => {
         <Button asChild>
           <Link href='/order'>
           <CircleDollarSign className='mr-2' /> Замолення
+          </Link>
+        </Button>
+        <Button variant={'outline'} asChild>
+          <Link href='/'>
+          <ReplyAll className='mr-2' /> На головну
           </Link>
         </Button>
       </div>

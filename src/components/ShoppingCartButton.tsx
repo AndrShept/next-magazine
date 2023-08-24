@@ -3,8 +3,8 @@ import { ShoppingCart } from '@/lib/db/cart';
 import { formatPrice } from '@/lib/format';
 import Link from 'next/link';
 import React from 'react';
-import { ShoppingCartIcon } from '@heroicons/react/24/outline';
 import { useState, useEffect } from 'react';
+import { ShoppingCart as ShoppingCartIcon } from 'lucide-react';
 
 interface ShoppingCartButtonProps {
   cart: ShoppingCart | null;
@@ -30,7 +30,7 @@ export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
     <div className='dropdown dropdown-end  '>
       <label tabIndex={1} className='btn btn-ghost btn-circle  '>
         <div className='indicator'>
-          <ShoppingCartIcon className='h-6 w-6 text-black' />
+        <ShoppingCartIcon strokeWidth={2.2} />
           {/* <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6'

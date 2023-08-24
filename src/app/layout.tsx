@@ -5,7 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
 import { AuthProvider } from '@/components/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
-
+import { Sidebar } from '@/components/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,15 +22,20 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <AuthProvider>
-        <body className={`${inter.className} pt-20`}>
+        <body className={`${inter.className} pt-20 `}>
           <ToastProvider />
 
           <Navbar />
-          <main className='p-4 container max-w-7xl mx-auto min-w-[300px] min-h-screen'>
+
+          <main className=' mx-auto  max-w-7xl    min-w-[300px] min-h-screen'>
+            {/* <Sidebar /> */}
+            <div className='p-4'>
             {children}
+            </div>
           </main>
-          <Toaster/>
-          <Footer />
+
+          <Toaster />
+          {/* <Footer /> */}
         </body>
       </AuthProvider>
     </html>
