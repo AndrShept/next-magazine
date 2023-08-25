@@ -1,11 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
-        serverActions: true,
-      },
-      images: {
-        domains: ['images.unsplash.com', 'plus.unsplash.com', 'img.freepik.com', "lh3.googleusercontent.com", "res.cloudinary.com"]
-      }
-}
+  experimental: {
+    serverActions: true,
+  },
+  images: {
+    domains: [
+      'images.unsplash.com',
+      'plus.unsplash.com',
+      'img.freepik.com',
+      'lh3.googleusercontent.com',
+      'res.cloudinary.com',
+      "w7.pngwing.com",
+    ],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

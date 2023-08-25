@@ -1,22 +1,30 @@
+'use client';
 import { Product } from '@prisma/client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { PriceTag } from './PriceTag';
 import Image from 'next/image';
+import { Separator } from './ui/separator';
 
 interface ProductCardProps {
   product: Product;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const [isMount, setIsMount] = useState(false);
+
   const isNew =
     Date.now() - new Date(product.createdAt).getTime() <
     1000 * 60 * 60 * 24 * 7;
+
+  useEffect(() => setIsMount(true), []);
+  if (!isMount) return null;
   return (
     <Link
       href={'/products/' + product.id}
       className='card   max-w-sm bg-base-100 hover:shadow-xl transition-shadow group duration-200 static'
     >
+      
       <figure className='flex items-center justify-center  '>
         <Image
           blurDataURL={product.imageUrl}
@@ -28,7 +36,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           height={400}
         />
       </figure>
+
       <div className='card-body'>
+        
         <h2 className='card-title'>{product.name}</h2>
         {isNew && <div className='badge badge-secondary'>NEW</div>}
         <p>{product.description}</p>
