@@ -6,7 +6,9 @@ const page = () => {
   return (
     <div className='mx-auto flex justify-center w-full bg-base-100 items-center rounded-lg flex-col '>
       <div className='text-center max-w-md p-4    '>
-        <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-400 font-bold text-3xl'> Contact Us</h1>
+        <h1 className='text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-400 font-bold text-3xl'>
+          Мої контакти
+        </h1>
         <p className='text-gray-400 font-light mt-4'>
           Sample text Click to select the text box. CLick agains or double click
           to start editing the text

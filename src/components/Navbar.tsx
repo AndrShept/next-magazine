@@ -31,8 +31,16 @@ export const Navbar = async () => {
           >
             {/* <Image priority src={'/logo.png'} height={60} width={60} alt='logo'/> */}
 
-            <Flower size={50} strokeWidth={1.4} />
-            <div className='flex flex-col text-base font-normal leading-5'>
+            {/* <Flower size={50} strokeWidth={1.4} /> */}
+            <Image
+              className='h-11 w-11 '
+              width={500}
+              height={500}
+              alt='logo'
+              src={'https://cdn-icons-png.flaticon.com/128/8312/8312499.png'}
+            />
+            
+            <div className='flex flex-col text-base font-normal leading-5 ml-2'>
               <span>Оскана</span>
               <span>Фіалки</span>
             </div>
