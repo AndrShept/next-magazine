@@ -15,7 +15,7 @@ export const Categories = ({ categories, categoryId }: CategoriesProps) => {
       <Button
         asChild
         variant={'outline'}
-        className={cn(` capitalize  rounded-full text-black/70   `, {
+        className={cn(` capitalize  rounded-full text-black/70 drop-shadow-sm  `, {
           'bg-pink-400 text-white hover:bg-bg-pink-400 hover:text-white':
             !categoryId,
         })}
@@ -27,7 +27,7 @@ export const Categories = ({ categories, categoryId }: CategoriesProps) => {
           asChild
           variant={'outline'}
           key={category.id}
-          className={cn(` capitalize  rounded-full text-black/70   `, {
+          className={cn(` capitalize  rounded-full text-black/70 drop-shadow-sm    `, {
             'bg-pink-400 text-white hover:bg-bg-pink-400 hover:text-white':
               category.id === categoryId,
           })}

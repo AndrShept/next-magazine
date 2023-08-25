@@ -7,7 +7,7 @@ import { UserMenuButton } from './UserMenuButton';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Image from 'next/image';
-import { Flower, Menu, ReplyAll } from 'lucide-react';
+import { Flower, Home, Menu, ReplyAll } from 'lucide-react';
 import { SheetSidebar } from './SheetSidebar';
 
 export const searchProducts = async (formData: FormData) => {
@@ -53,7 +53,7 @@ export const Navbar = async () => {
             data-tip={'На головну'}
             href='/'
           >
-            <ReplyAll size={26} />
+            <Home size={26} strokeWidth={1.5} className='text-gray-700' />
           </Link>
         </div>
         <form className='mx-auto pr-2 md:pr-4 ' action={searchProducts}>

@@ -25,7 +25,7 @@ export const SwiperComponent = () => {
   return (
     <Swiper
       // effect='fade'
-      className='max-w-4xl  rounded-xl container mb-10'
+      className='max-w-4xl  rounded-xl container mb-10 shadow-xl'
       // install Swiper modules
       modules={[Navigation, Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
       spaceBetween={50}

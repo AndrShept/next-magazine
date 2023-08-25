@@ -15,7 +15,7 @@ export const SheetSidebar = () => {
     <Sheet>
       <SheetTrigger>
         <div className='p-2 hover:bg-gray-200 rounded-md cursor-pointer duration-150 sm:hidden block'>
-          <Menu size={26} />
+          <Menu size={26} strokeWidth={1.5} className='text-gray-700' />
         </div>
       </SheetTrigger>
       <SheetContent side={'left'} className='w-[300px] '>

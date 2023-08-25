@@ -30,7 +30,7 @@ export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
     <div className='dropdown dropdown-end  '>
       <label tabIndex={1} className='btn btn-ghost btn-circle  '>
         <div className='indicator'>
-        <ShoppingCartIcon strokeWidth={2.2} />
+        <ShoppingCartIcon  strokeWidth={2} className='text-gray-700' />
           {/* <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6'
