@@ -44,13 +44,13 @@ export const TableIcons = ({ productId }: { productId: string }) => {
   };
   return (
     <>
-      <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer'>
+      <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer tooltip ' data-tip="Редагувати">
         <FileEdit onClick={() => router.push('/add-product/' + productId)} />
       </div>
       <>
         <AlertDialog>
           <AlertDialogTrigger>
-            <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer'>
+            <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer tooltip' data-tip="Видалити">
               <Trash2 />
             </div>
           </AlertDialogTrigger>

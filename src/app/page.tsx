@@ -22,7 +22,7 @@ export default async function Home({
   const totalPage = Math.ceil((totalItemCount - heroItem) / pageSize);
   const categories = await prisma.category.findMany();
   const products = await prisma.product.findMany({
-    where: { categoryId: categoryId },
+    where: { categoryId: categoryId, status: 'active' },
     orderBy: { id: 'desc' },
     skip: (currentPage - 1) * pageSize + (currentPage === 1 ? 0 : heroItem),
     take: pageSize + (currentPage === 1 ? heroItem : 0),

@@ -7,7 +7,8 @@ import { UserMenuButton } from './UserMenuButton';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Image from 'next/image';
-import { Flower } from 'lucide-react';
+import { Flower, Menu, ReplyAll } from 'lucide-react';
+import { SheetSidebar } from './SheetSidebar';
 
 export const searchProducts = async (formData: FormData) => {
   'use server';
@@ -23,7 +24,7 @@ export const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
     <div className='bg-base-100 drop-shadow-sm border-b fixed top-0 w-full z-50 '>
-      <div className='navbar bg-base-100 p-4 container max-w-7xl mx-auto min-w-[300px]  '>
+      <div className='navbar bg-base-100 p-4 container justify-between max-w-7xl mx-auto min-w-[300px]  '>
         <div className='flex-1'>
           <Link
             href='/'
@@ -39,28 +40,36 @@ export const Navbar = async () => {
               alt='logo'
               src={'https://cdn-icons-png.flaticon.com/128/8312/8312499.png'}
             />
-            
+
             <div className='flex flex-col text-base font-normal leading-5 ml-2'>
               <span>Оскана</span>
               <span>Фіалки</span>
             </div>
           </Link>
+          <SheetSidebar />
+
+          <Link
+            className='p-2 hover:bg-gray-200 rounded-md cursor-pointer duration-150 sm:hidden block tooltip tooltip-bottom'
+            data-tip={'На головну'}
+            href='/'
+          >
+            <ReplyAll size={26} />
+          </Link>
         </div>
+        <form className='mx-auto pr-2 md:pr-4 ' action={searchProducts}>
+          <div className='form-control '>
+            <input
+              placeholder='search'
+              name='searchQuery'
+              type='text'
+              className='input input-bordered w-full min-w-[50px]'
+            />
+          </div>
+        </form>
         <div className=' '>
-          <form action={searchProducts}>
-            <div className='form-control pr-2 md:pr-4 '>
-              <input
-                placeholder='search'
-                name='searchQuery'
-                type='text'
-                className='input input-bordered w-full min-w-[50px]'
-              />
-            </div>
-          </form>
           <ShoppingCartButton cart={cart} />
           <UserMenuButton session={session!} />
         </div>
-        <div className='flex-none'></div>
       </div>
     </div>
   );
