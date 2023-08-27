@@ -27,7 +27,7 @@ export const AddToCartButton = ({
         }}
         className='btn btn-secondary text-white font-normal rounded-full  '
       >
-        Добавити
+        В Корзину
         <svg
           xmlns='http://www.w3.org/2000/svg'
           className='h-5 w-5'

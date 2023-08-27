@@ -27,11 +27,10 @@ export default function RootLayout({
 
           <Navbar />
 
-          <main className=' mx-auto  max-w-7xl    min-w-[300px] min-h-screen'>
+          <main className=' mx-auto   max-w-7xl p-4   min-w-[300px] min-h-screen'>
             {/* <Sidebar /> */}
-            <div className='p-4'>
+
             {children}
-            </div>
           </main>
 
           <Toaster />
