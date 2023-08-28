@@ -27,27 +27,34 @@ export default async function Home({
     skip: (currentPage - 1) * pageSize + (currentPage === 1 ? 0 : heroItem),
     take: pageSize + (currentPage === 1 ? heroItem : 0),
   });
+  const imageUrls = await prisma.product.findMany({
+    select: { imageArrUrl: true },
+  });
+  const allImageUrl = [];
+
+  for (const imageUrl of imageUrls) {
+    allImageUrl.push(...imageUrl.imageArrUrl);
+  }
   return (
     <>
       <main className='flex flex-col '>
-        <SwiperComponent />
+        <SwiperComponent allImageUrl={allImageUrl} />
         <Categories categories={categories} categoryId={categoryId} />
         {products.length ? (
           <div className=' grid grid-cols-1   md:grid-cols-2 lg:grid-cols-3 my-4 gap-6 md:max-w-full max-w-md mx-auto'>
-            {(products).map(
-              (product) => (
-                <ProductCard product={product} key={product.id} />
-              )
-            )}
+            {products.map((product) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
           </div>
         ) : (
-          <h1 className='text-center  text-3xl text-gray-400 mt-20'>Нічого не знайдено</h1>
+          <h1 className='text-center  text-3xl text-gray-400 mt-20'>
+            Нічого не знайдено
+          </h1>
         )}
-        {totalPage > 1 && (
+        {totalPage > 1 && false && (
           <PaginationBar currentPage={currentPage} totalPages={totalPage} />
         )}
       </main>
-
     </>
   );
 }

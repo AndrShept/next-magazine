@@ -7,7 +7,6 @@ export const POST = async (req: Request) => {
     const body = await req.json();
     const { name, description, imageUrl, price, category, categoryId, status } =
       body;
-    console.log(body);
 
     if (!name && !description && !imageUrl && !price && !category && !status) {
       return new NextResponse('Missing required fields');
@@ -24,6 +23,7 @@ export const POST = async (req: Request) => {
         status,
       },
     });
+
     revalidatePath('/');
     return NextResponse.json(newProduct, { status: 201 });
   } catch (error) {

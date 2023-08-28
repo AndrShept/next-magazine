@@ -18,6 +18,7 @@ model Product {
   updatedAt   DateTime   @updatedAt
   categoryId  String
   status      String
+  view        Int?
   CartItem    CartItem[]
   category    Category[]
 
@@ -53,6 +54,19 @@ model CartItem {
   cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
 
   @@map("cartitems")
+}
+
+model Order {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  imageUrl    String
+  phoneNumber String
+  email       String
+  quantity    Int
+  price       Int
+  subtotal    Int
+
+  @@map("orders")
 }
 
 model Account {

@@ -1,9 +1,9 @@
-import React from 'react'
+import { FlowerSpinner } from '@/components/FlowerSpinner';
+import { Flower } from 'lucide-react';
+import React from 'react';
 
 const loading = () => {
-  return (
-    <div className='flex'><span className='loading loading-spinner loading-lg mx-auto mt-10'></span></div>
-  )
-}
+  return <FlowerSpinner />;
+};
 
-export default loading
+export default loading;
