@@ -3,6 +3,7 @@
 
 // export const POST = async (req: Request) => {
 //   const body = await req.json();
+//   console.log(body)
 //   if (!body) {
 //     throw new Error('Missing required fields');
 //   }

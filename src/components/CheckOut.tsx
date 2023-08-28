@@ -37,10 +37,17 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
 
-    const body = {...values, }
-    
+    try {
+      const res = await fetch('/api/order',{
+        method: 'POST',
+        body: JSON.stringify({...values,...cart })
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    console.log(cart)
     console.log(values);
 
 

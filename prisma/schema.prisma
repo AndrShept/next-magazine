@@ -52,18 +52,18 @@ model CartItem {
   quantity  Int
   cartId    String  @db.ObjectId
   cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  Order     Order?  @relation(fields: [orderId], references: [id])
+  orderId   String? @db.ObjectId
 
   @@map("cartitems")
 }
 
 model Order {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  imageUrl    String
   phoneNumber String
   email       String
-  quantity    Int
-  price       Int
+  CartItem    CartItem[]
   subtotal    Int
 
   @@map("orders")
