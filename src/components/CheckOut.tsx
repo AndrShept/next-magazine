@@ -14,6 +14,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Flower } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -28,6 +30,7 @@ const formSchema = z.object({
 });
 
 export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,22 +39,28 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
       email: '',
     },
   });
-
+  const isLoading = form.formState.isSubmitting;
   async function onSubmit(values: z.infer<typeof formSchema>) {
-
     try {
-      const res = await fetch('/api/order',{
+      const res = await fetch('/api/order', {
         method: 'POST',
-        body: JSON.stringify({...values,...cart })
-      })
+        body: JSON.stringify({ ...values, ...cart }),
+      });
+
+      if (res.ok) {
+        router.push('/thanks-page');
+        try {
+          await fetch('/api/cart', {
+            method: 'DELETE',
+            body: JSON.stringify(cart?.id),
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    console.log(cart)
-    console.log(values);
-
-
-
   }
 
   return (
@@ -108,7 +117,24 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
               </FormItem>
             )}
           />
-          <Button className='  rounded-full bg-[#f000b8] hover:bg-[#db32b4]' type='submit'>Замовити</Button>
+          {isLoading ? (
+            <Button
+              disabled={isLoading}
+              className='  rounded-full bg-[#f000b8] hover:bg-[#db32b4]'
+              type='submit'
+            >
+              Загрузка...{' '}
+              <Flower className='animate-spin ml-2' strokeWidth={1.5} />
+            </Button>
+          ) : (
+            <Button
+              disabled={isLoading}
+              className='  rounded-full bg-[#f000b8] hover:bg-[#db32b4]'
+              type='submit'
+            >
+              Замовити
+            </Button>
+          )}
         </form>
       </Form>
     </div>

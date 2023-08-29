@@ -63,7 +63,8 @@ model Order {
   name        String
   phoneNumber String
   email       String
-  CartItem    CartItem[]
+  cartId      String     @db.ObjectId
+  cartItem    CartItem[]
   subtotal    Int
 
   @@map("orders")
