@@ -11,8 +11,8 @@ export const metadata = {
 
 const CartPage = async () => {
   const cart = await getCart();
-  console.log(cart);
-  if (cart?.items.length === 0) return <EmptyCart />;
+  if (cart?.items.length === undefined || cart?.items.length === 0)
+    return <EmptyCart />;
   return (
     <div className='flex flex-col   mx-auto overflow-x-hidden '>
       {cart?.items.map((item) => (
