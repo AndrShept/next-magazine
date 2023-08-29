@@ -54,6 +54,7 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
             method: 'DELETE',
             body: JSON.stringify(cart?.id),
           });
+          router.refresh()
         } catch (error) {
           console.log(error);
         }
