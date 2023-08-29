@@ -19,7 +19,7 @@ const page = () => {
           </Link>
         </Button>
         <Button asChild>
-          <Link href='/order'>
+          <Link href='/order-list'>
           <CircleDollarSign className='mr-2' /> Замолення
           </Link>
         </Button>

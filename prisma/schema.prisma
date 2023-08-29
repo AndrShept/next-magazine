@@ -18,7 +18,7 @@ model Product {
   updatedAt   DateTime   @updatedAt
   categoryId  String
   status      String
-  view        Int?
+  view        Int? @default(0)
   CartItem    CartItem[]
   category    Category[]
 
