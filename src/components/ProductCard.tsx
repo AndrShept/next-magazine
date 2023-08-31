@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { PriceTag } from './PriceTag';
 import Image from 'next/image';
-import { Separator } from './ui/separator';
 
 interface ProductCardProps {
   product: Product;

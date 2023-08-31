@@ -1,5 +1,5 @@
 'use client';
-import { ArrowLeft, FileEdit, Trash2 } from 'lucide-react';
+import { ArrowLeft} from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Separator } from './ui/separator';
 import { useRouter } from 'next/navigation';

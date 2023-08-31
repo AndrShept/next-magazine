@@ -1,5 +1,4 @@
 'use client';
-import { prisma } from '@/lib/db/prisma';
 import { CheckIcon } from '@heroicons/react/24/outline';
 import React, { useTransition, useState } from 'react';
 

@@ -22,7 +22,6 @@ import {
   SelectValue,
 } from './ui/select';
 import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
 import { ArrowLeft, Flower, Flower2, Loader2, Wand2 } from 'lucide-react';
 import z from 'zod';
 import { ImageUpload } from './ImageUpload';

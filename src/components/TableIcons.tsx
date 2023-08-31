@@ -11,7 +11,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Erica_One } from 'next/font/google';
 import { useToast } from './ui/use-toast';
 import { useRouter } from 'next/navigation';
 

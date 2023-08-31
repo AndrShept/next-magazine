@@ -7,7 +7,7 @@ import { UserMenuButton } from './UserMenuButton';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Image from 'next/image';
-import { Flower, Home, Menu, ReplyAll } from 'lucide-react';
+import {  Home } from 'lucide-react';
 import { SheetSidebar } from './SheetSidebar';
 
 export const searchProducts = async (formData: FormData) => {
