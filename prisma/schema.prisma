@@ -70,13 +70,13 @@ model Order {
 }
 
 model OrderItem {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  Order       Order?  @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  orderId     String? @db.ObjectId
-  productName String
-  imageUrl    String
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  Order        Order?  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId      String? @db.ObjectId
+  productName  String
+  imageUrl     String
   productPrice Int
-  quantity    Int
+  quantity     Int
 
   @@map("orderItems")
 }
@@ -120,8 +120,14 @@ model User {
   accounts      Account[]
   sessions      Session[]
   cart          Cart[]
+  role          Role      @default(USER)
 
   @@map("users")
+}
+
+enum Role {
+  ADMIN
+  USER
 }
 
 model VerificationToken {
