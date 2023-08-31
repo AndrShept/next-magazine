@@ -11,7 +11,6 @@ const page = async () => {
     include:{orderItem:true},
     orderBy: { createdAt: 'desc' },
   });
-  console.log(orders)
   return (
     <div className='h-full max-w-3xl mx-auto '>
 
