@@ -23,7 +23,7 @@ export const CheckOutButton = ({ cart }: { cart: ShoppingCart | null }) => {
       <Dialog>
         <DialogTrigger>
           <button className='btn btn-secondary mx-auto text-white rounded-full '>
-            CHECKOUT
+            ДАЛЬШЕ
           </button>
         </DialogTrigger>
         <DialogContent>

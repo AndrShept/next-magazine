@@ -1,14 +1,9 @@
-import { ProductList } from '@/components/ProductList';
 import { prisma } from '@/lib/db/prisma';
 import React from 'react';
 import { OrderList } from './OrderList';
-import { Order, OrderItem } from '@prisma/client';
-import { Divide } from 'lucide-react';
-
-export type OrderListProps = Order & { orderItem: OrderItem[] };
 
 const page = async () => {
-  const orders: OrderListProps[] = await prisma.order.findMany({
+  const orders = await prisma.order.findMany({
     include: { orderItem: true },
     orderBy: { createdAt: 'desc' },
   });

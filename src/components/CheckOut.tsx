@@ -54,7 +54,7 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
             method: 'DELETE',
             body: JSON.stringify(cart?.id),
           });
-          router.refresh()
+          router.refresh();
         } catch (error) {
           console.log(error);
         }
@@ -75,7 +75,11 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder='Ваше імя' {...field} />
+                  <Input
+                    disabled={isLoading}
+                    placeholder='Ваше імя'
+                    {...field}
+                  />
                 </FormControl>
                 {/* <FormDescription>
                   This is your public display name.
@@ -92,6 +96,7 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
                 <FormLabel>Phone number</FormLabel>
                 <FormControl>
                   <Input
+                    disabled={isLoading}
                     type='number'
                     placeholder='номер телефону'
                     {...field}
@@ -109,7 +114,11 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
               <FormItem>
                 <FormLabel>Ваш email</FormLabel>
                 <FormControl>
-                  <Input placeholder='example@gmail.com' {...field} />
+                  <Input
+                    disabled={isLoading}
+                    placeholder='example@gmail.com'
+                    {...field}
+                  />
                 </FormControl>
                 {/* <FormDescription>
                   This is your public display name.
@@ -121,7 +130,7 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
           {isLoading ? (
             <Button
               disabled={isLoading}
-              className='  rounded-full bg-[#f000b8] hover:bg-[#db32b4]'
+              className=' w-full  rounded-full bg-[#f000b8] hover:bg-[#db32b4]'
               type='submit'
             >
               Загрузка...{' '}
@@ -130,7 +139,7 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
           ) : (
             <Button
               disabled={isLoading}
-              className='  rounded-full bg-[#f000b8] hover:bg-[#db32b4]'
+              className='w-full  rounded-full bg-[#f000b8] hover:bg-[#db32b4]'
               type='submit'
             >
               Замовити

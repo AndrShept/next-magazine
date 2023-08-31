@@ -31,6 +31,7 @@ export const DeleteIcon = ({ orderId }: { orderId: string }) => {
       });
     }
   };
+
   return (
     <>
       {isPending ? (

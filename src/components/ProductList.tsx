@@ -69,20 +69,21 @@ export const ProductList = ({ products }: ProductListProps) => {
           <TableRow>
             <TableHead className=''>Name</TableHead>
             <TableHead className='w-[200px] '>Image</TableHead>
-            <TableHead className=''>Price</TableHead>
+            <TableHead >Price</TableHead>
             <TableHead className='w-[50px] '>Button</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {products.map((product) => (
             <TableRow
-              className={`rounded-md ${
-                product.status === 'inactive' ? 'bg-red-100' : ''
+              className={`rounded-md  ${
+                product.status === 'inactive' ? 'bg-red-100 hover:bg-red-300' : ''
               } `}
               key={product.id}
             >
-              <TableCell className='font-medium'>{product.name}</TableCell>
-              <TableCell className=' relative'>
+              
+              <TableCell className='font-medium p-0 pr-2'>{product.name}</TableCell>
+              <TableCell className=' relative  '>
                 <Image
                   sizes='100wh'
                   className='object-cover'
@@ -91,8 +92,8 @@ export const ProductList = ({ products }: ProductListProps) => {
                   alt={'img'}
                 />
               </TableCell>
-              <TableCell>{formatPrice(product.price)}</TableCell>
-              <TableCell className='font-medium'>
+              <TableCell className='' >{formatPrice(product.price)}</TableCell>
+              <TableCell className='font-medium p-0'>
                 {' '}
                 <TableIcons productId={product.id} />
               </TableCell>

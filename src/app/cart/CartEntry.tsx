@@ -15,7 +15,7 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
   const [isMount, setIsMount] = useState(false);
   const [pending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
-  const quantityOptions = [...new Array(20)].map(
+  const quantityOptions = [...new Array(5)].map(
     (item, index) => (item = index)
   );
   const onChange = async (e: ChangeEvent<HTMLSelectElement>) => {
