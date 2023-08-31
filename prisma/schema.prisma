@@ -75,6 +75,7 @@ model OrderItem {
   orderId     String? @db.ObjectId
   productName String
   imageUrl    String
+  productPrice Int
   quantity    Int
 
   @@map("orderItems")

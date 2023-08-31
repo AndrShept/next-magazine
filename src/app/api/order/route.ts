@@ -23,6 +23,7 @@ export const POST = async (req: Request) => {
 
               productName: item.product.name,
               imageUrl: item.product.imageUrl,
+              productPrice: item.product.price,
             })),
           },
         },
