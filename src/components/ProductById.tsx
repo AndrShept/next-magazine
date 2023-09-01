@@ -66,7 +66,7 @@ export const ProductById = ({ product }: { product: Product }) => {
           <h1 className='sm:text-5xl text-4xl font-bold  text-black/80'>
             {product.name}{' '}
           </h1>
-          <p className='py-6 text-gray-600'>{product.description}</p>
+          <p className='py-6 text-gray-600 md:text-base text-sm'>{product.description}</p>
           <div className='flex justify-between items-center'>
             <PriceTag price={product.price} />
             <AddToCartButton

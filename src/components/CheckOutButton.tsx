@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { CheckOut } from '@/components/CheckOut';
 import {
   Dialog,
@@ -13,12 +13,7 @@ import { ShoppingCart } from '@/lib/db/cart';
 import { Button } from './ui/button';
 
 export const CheckOutButton = ({ cart }: { cart: ShoppingCart | null }) => {
-  const [isMount, setIsMount] = useState(false);
 
-  useEffect(() => {
-    setIsMount(true);
-  }, []);
-  if (!isMount) return null;
   return (
     <>
       <Dialog>
