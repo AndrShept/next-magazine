@@ -7,8 +7,10 @@ import { UserMenuButton } from './UserMenuButton';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Image from 'next/image';
-import {  Home } from 'lucide-react';
+import { Home } from 'lucide-react';
 import { SheetSidebar } from './SheetSidebar';
+import { cn } from '@/lib/utils';
+import { NavList } from './NavList';
 
 export const searchProducts = async (formData: FormData) => {
   'use server';
@@ -25,14 +27,11 @@ export const Navbar = async () => {
   return (
     <div className='bg-base-100 drop-shadow-sm border-b fixed top-0 w-full z-50 '>
       <div className='navbar bg-base-100 p-4 container justify-between max-w-7xl mx-auto min-w-[300px]  '>
-        <div className='flex-1'>
+        <div className=''>
           <Link
             href='/'
-            className=' text-4xl text-pink-600 items-center  hover:text-pink-700 duration-200 sm:flex hidden'
+            className=' text-4xl text-pink-600 items-center  hover:text-pink-700 duration-200 md:flex hidden'
           >
-            {/* <Image priority src={'/logo.png'} height={60} width={60} alt='logo'/> */}
-
-            {/* <Flower size={50} strokeWidth={1.4} /> */}
             <Image
               className='h-11 w-11 '
               width={500}
@@ -49,14 +48,14 @@ export const Navbar = async () => {
           <SheetSidebar />
 
           <Link
-            className='p-2 hover:bg-gray-200 rounded-md cursor-pointer duration-150 sm:hidden block tooltip tooltip-bottom'
+            className='p-2 hover:bg-gray-200 rounded-md cursor-pointer duration-150 md:hidden block tooltip tooltip-bottom'
             data-tip={'На головну'}
             href='/'
           >
             <Home size={26} strokeWidth={1.5} className='text-gray-700' />
           </Link>
         </div>
-        <form className='mx-auto pr-2 md:pr-4 ' action={searchProducts}>
+        <form className=' pr-2 md:pr-4 ' action={searchProducts}>
           <div className='form-control '>
             <input
               placeholder='search'
@@ -66,7 +65,9 @@ export const Navbar = async () => {
             />
           </div>
         </form>
-        <div className=' '>
+
+        <div>
+          <NavList />
           <ShoppingCartButton cart={cart} />
           <UserMenuButton session={session!} />
         </div>

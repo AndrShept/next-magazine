@@ -2,6 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
+export const metadata = {
+  title: 'Дякую за покупку',
+ 
+}
+
 const page = () => {
   return (
     <div className='mx-auto max-w-4xl h-screen'>
@@ -17,7 +22,9 @@ const page = () => {
           Дякую за замолення{' '}
         </h1>
         <p className='text-gray-400'>Ваше замовлення отримано</p>
-        <p className='text-gray-400'>Ми зв&apos;яжемося з вами найближчим часом.</p>
+        <p className='text-gray-400'>
+          Ми зв&apos;яжемося з вами найближчим часом.
+        </p>
 
         <Link
           className='btn btn-secondary rounded-full text-white mt-4'

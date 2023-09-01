@@ -1,7 +1,10 @@
 import { Contacts } from '@/components/Contacts';
-import { MailOpen, PhoneIncoming } from 'lucide-react';
-import Image from 'next/image';
+
 import React from 'react';
+
+export const metadata = {
+  title: 'Мої контакти',
+};
 
 const page = () => {
   return (
