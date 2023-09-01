@@ -41,9 +41,9 @@ export const SheetSidebar = () => {
                     setIsOpen(false);
                   }}
                   className={cn(
-                    'py-2 px-1 border-b-2 border-transparent hover:border-pink-200  ',
+                    'py-2 px-1 border-b-2 border-transparent hover:border-pink-200 text-base  ',
                     {
-                      'border-pink-500 duration-300 hover:border-pink-500 ':
+                      'border-pink-500 duration-300 hover:border-pink-500 font-semibold ':
                         pathname === nav.href,
                     }
                   )}
@@ -55,7 +55,7 @@ export const SheetSidebar = () => {
             </ul>
           </nav>
           <div className='flex flex-col gap-2 mt-4 text-center '>
-            <h3 className='text-zinc-400 '>Follow Use:</h3>
+            <h3 className='text-zinc-400 text-base '>Follow Use:</h3>
             <div className='flex gap-2'>
               <a
                 className='relative w-10 h-10 hover:opacity-90'

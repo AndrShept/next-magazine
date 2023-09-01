@@ -13,7 +13,7 @@ const page = async () => {
   });
   return (
     <div className='min-h-screen  space-2 max-w-3xl mx-auto '>
-      <ReviewForm />
+      {/* <ReviewForm /> */}
       <ReviewsList reviews={reviews}/>
     </div>
   );

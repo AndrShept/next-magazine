@@ -21,7 +21,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link
       href={'/products/' + product.id}
-      className='card   max-w-sm bg-base-100 hover:shadow-xl transition-shadow group duration-200 static'
+      className='card   max-w-sm bg-base-100 hover:shadow-xl transition-shadow group duration-200 static border border-zinc-200'
     >
       
       <figure className='flex items-center justify-center  '>

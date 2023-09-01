@@ -64,7 +64,7 @@ export const ReviewForm = () => {
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
           <FormField
             control={form.control}
             name='name'
@@ -98,7 +98,7 @@ export const ReviewForm = () => {
               </FormItem>
             )}
           />
-          <Button disabled={isLoading} className='w-full rounded-full' type='submit'>
+          <Button variant={'pink'} disabled={isLoading} className='w-full rounded-full' type='submit'>
             Відправити{' '}
             {isLoading && (
               <span>

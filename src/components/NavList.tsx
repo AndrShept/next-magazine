@@ -18,9 +18,9 @@ export const NavList = ({ className = '' }) => {
         {navList.map((nav, idx) => (
           <Link
             className={cn(
-              'py-2 px-1 border-b-2 border-transparent hover:border-pink-200 text-base  ',
+              'py-2 px-1 border-b-2 border-transparent hover:border-pink-200  ',
               {
-                'border-pink-500 duration-300 hover:border-pink-500 ':
+                'border-pink-500 duration-300 hover:border-pink-500 font-semibold ':
                   pathname === nav.href,
               },
               className
