@@ -5,7 +5,6 @@ import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
 import { AuthProvider } from '@/components/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
-import { Sidebar } from '@/components/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,7 +27,6 @@ export default function RootLayout({
           <Navbar />
 
           <main className=' mx-auto   max-w-7xl p-4   min-w-[300px] min-h-screen'>
-            {/* <Sidebar /> */}
 
             {children}
           </main>
