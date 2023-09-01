@@ -31,8 +31,8 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
   }, []);
   if (!isMount) return null;
   return (
-    <div>
-      <div className='flex flex-col   sm:flex-row sm:items-stretch items-center  gap-4  '>
+    <>
+      <div className='flex flex-col   sm:flex-row sm:items-stretch items-center  gap-4 bg-base-100  md:p-6 p-4 rounded-lg border border-zinc-200  '>
         <Image
           src={cartItem.product.imageUrl}
           alt={cartItem.product.name}
@@ -77,6 +77,6 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
         </div>
       </div>
       <div className='divider' />
-    </div>
+    </>
   );
 };

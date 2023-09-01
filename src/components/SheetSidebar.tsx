@@ -34,7 +34,7 @@ export const SheetSidebar = () => {
           </SheetDescription> */}
           <nav>
             <ul className=' gap-2 flex-col flex w-max  text-center'>
-              {navList.map((nav) => (
+              {navList.map((nav, idx) => (
                 <button
                   onClick={() => {
                     router.push(nav.href);
@@ -47,7 +47,7 @@ export const SheetSidebar = () => {
                         pathname === nav.href,
                     }
                   )}
-                  key={nav.id}
+                  key={idx}
                 >
                   {nav.name}
                 </button>
@@ -66,6 +66,7 @@ export const SheetSidebar = () => {
                   src={'https://cdn-icons-png.flaticon.com/128/733/733547.png'}
                   alt='img'
                   fill
+                  sizes='100vw'
                 />
               </a>
               <a
@@ -79,6 +80,7 @@ export const SheetSidebar = () => {
                   }
                   alt='img'
                   fill
+                  sizes='100vw'
                 />
               </a>
               <a
@@ -92,6 +94,7 @@ export const SheetSidebar = () => {
                   }
                   alt='img'
                   fill
+                  sizes='100vw'
                 />
               </a>
             </div>

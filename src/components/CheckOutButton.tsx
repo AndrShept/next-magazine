@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { ShoppingCart } from '@/lib/db/cart';
+import { Button } from './ui/button';
 
 export const CheckOutButton = ({ cart }: { cart: ShoppingCart | null }) => {
   const [isMount, setIsMount] = useState(false);
@@ -21,7 +22,7 @@ export const CheckOutButton = ({ cart }: { cart: ShoppingCart | null }) => {
   return (
     <>
       <Dialog>
-        <DialogTrigger>
+        <DialogTrigger asChild>
           <button className='btn btn-secondary mx-auto text-white rounded-full '>
             ДАЛЬШЕ
           </button>
