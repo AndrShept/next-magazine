@@ -12,7 +12,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     where: {
       OR: [
         { name: { contains: searchParams.searchQuery , mode: 'insensitive'  } },
-        { description: { contains: searchParams.searchQuery , mode: 'insensitive'  } },
+        // { description: { contains: searchParams.searchQuery , mode: 'insensitive'  } },
        
       ],
       
