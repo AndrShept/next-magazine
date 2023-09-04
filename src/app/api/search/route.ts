@@ -7,8 +7,7 @@ export const GET = async(req:Request)=> {
     const {searchParams} =   new URL(req.url )
     const res = Number(searchParams.get('page'))
 
-    console.log(searchParams)
-    console.log(res)
+
     const result = await prisma.product.findMany({
         orderBy: {createdAt: 'desc'},
         take: res

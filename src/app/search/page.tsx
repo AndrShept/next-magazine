@@ -3,7 +3,7 @@ import { prisma } from '@/lib/db/prisma';
 import React from 'react';
 
 interface SearchPageProps {
-  searchParams: { query: string };
+  searchParams: { searchQuery: string };
 }
 
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
@@ -11,8 +11,8 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     orderBy: { id: 'desc' },
     where: {
       OR: [
-        { name: { contains: searchParams.query , mode: 'insensitive'  } },
-        { description: { contains: searchParams.query , mode: 'insensitive'  } },
+        { name: { contains: searchParams.searchQuery , mode: 'insensitive'  } },
+        { description: { contains: searchParams.searchQuery , mode: 'insensitive'  } },
        
       ],
       
@@ -28,9 +28,9 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   return (
     <>
       <div className=' grid grid-cols-1   md:grid-cols-2 lg:grid-cols-3 my-4 gap-6 md:max-w-full max-w-md mx-auto'>
-        {products.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
+   
+          <ProductCard products={products}  />
+      
       </div>
     </>
   );

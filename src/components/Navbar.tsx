@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { getCart } from '@/lib/db/cart';
 import { ShoppingCartButton } from './ShoppingCartButton';
 import { UserMenuButton } from './UserMenuButton';
@@ -12,15 +11,7 @@ import { SheetSidebar } from './SheetSidebar';
 import { cn } from '@/lib/utils';
 import { NavList } from './NavList';
 import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
-
-export const searchProducts = async (formData: FormData) => {
-  'use server';
-  const searchQuery = formData.get('searchQuery')?.toString();
-  if (searchQuery) {
-    redirect(`/search?query=${searchQuery}`);
-  }
-  console.log(searchQuery);
-};
+import { SearchForm } from './SearchForm';
 
 export const Navbar = async () => {
   const cart = await getCart();
@@ -56,27 +47,19 @@ export const Navbar = async () => {
             <Home size={26} strokeWidth={1.5} className='text-gray-700' />
           </Link>
         </div>
-        <form className=' pr-2 md:pr-4 ' action={searchProducts}>
-          <div className='form-control '>
-            <input
-              placeholder='search'
-              name='searchQuery'
-              type='text'
-              className='input input-bordered w-full min-w-[50px]'
-            />
-          </div>
-        </form>
+        <SearchForm />
 
         <div>
           <NavList />
 
           <ShoppingCartButton cart={cart} />
- 
-          <Link className='p-3 rounded-full hover:bg-gray-200' href='/dashboard'>
-              <WrenchScrewdriverIcon className='h-5 w-5 text-gray-500' />{' '}
-              
-            </Link>
-     
+
+          <Link
+            className='p-3 rounded-full hover:bg-gray-200'
+            href='/dashboard'
+          >
+            <WrenchScrewdriverIcon className='h-5 w-5 text-gray-500' />{' '}
+          </Link>
 
           {/* <UserMenuButton session={session!} /> */}
         </div>

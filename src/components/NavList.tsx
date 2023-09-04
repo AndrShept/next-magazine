@@ -5,15 +5,15 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 
 export const navList = [
-  { name: 'Contacts', href: '/contacts', id: Date.now() },
-  { name: 'About', href: '/about', id: Date.now() },
-  { name: 'Reviews', href: '/reviews', id: Date.now() },
+  { name: 'Контакти', href: '/contacts', id: Date.now() },
+  { name: 'Про магазин', href: '/about', id: Date.now() },
+  { name: 'Відгуки', href: '/reviews', id: Date.now() },
 ];
 
 export const NavList = ({ className = '' }) => {
   const pathname = usePathname();
   return (
-    <nav className='mr-4'>
+    <nav className=''>
       <ul className=' gap-2 md:flex hidden'>
         {navList.map((nav, idx) => (
           <Link

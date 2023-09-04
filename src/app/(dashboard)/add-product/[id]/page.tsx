@@ -19,11 +19,7 @@ const AddProductPage = async ({ params }: { params: { id: string } }) => {
 
   });
 
-  const session = await getServerSession(authOptions);
 
-  if (session?.user?.email !== 'lolokos1986@gmail.com') {
-    redirect('/api/auth/signin?callbackUrl');
-  }
   return <AddProductFrom categories={categories} product={product} />;
 };
 

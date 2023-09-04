@@ -9,6 +9,8 @@ interface ImageUploadProps {
   disabled: boolean;
   imageArr: string[];
   setImageArr: any;
+  heroImage : string;
+  setHeroImage: (img: string) => void
   
 }
 
@@ -19,13 +21,15 @@ export const ImageUpload = ({
   value,
   onChange,
   disabled,
+  heroImage,
+  setHeroImage
 }: ImageUploadProps) => {
   const [index, setIndex] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
-
   useEffect(() => {
+    setHeroImage(imageArr[index])
     setIsMounted(true);
-  }, []);
+  }, [imageArr, index, setHeroImage]);
   if (!isMounted) return null;
   return (
     <>
@@ -35,7 +39,7 @@ export const ImageUpload = ({
             onChange(result.info.secure_url);
             setImageArr((prev: any) => [...prev, result.info.secure_url]);
           }}
-          options={{ maxFiles: 5, multiple: true }}
+          options={{ maxFiles: 6, multiple: true }}
           uploadPreset='t3hvddvv' // cloudinary settings/Upload
         >
           <div className='p-4 border-4 border-dashed border-primary/10 rounded-lg hover:opacity-75 transition flex   '>
@@ -55,13 +59,13 @@ export const ImageUpload = ({
         {imageArr.map((item: any, i: number) => (
           <div
             onClick={() => setIndex(i)}
-            className={`relative w-20 h-20  flex gap-4   cursor-pointer  border-2 overflow-hidden hover:opacity-90 duration-200 ${
-              index === i ? 'border-black/70 ' : 'border-transparent'
+            className={`relative w-24 h-24  flex gap-4   cursor-pointer  border-2 overflow-hidden hover:opacity-90  duration-200 ${
+              index === i ? 'border-pink-500/70 ' : 'border-transparent'
             }  `}
             key={item}
           >
             <Image
-              className='object-cover duration-200 hover:scale-105  '
+              className='object-cover duration-200  p-1  '
               fill
               alt='Upload'
               src={item || '/placeholder.svg'}

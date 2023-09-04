@@ -1,3 +1,4 @@
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Button } from '@/components/ui/button';
 import {
   BadgeAlert,
@@ -6,10 +7,17 @@ import {
   Plus,
   ReplyAll,
 } from 'lucide-react';
+import { getServerSession } from 'next-auth';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
-const page = () => {
+const page = async() => {
+
+  // const session = await getServerSession(authOptions);
+  // if (session?.user?.email !== 'lolokos1986@gmail.com') {
+  //   redirect('/api/auth/signin?callbackUrl');
+  // }
   return (
     <div className='flex justify-center items-center  '>
       <div className='flex flex-col gap-4  mt-[100px] '>

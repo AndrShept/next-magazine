@@ -59,6 +59,7 @@ export const AddProductFrom = ({
   product,
 }: AddProductFromProps) => {
   const [imageArr, setImageArr] = useState<any>([]);
+  const [heroImage, setHeroImage] = useState('')
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -75,7 +76,7 @@ export const AddProductFrom = ({
 
   const isLoading = form.formState.isSubmitting;
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const newValues = { ...values, imageUrl: imageArr };
+    const newValues = { ...values, imageUrl: imageArr, heroImage };
     try {
       if (!product) {
         const res = await fetch('/api/product', {
@@ -158,6 +159,8 @@ export const AddProductFrom = ({
                     disabled={isLoading}
                     onChange={field.onChange}
                     value={field.value}
+                    heroImage={heroImage}
+                    setHeroImage= {setHeroImage}
                   />
                 </FormControl>
                 <FormMessage />
