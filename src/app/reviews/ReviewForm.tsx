@@ -25,7 +25,7 @@ const reviewSchema = z.object({
   content: z.string().min(4).max(100),
 });
 
-export const ReviewForm = () => {
+export const ReviewForm = ({setIsOpen}: {setIsOpen: (bool: boolean)=> void}) => {
   const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof reviewSchema>>({
@@ -45,6 +45,7 @@ export const ReviewForm = () => {
       if (res.ok) {
         router.refresh();
         router.push('/reviews');
+        setIsOpen(false)
         toast({
           title: 'Success',
           description: 'Відгук успішно добавлений!',

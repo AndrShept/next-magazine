@@ -31,21 +31,21 @@ import { useToast } from './ui/use-toast';
 
 export const formSchema = z.object({
   name: z.string().min(1, {
-    message: 'Імя продукту обовязкове поле',
+    message: 'Імя продукту обов`язкове поле',
   }),
   description: z.string().min(1, {
-    message: ' Описання продукту обовязкове поле',
+    message: ' Описання продукту обов`язкове поле',
   }),
 
   price: z.any(),
   imageUrl: z.string().min(1, {
-    message: 'Фото продукту обовязкове поле',
+    message: 'Фото продукту обовя`зкове поле',
   }),
   categoryId: z.string().min(1, {
-    message: 'Категорія продукту обовязкова поле',
+    message: 'Категорія продукту обов`язкова поле',
   }),
   status: z.string().min(1, {
-    message: 'Статус продукту обовязкова поле',
+    message: 'Статус продукту обов`язкова поле',
   }),
 });
 

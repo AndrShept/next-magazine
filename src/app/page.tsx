@@ -42,9 +42,9 @@ export default async function Home({
         <Categories categories={categories} categoryId={categoryId} />
         {products.length ? (
           <div className=' grid grid-cols-1   md:grid-cols-2 lg:grid-cols-3 my-4 gap-6 md:max-w-full max-w-md mx-auto'>
-            {products.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
+          
+              <ProductCard products={products} />
+            
           </div>
         ) : (
           <h1 className='text-center  text-3xl text-gray-400 mt-20'>

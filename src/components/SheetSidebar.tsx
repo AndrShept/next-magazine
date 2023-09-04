@@ -13,6 +13,7 @@ import { navList } from './NavList';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const SheetSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +26,7 @@ export const SheetSidebar = () => {
           <Menu size={26} strokeWidth={1.5} className='text-gray-700' />
         </div>
       </SheetTrigger>
-      <SheetContent side={'left'} className='w-[300px] '>
+      <SheetContent side={'left'} className='w-[270px] '>
         <SheetHeader className='flex items-center justify-around h-screen'>
           {/* <SheetTitle>Мої контакти</SheetTitle> */}
           {/* <SheetDescription>
@@ -33,26 +34,32 @@ export const SheetSidebar = () => {
             account and remove your data from our servers.
           </SheetDescription> */}
           <nav>
-            <ul className=' gap-2 flex-col flex w-max  text-center'>
-              {navList.map((nav, idx) => (
-                <button
-                  onClick={() => {
-                    router.push(nav.href);
-                    setIsOpen(false);
-                  }}
-                  className={cn(
-                    'py-2 px-1 border-b-2 border-transparent hover:border-pink-200 text-base  ',
-                    {
-                      'border-pink-500 duration-300 hover:border-pink-500 font-semibold ':
-                        pathname === nav.href,
-                    }
-                  )}
-                  key={idx}
-                >
-                  {nav.name}
-                </button>
-              ))}
-            </ul>
+            <AnimatePresence  >
+              <ul className=' gap-2 flex-col flex w-max  text-center'>
+                {navList.map((nav, idx) => (
+                  <motion.button
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                    exit={{ opacity: 0}}
+                    onClick={() => {
+                      router.push(nav.href);
+                      setIsOpen(false);
+                    }}
+                    className={cn(
+                      'py-2 px-1 border-b-2 border-transparent hover:border-pink-200 text-base  ',
+                      {
+                        'border-pink-500 duration-300 hover:border-pink-500 font-semibold ':
+                          pathname === nav.href,
+                      }
+                    )}
+                    key={idx}
+                  >
+                    {nav.name}
+                  </motion.button>
+                ))}
+              </ul>
+            </AnimatePresence>
           </nav>
           <div className='flex flex-col gap-2 mt-4 text-center '>
             <h3 className='text-zinc-400 text-base '>Follow Use:</h3>

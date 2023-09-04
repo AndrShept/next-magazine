@@ -58,9 +58,9 @@ export const ProductList = ({ products }: ProductListProps) => {
             General information about your Product
           </p>
         </div>
-        <div className='ml-6'>
+        {/* <div className='ml-6'>
           <Button onClick={handleClick}>Delete ALL</Button>
-        </div>
+        </div> */}
       </div>
       <Separator className='bg-primary/10' />
       <Table>

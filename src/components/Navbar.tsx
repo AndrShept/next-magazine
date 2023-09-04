@@ -11,6 +11,7 @@ import { Home } from 'lucide-react';
 import { SheetSidebar } from './SheetSidebar';
 import { cn } from '@/lib/utils';
 import { NavList } from './NavList';
+import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
 
 export const searchProducts = async (formData: FormData) => {
   'use server';
@@ -68,8 +69,16 @@ export const Navbar = async () => {
 
         <div>
           <NavList />
+
           <ShoppingCartButton cart={cart} />
-          <UserMenuButton session={session!} />
+ 
+          <Link className='p-3 rounded-full hover:bg-gray-200' href='/dashboard'>
+              <WrenchScrewdriverIcon className='h-5 w-5 text-gray-500' />{' '}
+              
+            </Link>
+     
+
+          {/* <UserMenuButton session={session!} /> */}
         </div>
       </div>
     </div>

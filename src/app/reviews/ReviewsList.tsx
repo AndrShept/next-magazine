@@ -1,6 +1,6 @@
 'use client'
 import { Review } from '@prisma/client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { format } from 'timeago.js';
@@ -17,16 +17,21 @@ import { ReviewForm } from './ReviewForm';
 import { MessageCircle, MessageSquare } from 'lucide-react';
 
 export const ReviewsList = ({ reviews }: { reviews: Review[] }) => {
+  const [isMount, setIsMount] = useState(false);
+  const [isOpen , setIsOpen] = useState(false)
+
+  useEffect(() => setIsMount(true), []);
+  if (!isMount) return null;
   return (
     <div className='flex flex-col gap-5 '>
-      <Dialog>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button variant={'outline'} className='rounded-full text-pink-500 mx-auto hover:text-pink-500  md:max-w-md w-full'>
             Залишити відгук <MessageCircle className='ml-2' />
           </Button>
         </DialogTrigger>
         <DialogContent>
-          <ReviewForm />
+          <ReviewForm setIsOpen={setIsOpen} />
         </DialogContent>
       </Dialog>
 
