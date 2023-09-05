@@ -13,7 +13,7 @@ export const ProductById = ({ product }: { product: Product }) => {
   const [imgIndex, setImgIndex] = useState(0);
   const [isMount, setIsMount] = useState(false);
   const [isShow, setIsShow] = useState(false);
-
+console.log(product)
   useEffect(() => {
     setIsMount(true);
   }, []);

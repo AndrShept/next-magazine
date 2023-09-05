@@ -27,8 +27,8 @@ export default async function Home({
 
     },
     orderBy: { id: 'desc' },
-    skip: (currentPage - 1) * pageSize + (currentPage === 1 ? 0 : heroItem),
-    take: pageSize + (currentPage === 1 ? heroItem : 0),
+    // skip: (currentPage - 1) * pageSize + (currentPage === 1 ? 0 : heroItem),
+    // take: pageSize + (currentPage === 1 ? heroItem : 0),
   });
   const imageUrls = await prisma.product.findMany({
     select: { imageArrUrl: true },

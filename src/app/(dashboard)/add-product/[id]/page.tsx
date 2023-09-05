@@ -1,10 +1,8 @@
 import { FormSubmitButton } from '@/components/FormSubmitButton';
 import { prisma } from '@/lib/db/prisma';
-import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import { AddProductFrom } from '@/components/AddProductFrom';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export const metadata = {
   title: 'Add Product',
@@ -18,7 +16,6 @@ const AddProductPage = async ({ params }: { params: { id: string } }) => {
     
 
   });
-
 
   return <AddProductFrom categories={categories} product={product} />;
 };

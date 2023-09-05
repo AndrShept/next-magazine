@@ -1,14 +1,12 @@
 'use client';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React, { useState, useTransition } from 'react';
+import React, { useState } from 'react';
 import { Input } from './ui/input';
 
 export const SearchForm = () => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState('');
-  const [isPending, startTransition] = useTransition();
   // const searchQuery = formData.get('searchQuery')?.toString();
 
   // if (searchValue?.length) {
@@ -18,7 +16,7 @@ export const SearchForm = () => {
   //   router.push(`/`);
   // }
 
-  const handleSubmit = (e:any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault(); // Зупиняємо дефолтну поведінку форми
     if (searchValue?.length) {
       router.push(`/search?searchQuery=${searchValue}`);
@@ -27,9 +25,7 @@ export const SearchForm = () => {
     }
   };
   const onChange = (e: any) => {
-    startTransition(() => {
-      setSearchValue(e.target.value);
-    });
+    setSearchValue(e.target.value);
   };
   const handleCLick = () => {
     setSearchValue('');
