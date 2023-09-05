@@ -16,17 +16,15 @@ export const SearchForm = () => {
   //   router.push(`/`);
   // }
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault(); // Зупиняємо дефолтну поведінку форми
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement> ) => {
+    e.preventDefault(); 
     if (searchValue?.length) {
       router.push(`/search?searchQuery=${searchValue}`);
     } else {
       router.push(`/`);
     }
   };
-  const onChange = (e: any) => {
-    setSearchValue(e.target.value);
-  };
+
   const handleCLick = () => {
     setSearchValue('');
     router.push(`/`);
@@ -39,7 +37,7 @@ export const SearchForm = () => {
           <MagnifyingGlassIcon className='h-6 w-6 text-gray-500 left-2 top-2 absolute' />
           <Input
             value={searchValue.trimStart()}
-            onChange={onChange}
+            onChange={(e)=> setSearchValue(e.target.value)}
             placeholder='пошук...'
             className=' w-full min-w-[50px] pl-9 h-10 '
           />
