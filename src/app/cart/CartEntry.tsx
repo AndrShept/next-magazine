@@ -44,7 +44,7 @@ export const CartEntry = ({ cartItem }: CartEntryProps) => {
         <div className='flex flex-col justify-between'>
           <div className='flex flex-col'>
             <Link
-              className='font-bold hover:underline text-[#f000b8]/80'
+              className='font-semibold text-base hover:underline text-[#f000b8]/80'
               href={'/products/' + cartItem.product.id}
             >
               {cartItem.product.name}
