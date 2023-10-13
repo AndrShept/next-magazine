@@ -33,18 +33,21 @@ export const Navbar = async () => {
             />
 
             <div className='flex flex-col text-base font-normal leading-5 ml-2'>
-              <span>Оскана</span>
-              <span>Фіалки</span>
+
             </div>
           </Link>
           <SheetSidebar />
 
           <Link
-            className='p-2 hover:bg-gray-200 rounded-md cursor-pointer duration-150 md:hidden block tooltip tooltip-bottom'
+            className='p-2 hover:bg-secondary rounded-full cursor-pointer duration-150 md:hidden block tooltip tooltip-bottom'
             data-tip={'На головну'}
             href='/'
           >
-            <Home size={26} strokeWidth={1.5} className='text-gray-700' />
+            <Home
+              size={26}
+              strokeWidth={1.5}
+              className='text-muted-foreground'
+            />
           </Link>
         </div>
         <SearchForm />
@@ -55,10 +58,10 @@ export const Navbar = async () => {
           <ShoppingCartButton cart={cart} />
 
           <Link
-            className='p-3 rounded-full hover:bg-gray-200'
+            className='p-2 rounded-full hover:bg-secondary'
             href='/dashboard'
           >
-            <WrenchScrewdriverIcon className='h-5 w-5 text-gray-500' />{' '}
+            <WrenchScrewdriverIcon className='h-6 w-6 text-muted-foreground' />{' '}
           </Link>
 
           {/* <UserMenuButton session={session!} /> */}

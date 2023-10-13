@@ -2,17 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AddToCartButton } from '@/components/AddToCartButton';
-import { PriceTag } from '@/components/PriceTag';
 import { incrementProductQuantity } from '@/app/products/[id]/actions';
 import { Product } from '@prisma/client';
+import { formatPrice } from '@/lib/format';
+import { Separator } from './ui/separator';
 import { cn } from '@/lib/utils';
-import { Search } from 'lucide-react';
-import { GallerySwiper } from './GallerySwiper';
 
 export const ProductById = ({ product }: { product: Product }) => {
   const [imgIndex, setImgIndex] = useState(0);
   const [isMount, setIsMount] = useState(false);
-  const [isShow, setIsShow] = useState(false);
   useEffect(() => {
     setIsMount(true);
   }, []);
@@ -20,72 +18,53 @@ export const ProductById = ({ product }: { product: Product }) => {
   if (!isMount) return null;
 
   return (
-    <>
-      <div>
-        <div className='relative   group md:max-w-[600px] md:h-[400px] max-w-[600px] h-[300px] shadow-lg'>
+    <section className=' py-8 border-y-[1px] mx-auto max-w-3xl rounded-md  flex justify-center   sm:gap-8 gap-4   mt-24'>
+      <div className=' flex flex-col '>
+        <div className='relative rounded-md sm:h-[300px] border sm:w-[300px] h-[200px] w-[200px] aspect-square '>
           <Image
-            src={product.imageArrUrl[imgIndex]}
-            alt={product.name}
+            className='aspect-square object-cover rounded-md '
+            alt='img'
             fill
-            className=' object-cover '
-            priority
+            src={product.imageArrUrl[imgIndex]}
           />
-
-          <div
-            onClick={() => setIsShow(true)}
-            className='inset-0 bg-black/50 z-10  transition-all absolute   group-hover:flex hidden items-center justify-center cursor-pointer'
-          >
-            <div className='flex flex-col items-center justify-center'>
-              <Search size={40} className='text-gray-300' />
-              <p className='text-gray-300'>Click</p>
-            </div>
-          </div>
         </div>
-        <div className='grid gap-1 my-4 grid-cols-3 md:max-w-[600px] border-2 border-transparent max-w-[600px] '>
-          {product.imageArrUrl.map((itemImg, idx) => (
+        <div className='grid grid-cols-3 mt-2'>
+          {product.imageArrUrl.map((image: string, idx: number) => (
             <div
-              onClick={() => setImgIndex(idx)}
-              key={itemImg}
-              className={cn(`relative max-w-60  h-[100px] cursor-pointer  `, {
-                'border-2 border-pink-400  ': idx === imgIndex,
+            onClick={() => setImgIndex(idx)}
+              key={idx}
+              className={cn('relative border transition   rounded-md sm:h-[100px]  sm:w-[100px] h-[65px] w-[65px] aspect-square ',{
+                  'border-2 border-black' : idx === imgIndex
               })}
             >
               <Image
-                className=' object-cover p-1'
-                fill
+                className='aspect-square object-cover rounded-md p-1'
                 alt='img'
-                src={itemImg}
+                fill
+                src={image}
               />
             </div>
           ))}
         </div>
       </div>
-      <div className='flex flex-col'>
-        <div>
-          <h1 className='sm:text-5xl text-4xl font-bold  text-black/80'>
-            {product.name}{' '}
-          </h1>
-          <p className='py-6 text-gray-600 md:text-base text-sm'>{product.description}</p>
-          <div className='flex justify-between items-center'>
-            <PriceTag price={product.price} />
-            <AddToCartButton
-              incrementProductQuantity={incrementProductQuantity}
-              productId={product.id}
-            />
-          </div>
+      <div className=''>
+        <div className='text-left pb-2'>
+          <h1 className='sm:text-4xl text-xl font-bold'>{product.name}</h1>
+          <p className='sm:text-base mt-1 font-semibold'>
+            {formatPrice(product.price)}
+          </p>
         </div>
-      </div>
 
-      {/* Modal gallery */}
-      {isShow && (
-        <div
-          onClick={() => setIsShow(false)}
-          className='fixed p-4 animate-in fade-in-0  duration-500 z-50 inset-0 bg-black/50 flex justify-center mx-auto items-center'
-        >
-          <GallerySwiper imageArrUrl={product.imageArrUrl} />
-        </div>
-      )}
-      {/* Modal gallery */}
-    </>
+        <Separator />
+        <p className='text-left break-all text-muted-foreground py-2'>
+          {product.description}
+        </p>
+        <AddToCartButton
+          classname='sm:scale-100 scale-90'
+          productId={product.id}
+          incrementProductQuantity={incrementProductQuantity}
+        />
+      </div>
+    </section>
   );
 };

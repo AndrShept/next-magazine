@@ -19,5 +19,6 @@ export const incrementProductQuantity = async (productId: string) => {
       data: { cartId: cart.id, productId, quantity: 1 },
     });
   }
-  revalidatePath('/products/[id]')
+  // revalidatePath('/products/[id]')
+  // revalidatePath('/')
 };

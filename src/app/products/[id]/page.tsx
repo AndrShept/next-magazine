@@ -1,17 +1,13 @@
-import { ProductById } from '@/components/ProductById';
+import { AddToCartButton } from '@/components/AddToCartButton';
+
+import { Separator } from '@/components/ui/separator';
 import { prisma } from '@/lib/db/prisma';
+import { formatPrice } from '@/lib/format';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import React, { cache } from 'react';
+import React from 'react';
+import { ProductById } from '@/components/ProductById';
 
-// export const getProduct = cache(
-//   async ({ params }: { params: { id: string } }) => {
-//     const product = await prisma.product.findUnique({
-//       where: { id: params.id },
-//     });
-//     return product;
-//   }
-// );
 
 export const generateMetadata = async ({
   params,
@@ -35,11 +31,7 @@ const ProductPageById = async ({ params }: { params: { id: string } }) => {
     where: { id: params.id },
   });
   if (!product) notFound();
-  return (
-    <div className='gap-4 grid lg:grid-cols-2 grid-cols-1 bg-base-100 md:p-8 p-4 rounded-lg'>
-      <ProductById product={product} />
-    </div>
-  );
+  return <ProductById product={product} />;
 };
 
 export default ProductPageById;

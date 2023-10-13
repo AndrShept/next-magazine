@@ -20,7 +20,7 @@ export const Categories = ({ categories, categoryId }: CategoriesProps) => {
             !categoryId,
         })}
       >
-        <Link href={`/`}>Все</Link>
+        <Link href={`/`} scroll={false}>Все</Link>
       </Button>
       {categories.map((category) => (
         <Button

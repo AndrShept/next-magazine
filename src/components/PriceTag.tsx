@@ -8,8 +8,8 @@ interface PriceTagProps {
 
 export const PriceTag = ({ price, className }: PriceTagProps) => {
   return (
-    <span className={` ${className}  text-[#f000b8]/80   mt-6  font-medium`}>
-      Ціна: {formatPrice(price)}
+    <span className={` ${className}  text-muted-foreground  mt-6  font-medium`}>
+      {formatPrice(price)}
     </span>
   );
 };
