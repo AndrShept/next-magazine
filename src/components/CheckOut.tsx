@@ -130,7 +130,7 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
           {isLoading ? (
             <Button
               disabled={isLoading}
-              className=' w-full  rounded-full bg-[#f000b8] hover:bg-[#db32b4]'
+              className=' w-full  rounded-full'
               type='submit'
             >
               Загрузка...{' '}
@@ -139,7 +139,7 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
           ) : (
             <Button
               disabled={isLoading}
-              className='w-full  rounded-full bg-[#f000b8] hover:bg-[#db32b4]'
+              className='w-full  rounded-full'
               type='submit'
             >
               Замовити

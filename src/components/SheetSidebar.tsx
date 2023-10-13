@@ -23,7 +23,7 @@ export const SheetSidebar = () => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger>
         <div className='p-2 hover:bg-secondary rounded-full cursor-pointer duration-150 md:hidden block'>
-          <Menu size={26} strokeWidth={1.5} className='text-muted-foreground' />
+          <Menu size={22} strokeWidth={1.5} className='text-muted-foreground' />
         </div>
       </SheetTrigger>
       <SheetContent side={'left'} className='w-[270px] '>

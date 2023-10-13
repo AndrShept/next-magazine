@@ -134,7 +134,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
         ))}
       </div>
 
-      <div className=' h-max p-4 w-full sm:mt-0 mt-4  rounded-md bg-secondary flex flex-col'>
+      <div className=' h-max p-4 w-full sm:mt-0 mt-8  rounded-md bg-secondary flex flex-col'>
         <p className='text-xl font-semibold'>Order summary</p>
         <Separator className='my-2' />
         <div className='flex justify-between text-base font-semibold gap-x-1'>

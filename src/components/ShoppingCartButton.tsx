@@ -34,7 +34,7 @@ export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
         className='btn btn-ghost btn-circle hover:bg-secondary p-2'
       >
         <div className='indicator'>
-          <WalletCards strokeWidth={2} className='text-muted-foreground' />
+          <WalletCards size={22} strokeWidth={2} className='text-muted-foreground' />
 
           {cart?.size ? (
             <span className='badge badge-sm indicator-item bg-primary font-normal text-white '>

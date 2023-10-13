@@ -6,12 +6,13 @@ import { UserMenuButton } from './UserMenuButton';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Image from 'next/image';
-import { Home } from 'lucide-react';
+import { Home, Wrench } from 'lucide-react';
 import { SheetSidebar } from './SheetSidebar';
 import { cn } from '@/lib/utils';
 import { NavList } from './NavList';
 import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
 import { SearchForm } from './SearchForm';
+import { Button } from './ui/button';
 
 export const Navbar = async () => {
   const cart = await getCart();
@@ -32,9 +33,7 @@ export const Navbar = async () => {
               src={'https://cdn-icons-png.flaticon.com/128/8312/8312499.png'}
             />
 
-            <div className='flex flex-col text-base font-normal leading-5 ml-2'>
-
-            </div>
+            <div className='flex flex-col text-base font-normal leading-5 ml-2'></div>
           </Link>
           <SheetSidebar />
 
@@ -44,7 +43,7 @@ export const Navbar = async () => {
             href='/'
           >
             <Home
-              size={26}
+              size={22}
               strokeWidth={1.5}
               className='text-muted-foreground'
             />
@@ -57,12 +56,14 @@ export const Navbar = async () => {
 
           <ShoppingCartButton cart={cart} />
 
-          <Link
-            className='p-2 rounded-full hover:bg-secondary'
-            href='/dashboard'
-          >
-            <WrenchScrewdriverIcon className='h-6 w-6 text-muted-foreground' />{' '}
-          </Link>
+          <Button asChild variant={'ghost'} size={'icon'} className='rounded-full text-muted-foreground'>
+            <Link
+              className=''
+              href='/dashboard'
+            >
+             <Wrench size={22} />
+            </Link>
+          </Button>
 
           {/* <UserMenuButton session={session!} /> */}
         </div>
