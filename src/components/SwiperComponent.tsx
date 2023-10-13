@@ -25,7 +25,7 @@ export const SwiperComponent = ({ allImageUrl }: { allImageUrl: string[] }) => {
   return (
     <Swiper
       // effect='fade'
-      className='max-w-4xl  rounded-xl container mb-10 shadow-xl'
+      className='max-w-2xl  rounded-xl container mb-10 shadow-xl'
       // install Swiper modules
       modules={[Navigation, Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
       spaceBetween={50}
@@ -41,7 +41,7 @@ export const SwiperComponent = ({ allImageUrl }: { allImageUrl: string[] }) => {
       {allImageUrl.map((imgUrl, idx) => (
         <SwiperSlide key={ Date.now() + idx}>
           <Image
-            className='object-cover rounded-xl md:h-[500px] h-[300px] w-full'
+            className='object-cover rounded-xl md:h-[400px] h-[250px] w-full'
             height={1000}
             width={1000}
             alt={'sa'}

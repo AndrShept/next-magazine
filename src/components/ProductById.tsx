@@ -18,7 +18,7 @@ export const ProductById = ({ product }: { product: Product }) => {
   if (!isMount) return null;
 
   return (
-    <section className=' py-8 border-y-[1px] mx-auto max-w-3xl rounded-md  flex justify-center   sm:gap-8 gap-4   mt-24'>
+    <section className=' py-8 border-y-[1px] mx-auto max-w-3xl rounded-md  flex justify-center   sm:gap-8 gap-4   mt-14'>
       <div className=' flex flex-col '>
         <div className='relative rounded-md sm:h-[300px] border sm:w-[300px] h-[200px] w-[200px] aspect-square '>
           <Image
@@ -28,14 +28,17 @@ export const ProductById = ({ product }: { product: Product }) => {
             src={product.imageArrUrl[imgIndex]}
           />
         </div>
-        <div className='grid grid-cols-3 mt-2'>
+        <div className='grid grid-cols-3 mt-2 cursor-pointer'>
           {product.imageArrUrl.map((image: string, idx: number) => (
             <div
-            onClick={() => setImgIndex(idx)}
+              onClick={() => setImgIndex(idx)}
               key={idx}
-              className={cn('relative border transition   rounded-md sm:h-[100px]  sm:w-[100px] h-[65px] w-[65px] aspect-square ',{
-                  'border-2 border-black' : idx === imgIndex
-              })}
+              className={cn(
+                'relative border transition   rounded-md sm:h-[100px]  sm:w-[100px] h-[65px] w-[65px] aspect-square ',
+                {
+                  'border-2 border-black': idx === imgIndex,
+                }
+              )}
             >
               <Image
                 className='aspect-square object-cover rounded-md p-1'

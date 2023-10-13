@@ -30,41 +30,42 @@ export const ProductCard = ({ products }: ProductCardProps) => {
           // exit={{ opacity: 0 }}
           className=' overflow-hidden  group static '
           key={product.id}
-          onClick={() => router.push(`/products/${product.id}`,{scroll: false})}
-          
+          onClick={() =>
+            router.push(`/products/${product.id}`, { scroll: false })
+          }
         >
-          <div className='rounded-xl  cursor-pointer flex flex-col hover:shadow-md transition md:h-[300px] h-[280px] md:w-[240px] max-w-sm border  '>
-            <div className='overflow-hidden  rounded-t-xl   relative h-[50%] w-full'>
+          <div className='rounded-xl group   cursor-pointer grid grid-rows-2 hover:shadow-md transition md:h-[330px] md:w-[240px] h-[300px]  max-w-sm border  '>
+            <div className='overflow-hidden  rounded-t-xl   relative h-full w-full'>
               <Image
-                className='hover:scale-105 scale-100 rounded-t-xl border transition    object-cover'
+                className='group-hover:scale-105 scale-100 rounded-t-xl border transition    object-cover'
                 alt='img'
                 fill
                 src={product.imageUrl}
               />
             </div>
-            <div className='xs:p-3 p-2 '>
-              <div className='flex justify-between items-center'>
-                <h2 className='text-lg font-semibold truncate'>
-                  {product.name}
-                </h2>
-                {Date.now() - new Date(product.createdAt).getTime() <
-                  1000 * 60 * 60 * 24 * 7 && (
-                  <div className='font-semibold text-muted'>NEW!</div>
-                )}
-              </div>
+            <div className='flex flex-col justify-between p-2 '>
+              <div className=''>
+                <div className='flex justify-between items-center'>
+                  <h2 className='text-lg font-semibold truncate'>
+                    {product.name}
+                  </h2>
+                  {Date.now() - new Date(product.createdAt).getTime() <
+                    1000 * 60 * 60 * 24 * 7 && (
+                    <div className='font-semibold text-muted'>NEW!</div>
+                  )}
+                </div>
 
-              <p className='text-muted-foreground mt-2'>
-                {product.description}
-              </p>
-            </div>
-            <div className='xs:p-3 p-2 mt-auto flex justify-between items-center '>
-              <PriceTag price={product.price} />
-              <AddToCartButton
-                classname='h-10 w-10 p-[10px]'
-                isShowText={false}
-                productId={product.id}
-                incrementProductQuantity={incrementProductQuantity}
-              />
+                <p className='text-muted-foreground '>{product.description}</p>
+              </div>
+              <div className=' flex justify-between items-center '>
+                <PriceTag price={product.price} />
+                <AddToCartButton
+                  classname='h-10 w-10 p-[10px]'
+                  isShowText={false}
+                  productId={product.id}
+                  incrementProductQuantity={incrementProductQuantity}
+                />
+              </div>
             </div>
           </div>
         </motion.div>

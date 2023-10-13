@@ -13,14 +13,11 @@ import { ShoppingCart } from '@/lib/db/cart';
 import { Button } from './ui/button';
 
 export const CheckOutButton = ({ cart }: { cart: ShoppingCart | null }) => {
-
   return (
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <button className='btn btn-secondary mx-auto text-white rounded-full '>
-            ДАЛЬШЕ
-          </button>
+          <Button className='rounded-full mt-4'>Chekout</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>

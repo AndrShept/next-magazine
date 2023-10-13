@@ -17,8 +17,8 @@ export const Navbar = async () => {
   const cart = await getCart();
   const session = await getServerSession(authOptions);
   return (
-    <div className='bg-base-100 drop-shadow-sm border-b fixed top-0 w-full z-50 '>
-      <div className='navbar bg-base-100 p-4 container justify-between max-w-7xl mx-auto min-w-[300px]  '>
+    <header className=' drop-shadow-sm border-b fixed top-0 w-full z-50 '>
+      <div className='navbar bg-base-100  container justify-between max-w-7xl mx-auto min-w-[300px]  '>
         <div className=''>
           <Link
             href='/'
@@ -67,6 +67,6 @@ export const Navbar = async () => {
           {/* <UserMenuButton session={session!} /> */}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
