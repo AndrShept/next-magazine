@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { Input } from './ui/input';
 import qs from 'query-string';
-import { Loader2 } from 'lucide-react';
+import { Loader2, WindIcon } from 'lucide-react';
 
 export const SearchForm = () => {
   const router = useRouter();
@@ -13,7 +13,7 @@ export const SearchForm = () => {
 
   const url = qs.stringifyUrl(
     {
-      url: '/',
+      url: window.location.href,
       query: { searchValue },
     },
     { skipEmptyString: true }
@@ -27,16 +27,16 @@ export const SearchForm = () => {
     startTransition(() => {
       router.push(url);
     });
-  }, [searchValue]);
+  }, [ searchValue]);
   return (
-    <form className=' px-2 md:px-4  items-center grid grid-cols-12  '>
-      <div className='relative flex lg:w-[340px] sm:w-[280px] col-span-10'>
+    <form className=' px-2 md:px-4  items-center grid grid-cols-10  '>
+      <div className='relative flex  lg:w-[340px] sm:w-[280px] col-span-8'>
         <MagnifyingGlassIcon className='h-6 w-6 text-gray-500 left-2 top-2 absolute' />
         <Input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value.trimStart())}
           placeholder='пошук...'
-          className=' w-full min-w-[50px] pl-9 h-10 '
+          className=' w-full min-w-[50px] px-9 h-10 '
         />
         {searchValue && (
           <XMarkIcon

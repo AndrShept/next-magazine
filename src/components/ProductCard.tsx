@@ -34,7 +34,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
             router.push(`/products/${product.id}`, { scroll: false })
           }
         >
-          <div className='rounded-xl group   cursor-pointer grid grid-rows-2 hover:shadow-md transition md:h-[300px] md:w-[240px] h-[260px] w-[200px] border  '>
+          <div className='rounded-xl group   cursor-pointer grid grid-rows-2 hover:shadow-md transition md:h-[300px] md:w-[240px] sm:h-[260px] sm:w-[200px] h-[230px] w-[160px] border  '>
             <div className='overflow-hidden  rounded-t-xl   relative h-full w-full'>
               <Image
                 className='group-hover:scale-105 scale-100 rounded-t-xl border transition    object-cover'

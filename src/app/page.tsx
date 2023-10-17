@@ -30,7 +30,6 @@ export default async function Home({
   const currentPage = parseInt(page);
   const pageSize = 6;
   const heroItem = 1;
-  console.log(searchValue);
   const totalItemCount = await prisma.product.count();
   const totalPage = Math.ceil((totalItemCount - heroItem) / pageSize);
   const categories = await prisma.category.findMany();

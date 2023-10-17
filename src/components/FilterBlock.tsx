@@ -30,7 +30,6 @@ import qs from 'query-string';
 
 interface FilterBlockProps {
   categories: Category[];
- 
 }
 
 export const FilterBlock = ({ categories }: FilterBlockProps) => {
@@ -50,7 +49,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
 
   React.useEffect(() => {
     router.push(url);
-  }, [router, url]);
+  }, [filter, isNew, categoryId, sortDirection]);
   return (
     <div className='overflow-x-auto w-full sticky justify-center top-7 p-3 border-y z-50 flex items-center sm:gap-6 gap-2'>
       <Select onValueChange={setCategoryId}>
