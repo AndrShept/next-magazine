@@ -11,10 +11,13 @@ export const SearchForm = () => {
   const [isPending, startTransition] = useTransition();
   const [searchValue, setSearchValue] = useState('');
 
-  const url = qs.stringifyUrl({
-    url: '/',
-    query: { searchValue },
-  });
+  const url = qs.stringifyUrl(
+    {
+      url: '/',
+      query: { searchValue },
+    },
+    { skipEmptyString: true }
+  );
 
   const handleCLick = () => {
     setSearchValue('');
@@ -26,8 +29,8 @@ export const SearchForm = () => {
     });
   }, [searchValue]);
   return (
-    <form className=' px-2 md:px-4 flex items-center   '>
-      <div className='relative flex sm:w-[300px]'>
+    <form className=' px-2 md:px-4  items-center grid grid-cols-12  '>
+      <div className='relative flex lg:w-[340px] sm:w-[280px] col-span-10'>
         <MagnifyingGlassIcon className='h-6 w-6 text-gray-500 left-2 top-2 absolute' />
         <Input
           value={searchValue}
@@ -42,7 +45,9 @@ export const SearchForm = () => {
           />
         )}
       </div>
-      {isPending && <Loader2 className=' ml-2 animate-spin' />}
+      <div className='col-span-2'>
+        {isPending && <Loader2 className=' ml-2 animate-spin' />}
+      </div>
     </form>
   );
 };
