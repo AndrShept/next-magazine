@@ -99,7 +99,7 @@ export const ReviewForm = ({setIsOpen}: {setIsOpen: (bool: boolean)=> void}) => 
               </FormItem>
             )}
           />
-          <Button variant={'pink'} disabled={isLoading} className='w-full rounded-full' type='submit'>
+          <Button disabled={isLoading} className='w-full rounded-full' type='submit'>
             Відправити{' '}
             {isLoading && (
               <span>

@@ -26,7 +26,7 @@ export const ReviewsList = ({ reviews }: { reviews: Review[] }) => {
     <div className='flex flex-col gap-5 '>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Button variant={'outline'} className='rounded-full text-pink-500 mx-auto hover:text-pink-500  md:max-w-md w-full'>
+          <Button variant={'outline'} className='rounded-full mx-auto md:max-w-md w-full'>
             Залишити відгук <MessageCircle className='ml-2' />
           </Button>
         </DialogTrigger>

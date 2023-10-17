@@ -52,11 +52,11 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
   }, [filter, isNew, categoryId, sortDirection]);
   return (
     <div className='overflow-x-auto w-full sticky justify-center top-7 p-3 border-y z-50 flex items-center sm:gap-6 gap-2'>
-      <Select onValueChange={setCategoryId}>
-        <SelectTrigger className='max-w-[180px] rounded-full '>
+      <Select  onValueChange={setCategoryId}>
+        <SelectTrigger  className='max-w-[180px] rounded-full '>
           <SelectValue placeholder='Виберіть категорію' />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent side='top' >
           <SelectGroup>
             <SelectLabel>Категорії</SelectLabel>
             <SelectItem value={''}>Всі</SelectItem>
@@ -74,7 +74,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
             {filter === 'price' ? 'Ціна' : 'Популярні'}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent side='top'>
           <DropdownMenuLabel>Фільтрувати</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup value={filter} onValueChange={setFilter}>
@@ -91,7 +91,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
             {sortDirection === 'asc' ? `за зростанням` : ` за спаданням`}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent side='top'>
           <DropdownMenuLabel>Фільтрувати</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup
@@ -107,7 +107,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-      <div>
+      {/* <div>
         <div className='flex items-center space-x-2'>
           <Checkbox
             id='terms'
@@ -117,7 +117,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
           />
           <Label htmlFor='terms'>Новинки</Label>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -1,10 +1,10 @@
 'use client';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useRouter } from 'next/navigation';
+import {  useRouter } from 'next/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { Input } from './ui/input';
 import qs from 'query-string';
-import { Loader2, WindIcon } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 export const SearchForm = () => {
   const router = useRouter();
@@ -27,7 +27,7 @@ export const SearchForm = () => {
     startTransition(() => {
       router.push(url);
     });
-  }, [ searchValue]);
+  }, [searchValue]);
   return (
     <form className=' px-2 md:px-4  items-center grid grid-cols-10  '>
       <div className='relative flex  lg:w-[340px] sm:w-[280px] col-span-8'>
