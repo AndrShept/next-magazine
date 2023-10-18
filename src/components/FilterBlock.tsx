@@ -54,7 +54,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
     router.push(url);
   }, [filter, isNew, categoryId, sortDirection, isFilteredLeaf]);
   return (
-    <div className='overflow-x-auto w-full sticky justify-center top-7 p-3 border-y z-50 flex items-center sm:gap-6 gap-2'>
+    <div className='overflow-x-auto w-full  justify-center  p-3 border-y z-50 flex items-center sm:gap-6 gap-2'>
       <Select  onValueChange={setCategoryId}>
         <SelectTrigger  className='max-w-[180px] rounded-full '>
           <SelectValue placeholder='Виберіть категорію' />
