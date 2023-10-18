@@ -5,7 +5,8 @@ import { NextResponse } from 'next/server';
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { name, description, imageUrl, price, category, categoryId, status, imageArr } =
+    console.log(body)
+    const { name, description, imageUrl, price, category, categoryId, status, imageArr , isLeaf} =
       body;
 
     if (!name && !description && !imageUrl && !price && !category && !status) {
@@ -21,6 +22,7 @@ export const POST = async (req: Request) => {
         category,
         categoryId,
         status,
+        isLeaf
       },
     });
 

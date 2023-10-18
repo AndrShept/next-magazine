@@ -27,6 +27,8 @@ import {
 import { Category } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import qs from 'query-string';
+import { Leaf } from 'lucide-react';
+import { Toggle } from './ui/toggle';
 
 interface FilterBlockProps {
   categories: Category[];
@@ -36,9 +38,10 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
   const router = useRouter();
   const [filter, setFilter] = React.useState('popular');
   const [isNew, setIsNew] = React.useState(false);
+  const [isFilteredLeaf, setIsFilteredLeaf] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState('all');
   const [sortDirection, setSortDirection] = React.useState('asc');
-  const query = { filter, isNew, categoryId, sortDirection };
+  const query = { filter, isNew, categoryId, sortDirection,isFilteredLeaf };
   const url = qs.stringifyUrl(
     {
       url: '/',
@@ -49,7 +52,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
 
   React.useEffect(() => {
     router.push(url);
-  }, [filter, isNew, categoryId, sortDirection]);
+  }, [filter, isNew, categoryId, sortDirection, isFilteredLeaf]);
   return (
     <div className='overflow-x-auto w-full sticky justify-center top-7 p-3 border-y z-50 flex items-center sm:gap-6 gap-2'>
       <Select  onValueChange={setCategoryId}>
@@ -118,6 +121,10 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
           <Label htmlFor='terms'>Новинки</Label>
         </div>
       </div> */}
+    <Toggle pressed={isFilteredLeaf} onPressedChange={setIsFilteredLeaf} className='rounded-full' aria-label="Toggle italic">
+    <Leaf size={20}/>
+    </Toggle>
+
     </div>
   );
 };

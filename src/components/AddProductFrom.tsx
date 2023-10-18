@@ -28,6 +28,7 @@ import { ImageUpload } from './ImageUpload';
 import { Category, Product } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { useToast } from './ui/use-toast';
+import { Switch } from './ui/switch';
 
 export const formSchema = z.object({
   name: z.string().min(1, {
@@ -45,6 +46,7 @@ export const formSchema = z.object({
   status: z.string().min(1, {
     message: 'Статус продукту обов`язкова поле',
   }),
+  isLeaf: z.boolean().default(false).optional()
 });
 
 interface AddProductFromProps {
@@ -69,6 +71,7 @@ export const AddProductFrom = ({
       price: 0,
       categoryId: undefined,
       status: 'active',
+      isLeaf: false
     },
   });
 
@@ -170,7 +173,7 @@ export const AddProductFrom = ({
               </FormItem>
             )}
           />
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 '>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4  '>
             <FormField
               name='name'
               control={form.control}
@@ -285,6 +288,30 @@ export const AddProductFrom = ({
                   </Select>
 
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="isLeaf"
+              render={({ field }) => (
+                <FormItem className="">
+                   <FormLabel className="text-base">Листок</FormLabel>
+                  <div className="space-y-0.5 flex border p-[6px] rounded-md items-center mt-0">
+                   
+                    {/* <FormDescription>
+                      Receive emails about your account security.
+                    </FormDescription> */}
+                    <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                     
+                      aria-readonly
+                    />
+                  </FormControl>
+                  </div>
+
                 </FormItem>
               )}
             />

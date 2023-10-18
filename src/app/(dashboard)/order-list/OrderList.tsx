@@ -83,6 +83,11 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
                     <div className='grid grid-cols-4 items-center justify-between bg-base-100 px-4 py-2 rounded-md'>
                       <span className='font-medium text-zinc-500 text-left '>
                         {item.productName}
+                        {item.isLeaf && (
+                      <h3 className='text-green-600 text-sm font-normal'>
+                        (листок)
+                      </h3>
+                    )}
                       </span>
                       <div className='relative sm:h-20 h-14 max-w-md ml-2   '>
                         <Image

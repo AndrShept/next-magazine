@@ -28,7 +28,7 @@ export const PUT = async (
 ) => {
   try {
     const body = await req.json();
-    const { name, description, price, categoryId,  status, imageUrl, imageArr } =
+    const { name, description, price, categoryId,  status, imageUrl, imageArr ,isLeaf } =
       body;
     if (!params.id && body) {
       throw new Error('Missing required fields');
@@ -43,6 +43,7 @@ export const PUT = async (
         imageUrl: imageUrl,
         imageArrUrl: imageArr,
         status,
+        isLeaf
       },
     });
     revalidatePath('/product-list');

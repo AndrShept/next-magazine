@@ -18,6 +18,7 @@ model Product {
   updatedAt   DateTime   @updatedAt
   categoryId  String
   status      String
+  isLeaf      Boolean    @default(false)
   view        Int?       @default(0)
   CartItem    CartItem[]
   category    Category[]
@@ -86,6 +87,7 @@ model OrderItem {
   orderId      String? @db.ObjectId
   productName  String
   imageUrl     String
+  isLeaf       Boolean?
   productPrice Int
   quantity     Int
 

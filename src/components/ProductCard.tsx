@@ -17,7 +17,6 @@ interface ProductCardProps {
 export const ProductCard = ({ products }: ProductCardProps) => {
   const [isMount, setIsMount] = useState(false);
   const router = useRouter();
-
   useEffect(() => setIsMount(true), []);
   if (!isMount) return null;
   return (
@@ -48,10 +47,25 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                 <div className='flex justify-between items-center'>
                   <h2 className='text-lg font-semibold truncate'>
                     {product.name}
+                    {product.isLeaf && (
+                      <h3 className='text-green-600 text-sm font-normal'>
+                        (листок)
+                      </h3>
+                    )}
                   </h2>
-                  {Date.now() - new Date(product.createdAt).getTime() <
+                  {/* {Date.now() - new Date(product.createdAt).getTime() <
                     1000 * 60 * 60 * 24 * 7 && (
                     <div className='font-semibold text-muted'>NEW!</div>
+                  )} */}
+                  {product.isLeaf && (
+                    <div className='relative sm:h-10 sm:w-10 sm:p-2 w-7 h-7 p-1 border rounded-full'>
+                      <Image
+                        alt='img'
+                        width={1000}
+                        height={1000}
+                        src={'/leaf.png'}
+                      />
+                    </div>
                   )}
                 </div>
 

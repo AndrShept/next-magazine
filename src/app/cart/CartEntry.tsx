@@ -67,7 +67,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
         {cart.items.map((cartItem) => (
           <div
             key={cartItem.id}
-            className='sm:flex flex-col sm:flex-row  gap-2  border-b py-4'
+            className='sm:flex flex-col sm:flex-row   gap-2  border-b py-4'
           >
             <div
               onClick={() => router.push(`/products/${cartItem.productId}`)}
@@ -80,12 +80,24 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
                 src={cartItem.product.imageUrl}
               />
             </div>
-            <div className=' flex sm:justify-between justify-center items-start  sm:mt-0 mt-2 gap-2 flex-wrap  flex-1 '>
+            <div className=' flex sm:justify-between justify-center items-start   sm:mt-0 mt-2 gap-2 flex-wrap  flex-1 '>
               <div className='flex flex-col'>
-                <h2 className='text-2xl font-semibold'>
-                  {' '}
-                  {cartItem.product.name}
-                </h2>
+                <div className='flex items-center gap-x-2'>
+                  <h2 className='text-2xl font-semibold'>
+                    {' '}
+                    {cartItem.product.name}
+                  </h2>
+                  {cartItem.product.isLeaf && (
+                    <div className='relative sm:h-8 sm:w-8 sm:p-[6px] w-7 h-7 p-1 border rounded-full'>
+                      <Image
+                        alt='img'
+                        width={1000}
+                        height={1000}
+                        src={'/leaf.png'}
+                      />
+                    </div>
+                  )}
+                </div>
                 <span className='text-muted-foreground'>
                   {' '}
                   {formatPrice(cartItem.product.price)}
@@ -93,7 +105,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
               </div>
               <div className='text-muted-foreground flex items-center gap-x-1 '>
                 <Button
-                  disabled={isPending || cartItem.quantity === 1}
+                  disabled={cartItem.quantity === 1}
                   onClick={() =>
                     decreaseQuantity(cartItem.productId, cartItem.quantity)
                   }
@@ -107,7 +119,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
                   {cartItem.quantity}
                 </span>
                 <Button
-                  disabled={isPending}
+                  // disabled={isPending}
                   onClick={() =>
                     increaseQuantity(cartItem.productId, cartItem.quantity)
                   }
@@ -120,13 +132,13 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
               </div>
               <div className='text-muted-foreground'>
                 <Button
-                  disabled={isPending}
+                  // disabled={isPending}
                   onClick={() => DeleteProduct(cartItem.productId, 0)}
                   className='rounded-full'
                   variant={'ghost'}
                   size={'icon'}
                 >
-                  {isPending ? <Loader2 className='animate-spin' /> : <X />}
+                   <X />
                 </Button>
               </div>
             </div>
