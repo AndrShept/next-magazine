@@ -66,14 +66,13 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
     router.push(url);
     let currentPosition = window.scrollY;
 
-    console.log(currentPosition);
     setTimeout(() => {
       window.scroll(0, currentPosition);
     }, 50);
   }, [router, url]);
 
   return (
-    <div className='overflow-x-auto flex-wrap w-full  justify-center  p-3 border-y flex items-center sm:gap-6 gap-2'>
+    <div className='overflow-x-auto flex-wrap w-full  justify-center  p-3 border-y flex items-center lg:gap-6 md:gap-3 gap-2'>
       <Select value={categoryId} onValueChange={setCategoryId}>
         <SelectTrigger className='max-w-[180px] rounded-full '>
           <SelectValue placeholder='Виберіть категорію' />
@@ -141,13 +140,14 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
         </div>
       </div> */}
 
-      <Toggle
+     <div className='gap-0 flex items-center'>
+     <Toggle
         pressed={isFilteredLeaf}
         onPressedChange={setIsFilteredLeaf}
         className='rounded-full'
         aria-label='Toggle italic'
       >
-        <Leaf className='text-green-700' size={20} />
+        <Leaf size={20} />
       </Toggle>
 
       <TooltipProvider>
@@ -166,7 +166,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
               variant={'ghost'}
               size={'icon'}
             >
-              <X className='text-red-500 hover:text-red-600' />
+              <X  />
             </Button>
           </TooltipTrigger>
           <TooltipContent>
@@ -174,6 +174,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
+     </div>
     </div>
   );
 };
