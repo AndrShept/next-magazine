@@ -1,6 +1,6 @@
 'use client';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import {  useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { Input } from './ui/input';
 import qs from 'query-string';
@@ -24,8 +24,13 @@ export const SearchForm = () => {
   };
 
   useEffect(() => {
+    const currentPosition = window.scrollY;
+
     startTransition(() => {
       router.push(url);
+      setTimeout(() => {
+        window.scroll(0, currentPosition);
+      }, 50);
     });
   }, [searchValue]);
   return (

@@ -59,7 +59,6 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
     }, 50);
     // Виконайте ререндер компоненту
 
-    console.log(currentPosition)
   }, [router, url]);
   return (
     <div className='overflow-x-auto w-full  justify-center  p-3 border-y flex items-center sm:gap-6 gap-2'>
