@@ -147,7 +147,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
         className='rounded-full'
         aria-label='Toggle italic'
       >
-        <Leaf size={20} />
+        <Leaf className='text-green-700' size={20} />
       </Toggle>
 
       <TooltipProvider>
