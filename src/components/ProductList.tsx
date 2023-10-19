@@ -1,5 +1,5 @@
 'use client';
-import { ArrowLeft} from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { Separator } from './ui/separator';
 import { useRouter } from 'next/navigation';
@@ -40,6 +40,7 @@ export const ProductList = ({ products }: ProductListProps) => {
   };
   useEffect(() => {
     setIsMounted(true);
+    window.scroll(0, 0);
   }, []);
   if (!isMounted) return null;
 
@@ -69,7 +70,7 @@ export const ProductList = ({ products }: ProductListProps) => {
           <TableRow>
             <TableHead className=''>Name</TableHead>
             <TableHead className='w-[200px] '>Image</TableHead>
-            <TableHead >Price</TableHead>
+            <TableHead>Price</TableHead>
             <TableHead className='w-[50px] '>Button</TableHead>
           </TableRow>
         </TableHeader>
@@ -77,12 +78,15 @@ export const ProductList = ({ products }: ProductListProps) => {
           {products.map((product) => (
             <TableRow
               className={`rounded-md  ${
-                product.status === 'inactive' ? 'bg-red-100 hover:bg-red-200' : ''
+                product.status === 'inactive'
+                  ? 'bg-red-100 hover:bg-red-200'
+                  : ''
               } `}
               key={product.id}
             >
-              
-              <TableCell className='font-medium p-0 px-2'>{product.name}</TableCell>
+              <TableCell className='font-medium p-0 px-2'>
+                {product.name}
+              </TableCell>
               <TableCell className=' relative  '>
                 <Image
                   sizes='100wh'
@@ -92,7 +96,7 @@ export const ProductList = ({ products }: ProductListProps) => {
                   alt={'img'}
                 />
               </TableCell>
-              <TableCell  >{formatPrice(product.price)}</TableCell>
+              <TableCell>{formatPrice(product.price)}</TableCell>
               <TableCell className='font-medium p-0'>
                 {' '}
                 <TableIcons productId={product.id} />

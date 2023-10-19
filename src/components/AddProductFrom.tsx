@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -46,7 +46,7 @@ export const formSchema = z.object({
   status: z.string().min(1, {
     message: 'Статус продукту обов`язкова поле',
   }),
-  isLeaf: z.boolean().default(false).optional()
+  isLeaf: z.boolean().default(false).optional(),
 });
 
 interface AddProductFromProps {
@@ -71,7 +71,7 @@ export const AddProductFrom = ({
       price: 0,
       categoryId: undefined,
       status: 'active',
-      isLeaf: false
+      isLeaf: false,
     },
   });
 
@@ -129,8 +129,11 @@ export const AddProductFrom = ({
       });
     }
   };
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
-    <div className='h-full p-4 space-2 max-w-3xl mx-auto '>
+    <div className='h-full px-4 space-2 max-w-3xl mx-auto '>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -291,27 +294,24 @@ export const AddProductFrom = ({
                 </FormItem>
               )}
             />
-             <FormField
+            <FormField
               control={form.control}
-              name="isLeaf"
+              name='isLeaf'
               render={({ field }) => (
-                <FormItem className="">
-                   <FormLabel className="text-base">Листок</FormLabel>
-                  <div className="space-y-0.5 flex border p-[6px] rounded-md items-center mt-0">
-                   
+                <FormItem className=''>
+                  <FormLabel className='text-base'>Листок</FormLabel>
+                  <div className='space-y-0.5 flex border p-[6px] rounded-md items-center mt-0'>
                     {/* <FormDescription>
                       Receive emails about your account security.
                     </FormDescription> */}
                     <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                     
-                      aria-readonly
-                    />
-                  </FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        aria-readonly
+                      />
+                    </FormControl>
                   </div>
-
                 </FormItem>
               )}
             />

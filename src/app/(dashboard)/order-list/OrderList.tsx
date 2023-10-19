@@ -23,13 +23,16 @@ interface OrderListProps extends Order {
 
 export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
   const [isMount, setIsMount] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
-  useEffect(() => setIsMount(true), []);
+  useEffect(() => {
+    setIsMount(true);
+    window.scroll(0, 0);
+  }, []);
   if (!isMount) return null;
   return (
     <div>
-            <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-2'>
         <div
           onClick={() => router.back()}
           className='cursor-pointer rounded-full p-2 hover:bg-zinc-300'
@@ -42,7 +45,6 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
             General information about your Product
           </p>
         </div>
-
       </div>
       <Separator className='bg-primary/10 mb-8' />
       <AnimatePresence initial={true}>
@@ -53,7 +55,6 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 * idx }}
               exit={{ opacity: 0, x: 200 }}
-
               key={order.id}
             >
               <AccordionItem
@@ -84,10 +85,10 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
                       <span className='font-medium text-zinc-500 text-left '>
                         {item.productName}
                         {item.isLeaf && (
-                      <h3 className='text-green-600 text-sm font-normal'>
-                        (листок)
-                      </h3>
-                    )}
+                          <h3 className='text-green-600 text-sm font-normal'>
+                            (листок)
+                          </h3>
+                        )}
                       </span>
                       <div className='relative sm:h-20 h-14 max-w-md ml-2   '>
                         <Image

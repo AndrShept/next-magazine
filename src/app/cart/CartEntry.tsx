@@ -58,6 +58,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
 
   useEffect(() => {
     setIsMount(true);
+    window.scroll(0, 0);
   }, []);
 
   if (!isMount) return null;
@@ -138,7 +139,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
                   variant={'ghost'}
                   size={'icon'}
                 >
-                   <X />
+                  <X />
                 </Button>
               </div>
             </div>
