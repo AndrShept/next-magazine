@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -13,8 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -24,11 +21,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { Category } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import qs from 'query-string';
-import { Leaf } from 'lucide-react';
+import { Leaf, X } from 'lucide-react';
 import { Toggle } from './ui/toggle';
+import { Button } from '@/components/ui/button';
 
 interface FilterBlockProps {
   categories: Category[];
@@ -39,9 +43,10 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
   const [filter, setFilter] = React.useState('popular');
   const [isNew, setIsNew] = React.useState(false);
   const [isFilteredLeaf, setIsFilteredLeaf] = React.useState(false);
-  const [categoryId, setCategoryId] = React.useState('all');
+  const [categoryId, setCategoryId] = React.useState('');
   const [sortDirection, setSortDirection] = React.useState('asc');
   const query = { filter, isNew, categoryId, sortDirection, isFilteredLeaf };
+
   const url = qs.stringifyUrl(
     {
       url: '/',
@@ -49,20 +54,27 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
     },
     { skipNull: true, skipEmptyString: true }
   );
-
+  const clearAllFilter = () => {
+    setFilter('popular');
+    setIsNew(false);
+    setIsFilteredLeaf(false);
+    setCategoryId('');
+    setSortDirection('asc');
+  };
 
   React.useEffect(() => {
-    router.push(url)
-    const currentPosition = window.scrollY;
+    router.push(url);
+    let currentPosition = window.scrollY;
+
+    console.log(currentPosition);
     setTimeout(() => {
       window.scroll(0, currentPosition);
     }, 50);
-    // Виконайте ререндер компоненту
-
   }, [router, url]);
+
   return (
-    <div className='overflow-x-auto w-full  justify-center  p-3 border-y flex items-center sm:gap-6 gap-2'>
-      <Select onValueChange={setCategoryId}>
+    <div className='overflow-x-auto flex-wrap w-full  justify-center  p-3 border-y flex items-center sm:gap-6 gap-2'>
+      <Select value={categoryId} onValueChange={setCategoryId}>
         <SelectTrigger className='max-w-[180px] rounded-full '>
           <SelectValue placeholder='Виберіть категорію' />
         </SelectTrigger>
@@ -128,6 +140,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
           <Label htmlFor='terms'>Новинки</Label>
         </div>
       </div> */}
+
       <Toggle
         pressed={isFilteredLeaf}
         onPressedChange={setIsFilteredLeaf}
@@ -136,6 +149,31 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
       >
         <Leaf size={20} />
       </Toggle>
+
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              disabled={
+                filter === 'popular' &&
+                isNew === false &&
+                isFilteredLeaf === false &&
+                categoryId === '' &&
+                sortDirection === 'asc'
+              }
+              onClick={clearAllFilter}
+              className='rounded-full'
+              variant={'ghost'}
+              size={'icon'}
+            >
+              <X className='text-red-500 hover:text-red-600' />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Очистити фільтри</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   );
 };
