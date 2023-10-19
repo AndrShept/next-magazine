@@ -41,7 +41,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
   const [isFilteredLeaf, setIsFilteredLeaf] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState('all');
   const [sortDirection, setSortDirection] = React.useState('asc');
-  const query = { filter, isNew, categoryId, sortDirection,isFilteredLeaf };
+  const query = { filter, isNew, categoryId, sortDirection, isFilteredLeaf };
   const url = qs.stringifyUrl(
     {
       url: '/',
@@ -50,16 +50,24 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
     { skipNull: true, skipEmptyString: true }
   );
 
+
   React.useEffect(() => {
-    router.push(url);
-  }, [filter, isNew, categoryId, sortDirection, isFilteredLeaf]);
+    router.push(url)
+    const currentPosition = window.scrollY;
+    setTimeout(() => {
+      window.scroll(0, currentPosition);
+    }, 50);
+    // Виконайте ререндер компоненту
+
+    console.log(currentPosition)
+  }, [router, url]);
   return (
-    <div className='overflow-x-auto w-full  justify-center  p-3 border-y z-50 flex items-center sm:gap-6 gap-2'>
-      <Select  onValueChange={setCategoryId}>
-        <SelectTrigger  className='max-w-[180px] rounded-full '>
+    <div className='overflow-x-auto w-full  justify-center  p-3 border-y flex items-center sm:gap-6 gap-2'>
+      <Select onValueChange={setCategoryId}>
+        <SelectTrigger className='max-w-[180px] rounded-full '>
           <SelectValue placeholder='Виберіть категорію' />
         </SelectTrigger>
-        <SelectContent side='top' >
+        <SelectContent side='top'>
           <SelectGroup>
             <SelectLabel>Категорії</SelectLabel>
             <SelectItem value={''}>Всі</SelectItem>
@@ -121,10 +129,14 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
           <Label htmlFor='terms'>Новинки</Label>
         </div>
       </div> */}
-    <Toggle pressed={isFilteredLeaf} onPressedChange={setIsFilteredLeaf} className='rounded-full' aria-label="Toggle italic">
-    <Leaf size={20}/>
-    </Toggle>
-
+      <Toggle
+        pressed={isFilteredLeaf}
+        onPressedChange={setIsFilteredLeaf}
+        className='rounded-full'
+        aria-label='Toggle italic'
+      >
+        <Leaf size={20} />
+      </Toggle>
     </div>
   );
 };

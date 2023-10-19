@@ -30,7 +30,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
           className=' overflow-hidden  group static '
           key={product.id}
           onClick={() =>
-            router.push(`/products/${product.id}`, { scroll: false })
+            router.push(`/products/${product.id}`, { scroll: true })
           }
         >
           <div className='rounded-xl group   cursor-pointer grid grid-rows-2 hover:shadow-md transition md:h-[300px] md:w-[240px] sm:h-[260px] sm:w-[200px] h-[230px] w-[160px] border  '>

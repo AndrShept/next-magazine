@@ -13,9 +13,13 @@ export const ProductById = ({ product }: { product: Product }) => {
   const [isMount, setIsMount] = useState(false);
   useEffect(() => {
     setIsMount(true);
+ 
+      window.scroll(0, 0);
+
   }, []);
 
   if (!isMount) return null;
+
 
   return (
     <section className=' py-8 border-y-[1px] mx-auto max-w-3xl rounded-md  flex justify-center   sm:gap-8 gap-4   mt-14'>

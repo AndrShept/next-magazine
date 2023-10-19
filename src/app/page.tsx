@@ -14,7 +14,7 @@ interface HomeProps {
     isNew: boolean;
     sortDirection: string;
     searchValue: string;
-    isFilteredLeaf: string
+    isFilteredLeaf: string;
   };
 }
 
@@ -26,8 +26,7 @@ export default async function Home({
     isNew,
     sortDirection,
     searchValue,
-  isFilteredLeaf,
-
+    isFilteredLeaf,
   },
 }: HomeProps) {
   const currentPage = parseInt(page);
@@ -40,7 +39,7 @@ export default async function Home({
     where: {
       categoryId: categoryId === 'all' ? undefined : categoryId,
       status: 'active',
-      isLeaf: isFilteredLeaf === 'true'? true: undefined,
+      isLeaf: isFilteredLeaf === 'true' ? true : undefined,
       OR: searchValue
         ? [{ name: { contains: searchValue, mode: 'insensitive' } }]
         : undefined,
