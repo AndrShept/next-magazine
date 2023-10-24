@@ -46,6 +46,12 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
   const [categoryId, setCategoryId] = React.useState('');
   const [sortDirection, setSortDirection] = React.useState('asc');
   const query = { filter, isNew, categoryId, sortDirection, isFilteredLeaf };
+  const defaultState =
+    filter === 'popular' &&
+    isNew === false &&
+    isFilteredLeaf === false &&
+    categoryId === '' &&
+    sortDirection === 'asc';
 
   const url = qs.stringifyUrl(
     {
@@ -64,6 +70,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
 
   React.useEffect(() => {
     router.push(url);
+
     let currentPosition = window.scrollY;
 
     setTimeout(() => {
@@ -74,7 +81,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
   return (
     <div className='overflow-x-auto flex-wrap w-full  justify-center  p-3 border-y flex items-center lg:gap-6 md:gap-3 gap-2'>
       <Select value={categoryId} onValueChange={setCategoryId}>
-        <SelectTrigger className='max-w-[180px] rounded-full '>
+        <SelectTrigger className='max-w-[140px] rounded-full '>
           <SelectValue placeholder='Виберіть категорію' />
         </SelectTrigger>
         <SelectContent side='top'>
@@ -140,41 +147,35 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
         </div>
       </div> */}
 
-     <div className='gap-0 flex items-center'>
-     <Toggle
-        pressed={isFilteredLeaf}
-        onPressedChange={setIsFilteredLeaf}
-        className='rounded-full'
-        aria-label='Toggle italic'
-      >
-        <Leaf size={20} />
-      </Toggle>
+      <div className='gap-0 flex items-center'>
+        <Toggle
+          pressed={isFilteredLeaf}
+          onPressedChange={setIsFilteredLeaf}
+          className='rounded-full'
+          aria-label='Toggle italic'
+        >
+          <Leaf size={20} />
+        </Toggle>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              disabled={
-                filter === 'popular' &&
-                isNew === false &&
-                isFilteredLeaf === false &&
-                categoryId === '' &&
-                sortDirection === 'asc'
-              }
-              onClick={clearAllFilter}
-              className='rounded-full'
-              variant={'ghost'}
-              size={'icon'}
-            >
-              <X  />
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Очистити фільтри</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-     </div>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                disabled={defaultState}
+                onClick={clearAllFilter}
+                className='rounded-full'
+                variant={'ghost'}
+                size={'icon'}
+              >
+                <X />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Очистити фільтри</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
     </div>
   );
 };

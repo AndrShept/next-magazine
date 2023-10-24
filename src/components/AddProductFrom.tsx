@@ -34,7 +34,7 @@ export const formSchema = z.object({
   name: z.string().min(1, {
     message: 'Імя продукту обов`язкове поле',
   }),
-  description: z.string().max(50),
+  description: z.string().max(100),
 
   price: z.any(),
   imageUrl: z.string().min(1, {

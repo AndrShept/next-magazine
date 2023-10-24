@@ -33,8 +33,8 @@ export const ProductCard = ({ products }: ProductCardProps) => {
             router.push(`/products/${product.id}`, { scroll: true })
           }
         >
-          <div className='rounded-xl group   cursor-pointer grid grid-rows-2 hover:shadow-md transition md:h-[300px] md:w-[240px] sm:h-[260px] sm:w-[200px] h-[230px] w-[160px] border  '>
-            <div className='overflow-hidden  rounded-t-xl   relative h-full w-full'>
+          <div className='rounded-xl group   cursor-pointer grid grid-rows-4 hover:shadow-md transition md:h-[300px] md:w-[240px] sm:h-[260px] sm:w-[200px] h-[230px] w-[160px] border  '>
+            <div className='overflow-hidden  rounded-t-xl  relative row-span-2 h-full w-full'>
               <Image
                 className='group-hover:scale-105 scale-100 rounded-t-xl border transition    object-cover'
                 alt='img'
@@ -43,9 +43,9 @@ export const ProductCard = ({ products }: ProductCardProps) => {
               />
             </div>
             <div className='flex flex-col justify-between p-2 '>
-              <div className=''>
-                <div className='flex justify-between items-center'>
-                  <h2 className='text-lg font-semibold truncate'>
+           
+                <div className='flex justify-between items-start '>
+                  <h2 className='md:text-lg text-sm font-semibold '>
                     {product.name}
                     {product.isLeaf && (
                       <h3 className='text-green-600 text-sm font-normal'>
@@ -58,7 +58,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                     <div className='font-semibold text-muted'>NEW!</div>
                   )} */}
                   {product.isLeaf && (
-                    <div className='relative sm:h-10 sm:w-10 sm:p-2 w-7 h-7 p-1 border rounded-full'>
+                    <div className='relative flex items-center justify-center sm:h-10 sm:w-10 sm:p-2 w-7 h-7 p-1 border rounded-full'>
                       <Image
                         alt='img'
                         width={1000}
@@ -70,8 +70,10 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                 </div>
 
                 {/* <p className='text-muted-foreground '>{product.description}</p> */}
-              </div>
-              <div className=' flex justify-between items-center '>
+              
+
+            </div>
+            <div className=' flex justify-between items-end p-2 '>
                 <PriceTag price={product.price} />
                 <AddToCartButton
                   classname='sm:h-10 sm:w-10 sm:p-[10px] h-8 w-8 p-[6px]'
@@ -80,7 +82,6 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                   incrementProductQuantity={incrementProductQuantity}
                 />
               </div>
-            </div>
           </div>
         </motion.div>
       ))}
