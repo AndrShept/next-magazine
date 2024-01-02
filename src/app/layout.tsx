@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <AuthProvider>
-        <body className={`${inter.className} pt-20 `}>
+        <body className={`${inter.className} `}>
           <ToastProvider />
 
           <Navbar />

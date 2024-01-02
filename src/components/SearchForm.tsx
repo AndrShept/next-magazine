@@ -1,22 +1,23 @@
 'use client';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState, useTransition } from 'react';
 import { Input } from './ui/input';
 import qs from 'query-string';
 import { Loader2 } from 'lucide-react';
 
 export const SearchForm = () => {
+  const pathname = usePathname();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [searchValue, setSearchValue] = useState('');
 
   const url = qs.stringifyUrl(
     {
-      url: window.location.href,
+      url: pathname,
       query: { searchValue },
     },
-    { skipEmptyString: true }
+    { skipEmptyString: true, skipNull: true }
   );
 
   const handleCLick = () => {
@@ -32,7 +33,7 @@ export const SearchForm = () => {
         window.scroll(0, currentPosition);
       }, 50);
     });
-  }, [searchValue]);
+  }, [router, searchValue, url]);
   return (
     <form className=' px-2 md:px-4  items-center grid grid-cols-10  '>
       <div className='relative flex  lg:w-[340px] sm:w-[280px] col-span-8'>
