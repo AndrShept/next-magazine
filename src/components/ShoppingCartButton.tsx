@@ -4,7 +4,7 @@ import { formatPrice } from '@/lib/format';
 import Link from 'next/link';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { WalletCards } from 'lucide-react';
+import { ShoppingCart as ShoppingCartIcon, WalletCards } from 'lucide-react';
 import { Button } from './ui/button';
 
 interface ShoppingCartButtonProps {
@@ -31,10 +31,14 @@ export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
     <div className='dropdown dropdown-end  '>
       <label
         tabIndex={1}
-        className='btn btn-ghost btn-circle hover:bg-secondary p-2'
+        className='btn btn-ghost  hover:bg-secondary  px-2  hover:text-primary '
       >
-        <div className='indicator'>
-          <WalletCards size={22} strokeWidth={2} className='text-muted-foreground' />
+        <div className='indicator p-0 '>
+          <ShoppingCartIcon
+            size={22}
+            strokeWidth={2}
+            className='text-muted-foreground  hover:text-primary '
+          />
 
           {cart?.size ? (
             <span className='badge badge-sm indicator-item bg-primary font-normal text-white '>
@@ -54,7 +58,7 @@ export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
               {formatPrice(cart?.subtotal || 0)}
             </span>
           </div>
-          <Button asChild className='rounded-full'>
+          <Button asChild className='rounded-full '>
             <Link onClick={closeDropDown} href='/cart' className=''>
               До корзини
             </Link>

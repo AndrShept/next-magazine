@@ -64,7 +64,7 @@ export default async function Home({
         <SwiperComponent allImageUrl={allImageUrl} />
         <FilterBlock categories={categories} />
         {products.length ? (
-          <div className=' grid grid-cols-2   md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 my-4 md:gap-6 gap-3 md:max-w-full max-w-md mx-auto'>
+          <div className=' grid grid-cols-2   md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 my-4 md:gap-6 gap-6 md:max-w-full max-w-md mx-auto'>
             <ProductCard products={products} />
           </div>
         ) : (

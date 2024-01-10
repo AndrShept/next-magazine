@@ -6,13 +6,15 @@ import { UserMenuButton } from './UserMenuButton';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Image from 'next/image';
-import { Home, Wrench } from 'lucide-react';
+import { Home, Settings, Wrench } from 'lucide-react';
 import { SheetSidebar } from './SheetSidebar';
 import { cn } from '@/lib/utils';
 import { NavList } from './NavList';
 import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
 import { SearchForm } from './SearchForm';
 import { Button } from './ui/button';
+import { FavoriteIcon } from './FavoriteIcon';
+import { ActionTooltip } from './ActionTooltip';
 
 export const Navbar = async () => {
   const cart = await getCart();
@@ -54,16 +56,22 @@ export const Navbar = async () => {
         <div>
           <NavList />
 
+          <FavoriteIcon />
+
           <ShoppingCartButton cart={cart} />
 
-          <Button asChild variant={'ghost'} size={'icon'} className='rounded-full text-muted-foreground'>
-            <Link
-              className=''
-              href='/dashboard'
+          <ActionTooltip label='Settings'>
+            <Button
+              asChild
+              variant={'ghost'}
+              size={'icon'}
+              className=' text-muted-foreground'
             >
-             <Wrench size={22} />
-            </Link>
-          </Button>
+              <Link className='' href='/dashboard'>
+                <Settings />
+              </Link>
+            </Button>
+          </ActionTooltip>
 
           {/* <UserMenuButton session={session!} /> */}
         </div>

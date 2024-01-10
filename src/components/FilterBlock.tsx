@@ -33,6 +33,7 @@ import qs from 'query-string';
 import { Leaf, X } from 'lucide-react';
 import { Toggle } from './ui/toggle';
 import { Button } from '@/components/ui/button';
+import { ActionTooltip } from './ActionTooltip';
 
 interface FilterBlockProps {
   categories: Category[];
@@ -151,30 +152,23 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
         <Toggle
           pressed={isFilteredLeaf}
           onPressedChange={setIsFilteredLeaf}
-          className='rounded-full'
+          className='rounded-full '
           aria-label='Toggle italic'
         >
           <Leaf size={20} />
         </Toggle>
 
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                disabled={defaultState}
-                onClick={clearAllFilter}
-                className='rounded-full'
-                variant={'ghost'}
-                size={'icon'}
-              >
-                <X />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Очистити фільтри</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <ActionTooltip label='Очистити фільтри'>
+          <Button
+            disabled={defaultState}
+            onClick={clearAllFilter}
+            className='rounded-full'
+            variant={'ghost'}
+            size={'icon'}
+          >
+            <X />
+          </Button>
+        </ActionTooltip>
       </div>
     </div>
   );

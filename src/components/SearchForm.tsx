@@ -20,23 +20,18 @@ export const SearchForm = () => {
     { skipEmptyString: true, skipNull: true }
   );
 
-  const handleCLick = () => {
+  const handleClearInput = () => {
     setSearchValue('');
   };
 
   useEffect(() => {
-    const currentPosition = window.scrollY;
-
     startTransition(() => {
       router.push(url);
-      setTimeout(() => {
-        window.scroll(0, currentPosition);
-      }, 50);
     });
   }, [router, searchValue, url]);
   return (
-    <form className=' px-2 md:px-4  items-center grid grid-cols-10  '>
-      <div className='relative flex  lg:w-[340px] sm:w-[280px] col-span-8'>
+    <form className=' px-2 md:px-4  items-center grid xl:grid-cols-10 sm:grid-cols-8 grid-cols-4    '>
+      <div className='relative flex  lg:w-[340px] md:w-[280] sm:w-[280px] xl:col-span-8 col-span-6'>
         <MagnifyingGlassIcon className='h-6 w-6 text-gray-500 left-2 top-2 absolute' />
         <Input
           value={searchValue}
@@ -46,12 +41,12 @@ export const SearchForm = () => {
         />
         {searchValue && (
           <XMarkIcon
-            onClick={handleCLick}
+            onClick={handleClearInput}
             className='h-6 w-6 text-gray-500 absolute right-2 top-2 opacity-70 hover:opacity-100 '
           />
         )}
       </div>
-      <div className='col-span-2'>
+      <div className='col-span-2 sm:block hidden'>
         {isPending && <Loader2 className=' ml-2 animate-spin' />}
       </div>
     </form>
