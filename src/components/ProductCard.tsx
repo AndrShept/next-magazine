@@ -52,7 +52,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                 fill
                 src={product.imageUrl}
               />
-              <FavoriteIconButton />
+              <FavoriteIconButton product={product} />
             </div>
             <div className='flex flex-col justify-between p-2 '>
               <div className='flex items-start justify-between '>
@@ -85,7 +85,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
             <div className='flex items-end justify-between p-2 '>
               <PriceTag price={product.price} />
               <AddToCartButton
-                classname='md:h-10 md:w-10 md:p-[10px]     h-8 w-8 p-[6px]'
+                className='md:h-10 md:w-10 md:p-[10px]     h-8 w-8 p-[6px]'
                 isShowText={false}
                 productId={product.id}
                 incrementProductQuantity={incrementProductQuantity}

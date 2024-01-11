@@ -16,7 +16,7 @@ export const ActionTooltip = ({ children, label }: ActionTooltip) => {
     <TooltipProvider delayDuration={200}>
       <Tooltip>
         <TooltipTrigger asChild >{children}</TooltipTrigger>
-        <TooltipContent sideOffset={4}>
+        <TooltipContent  sideOffset={4}>
           <p>{label}</p>
         </TooltipContent>
       </Tooltip>
