@@ -10,7 +10,7 @@ import { Button } from './ui/button';
 import { ActionTooltip } from './ActionTooltip';
 import { useFavorite } from '@/lib/store/favorite-store';
 
-export const FavoriteIcon = () => {
+export const FavoriteIconModal = () => {
   const [isMount, setIsMount] = useState(false);
   const { favoriteProducts } = useFavorite();
 

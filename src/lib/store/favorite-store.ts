@@ -10,7 +10,6 @@ interface useFavoriteProps {
   removeFavoriteProduct: (id: string) => void;
   clearAllFavoriteProduct: () => void;
 }
-
 export const useFavorite = create<useFavoriteProps>()(
   persist(
     (set) => ({

@@ -41,7 +41,7 @@ export const SwiperComponent = ({ allImageUrl }: { allImageUrl: string[] }) => {
       {allImageUrl.map((imgUrl, idx) => (
         <SwiperSlide key={ Date.now() + idx}>
           <Image
-            className='object-cover rounded-xl md:h-[400px] h-[250px] w-full'
+            className='object-cover rounded-xl md:h-[400px] sm:h-[350px] h-[300px] w-full'
             height={1000}
             width={1000}
             alt={'sa'}

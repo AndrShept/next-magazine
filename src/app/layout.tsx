@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
 import { AuthProvider } from '@/components/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
+import { Toaster as  ToasterSonner} from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
           <ToastProvider />
 
           <Navbar />
-
+          <ToasterSonner />
           <main className=' mx-auto   max-w-7xl p-4   min-w-[300px] min-h-screen'>
             {children}
           </main>

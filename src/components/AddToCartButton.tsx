@@ -5,23 +5,28 @@ import { Button } from './ui/button';
 import { Loader, Loader2, Wallet } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
+import { CartItem, Product } from '@prisma/client';
 
 interface AddToCartButtonProps {
   productId: string;
-  incrementProductQuantity: (productId: string) => Promise<void>;
+  incrementProductQuantity: (
+    productId: string
+  ) => Promise<CartItem & { product: Product }>;
   isShowText?: boolean;
-  classname?: string
+  classname?: string;
 }
 
 export const AddToCartButton = ({
   productId,
   incrementProductQuantity,
   isShowText = true,
-  classname
+  classname,
 }: AddToCartButtonProps) => {
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
-  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -29,21 +34,30 @@ export const AddToCartButton = ({
     >
       <Button
         variant={'default'}
-        disabled={isPending}
+        disabled={isLoading}
         onClick={() => {
-          setSuccess(false);
-          
-          startTransition(async () => {
-            await incrementProductQuantity(productId);
-            setSuccess(true);
-            router.refresh()
+          const promise = incrementProductQuantity(productId);
+          setIsLoading(true);
+          toast.promise(promise, {
+            loading: 'Loading...',
+            success: (data) => {
+              setSuccess(true);
+              setTimeout(() => {
+                setSuccess(false);
+              }, 4000);
+              router.refresh();
+              setIsLoading(false);
+
+              return `${data.product.name} добавлено до корзини`;
+            },
+            error: 'Error',
           });
         }}
         className={cn('rounded-full  gap-x-1 ', classname)}
       >
         {isShowText && 'В Корзину'} <Wallet />
       </Button>
-      {isPending && <Loader2 className='animate-spin'/>}
+      {isPending && <Loader2 className='animate-spin' />}
       {!isPending && success && (
         <span className='text-success animate-in duration-500 fade-in slide-in-from-right-20  '>
           <CheckIcon className='h-6 w-6 text-green-500' />

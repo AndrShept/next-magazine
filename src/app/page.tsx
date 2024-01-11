@@ -29,6 +29,10 @@ export default async function Home({
     isFilteredLeaf,
   },
 }: HomeProps) {
+  const obj = [
+    { name: 'adsad', age: 23 },
+    { name: 'olga', age: 34 },
+  ];
   const currentPage = parseInt(page);
   const pageSize = 6;
   const heroItem = 1;
@@ -64,11 +68,11 @@ export default async function Home({
         <SwiperComponent allImageUrl={allImageUrl} />
         <FilterBlock categories={categories} />
         {products.length ? (
-          <div className=' grid grid-cols-2   md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 my-4 md:gap-6 gap-6 md:max-w-full max-w-md mx-auto'>
+          <div className='grid max-w-md grid-cols-2 gap-6 mx-auto my-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 md:gap-6 md:max-w-full'>
             <ProductCard products={products} />
           </div>
         ) : (
-          <h1 className='text-center  text-3xl text-gray-400 mt-20'>
+          <h1 className='mt-20 text-3xl text-center text-gray-400'>
             Нічого не знайдено
           </h1>
         )}
