@@ -38,18 +38,18 @@ export const Navbar = async () => {
             <div className='flex flex-col text-base font-normal leading-5 ml-2'></div>
           </Link>
           <SheetSidebar />
-
-          <Link
-            className='p-2 hover:bg-secondary rounded-full cursor-pointer duration-150 md:hidden block tooltip tooltip-bottom'
-            data-tip={'На головну'}
-            href='/'
-          >
-            <Home
-              size={22}
-              strokeWidth={1.5}
-              className='text-muted-foreground'
-            />
-          </Link>
+          <ActionTooltip label='На головну'>
+            <Link
+              className='p-2 hover:bg-secondary rounded-full cursor-pointer duration-150 md:hidden block'
+              href='/'
+            >
+              <Home
+                size={22}
+                strokeWidth={1.5}
+                className='text-muted-foreground'
+              />
+            </Link>
+          </ActionTooltip>
         </div>
         <SearchForm />
 

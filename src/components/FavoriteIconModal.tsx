@@ -17,6 +17,7 @@ import { formatPrice } from '@/lib/format';
 
 export const FavoriteIconModal = () => {
   const [isMount, setIsMount] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const { favoriteProducts, clearAllFavoriteProduct, removeFavoriteProduct } =
     useFavorite();
@@ -26,7 +27,7 @@ export const FavoriteIconModal = () => {
   }, []);
   if (!isMount) return null;
   return (
-    <Popover>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger>
         <ActionTooltip label='Favorite'>
           <Button
@@ -38,7 +39,7 @@ export const FavoriteIconModal = () => {
           </Button>
         </ActionTooltip>
       </PopoverTrigger>
-      <PopoverContent className='w-[500px]' >
+      <PopoverContent className='w-[500px]'>
         <ScrollArea className='h-full'>
           {favoriteProducts.length > 0 && (
             <ul className='flex flex-col gap-1 overflow-x-auto '>
@@ -50,7 +51,10 @@ export const FavoriteIconModal = () => {
                   <div className='flex flex-1 items-center '>
                     <div className='relative cursor-pointer rounded-md h-20 w-32 shadow'>
                       <Image
-                        onClick={() => router.push(`/products/${product.id}`)}
+                        onClick={() => {
+                          router.push(`/products/${product.id}`);
+                          setIsOpen(false);
+                        }}
                         className='object-cover rounded-md border  '
                         fill
                         src={product.imageUrl}
@@ -58,8 +62,12 @@ export const FavoriteIconModal = () => {
                       />
                     </div>
                     <span
-                     onClick={() => router.push(`/products/${product.id}`)}
-                    className='ml-2 text-muted-foreground hover:underline cursor-pointer'>
+                      onClick={() => {
+                        router.push(`/products/${product.id}`);
+                        setIsOpen(false);
+                      }}
+                      className='ml-2 text-muted-foreground hover:underline cursor-pointer'
+                    >
                       {product.name}
                     </span>
                   </div>
