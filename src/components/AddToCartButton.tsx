@@ -14,14 +14,14 @@ interface AddToCartButtonProps {
     productId: string
   ) => Promise<CartItem & { product: Product }>;
   isShowText?: boolean;
-  className?: string;
+  classname?: string;
 }
 
 export const AddToCartButton = ({
   productId,
   incrementProductQuantity,
   isShowText = true,
-  className,
+  classname,
 }: AddToCartButtonProps) => {
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
@@ -53,7 +53,7 @@ export const AddToCartButton = ({
             error: 'Error',
           });
         }}
-        className={cn('rounded-full  gap-x-1 ', className)}
+        className={cn('rounded-full  gap-x-1 ', classname)}
       >
         {isShowText && 'В Корзину'} <Wallet />
       </Button>
