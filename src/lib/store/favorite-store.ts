@@ -5,14 +5,20 @@ import { persist } from 'zustand/middleware';
 interface FavoriteDataProps extends Product {}
 
 interface useFavoriteProps {
+  page: number;
+  itemsPerPage: number;
   favoriteProducts: FavoriteDataProps[];
   addFavoriteProduct: (product: FavoriteDataProps) => void;
   removeFavoriteProduct: (id: string) => void;
   clearAllFavoriteProduct: () => void;
+  incrementPage: () => void;
+  decrementPage: () => void;
 }
 export const useFavorite = create<useFavoriteProps>()(
   persist(
     (set) => ({
+      page: 1,
+      itemsPerPage: 5,
       favoriteProducts: [],
       addFavoriteProduct: (product) =>
         set((state) => ({
@@ -25,6 +31,8 @@ export const useFavorite = create<useFavoriteProps>()(
           ),
         })),
       clearAllFavoriteProduct: () => set({ favoriteProducts: [] }),
+      incrementPage: () => set((state) => ({ page: state.page + 1 })),
+      decrementPage: () => set((state) => ({ page: state.page - 1 })),
     }),
     { name: 'favorite-store' }
   )

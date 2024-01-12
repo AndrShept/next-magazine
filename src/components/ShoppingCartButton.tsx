@@ -6,6 +6,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { ShoppingCart as ShoppingCartIcon, WalletCards } from 'lucide-react';
 import { Button } from './ui/button';
+import { Indicator } from './Indicator';
 
 interface ShoppingCartButtonProps {
   cart: ShoppingCart | null;
@@ -33,18 +34,14 @@ export const ShoppingCartButton = ({ cart }: ShoppingCartButtonProps) => {
         tabIndex={1}
         className='btn btn-ghost  hover:bg-secondary  px-2  hover:text-primary '
       >
-        <div className='indicator p-0 '>
+        <div className='p-0 '>
           <ShoppingCartIcon
             size={22}
             strokeWidth={2}
             className='text-muted-foreground  hover:text-primary '
           />
 
-          {cart?.size ? (
-            <span className='badge badge-sm indicator-item bg-primary font-normal text-white '>
-              {cart?.size ?? 0}
-            </span>
-          ) : null}
+          {cart?.size ? <Indicator classname='top-[5px]' number={cart?.size} /> : null}
         </div>
       </label>
       <div
