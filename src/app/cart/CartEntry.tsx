@@ -21,6 +21,7 @@ interface CartEntryProps {
   cart: ShoppingCart;
 }
 
+
 export const CartEntry = ({ cart }: CartEntryProps) => {
   const [isMount, setIsMount] = useState(false);
   const [isPending, startTransition] = useTransition();

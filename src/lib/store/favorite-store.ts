@@ -18,7 +18,7 @@ export const useFavorite = create<useFavoriteProps>()(
   persist(
     (set) => ({
       page: 1,
-      itemsPerPage: 5,
+      itemsPerPage: 6,
       favoriteProducts: [],
       addFavoriteProduct: (product) =>
         set((state) => ({

@@ -21,6 +21,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
   const router = useRouter();
   useEffect(() => setIsMount(true), []);
   if (!isMount) return null;
+
   return (
     <>
       {products.map((product, i) => (

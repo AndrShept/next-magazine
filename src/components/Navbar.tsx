@@ -20,7 +20,7 @@ export const Navbar = async () => {
   const cart = await getCart();
   const session = await getServerSession(authOptions);
   return (
-    <header className=' drop-shadow-sm border-b sticky top-0  z-50 '>
+    <header className=' drop-shadow-sm backdrop-blur border-b sticky top-0  z-50 '>
       <div className='navbar bg-base-100  container justify-between max-w-7xl mx-auto min-w-[300px]  '>
         <div className=''>
           <Link

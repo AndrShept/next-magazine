@@ -31,6 +31,7 @@ export const FavoriteIconModal = () => {
   const endIndex = startIndex + itemsPerPage;
   const totalPage = Math.ceil(favoriteProducts.length / itemsPerPage);
 
+
   useEffect(() => {
     setIsMount(true);
   }, []);
@@ -51,7 +52,7 @@ export const FavoriteIconModal = () => {
           </Button>
         </ActionTooltip>
       </PopoverTrigger>
-      <PopoverContent className='sm:w-[500px] w-[400px] min-h-[200px]  '>
+      <PopoverContent className='sm:w-[500px] w-min min-h-[200px]  '>
         {favoriteProducts.length > 0 && (
           <ul className='flex flex-col gap-1  '>
             {favoriteProducts.slice(startIndex, endIndex).map((product) => (
@@ -60,7 +61,7 @@ export const FavoriteIconModal = () => {
                 key={product.id}
               >
                 <div className='flex flex-1 items-center '>
-                  <div className='relative cursor-pointer rounded-md h-20 w-32   shadow'>
+                  <div className='relative cursor-pointer rounded-md sm:h-20 sm:w-32 h-16 w-28  shadow'>
                     <Image
                       onClick={() => {
                         router.push(`/products/${product.id}`);
@@ -82,17 +83,17 @@ export const FavoriteIconModal = () => {
                     {product.name}
                   </span>
                 </div>
-                <span className='mr-2 font-semibold '>
+                <span className='px-2 font-semibold sm:mr-4 '>
                   {formatPrice(product.price)}
                 </span>
 
                 <Button
                   onClick={() => removeFavoriteProduct(product.id)}
-                  className='text-muted-foreground rounded-full'
+                  className='text-muted-foreground rounded-full sm:h-10 sm:w-10 h-8 w-8 '
                   variant={'ghost'}
                   size={'icon'}
                 >
-                  <X />
+                  <X size={20}/>
                 </Button>
               </li>
             ))}
