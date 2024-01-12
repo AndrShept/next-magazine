@@ -67,7 +67,7 @@ export const ProductById = ({ product }: { product: Product }) => {
           {product.description}
         </p>
         <AddToCartButton
-          classname='sm:scale-100 scale-90'
+          className='sm:scale-100 scale-90'
           productId={product.id}
           incrementProductQuantity={incrementProductQuantity}
         />

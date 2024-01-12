@@ -29,10 +29,7 @@ export default async function Home({
     isFilteredLeaf,
   },
 }: HomeProps) {
-  const obj = [
-    { name: 'adsad', age: 23 },
-    { name: 'olga', age: 34 },
-  ];
+
   const currentPage = parseInt(page);
   const pageSize = 6;
   const heroItem = 1;
