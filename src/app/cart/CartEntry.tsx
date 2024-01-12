@@ -72,7 +72,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
           >
             <div
               onClick={() => router.push(`/products/${cartItem.productId}`)}
-              className='relative border mx-auto  rounded-md h-[200px] w-[200px] cursor-pointer'
+              className='relative border sm:mr-auto mx-auto  rounded-md h-[200px] w-[200px] cursor-pointer'
             >
               <Image
                 className='rounded-md object-cover'
@@ -81,9 +81,9 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
                 src={cartItem.product.imageUrl}
               />
             </div>
-            <div className=' flex sm:justify-between justify-center items-start   sm:mt-0 mt-2 gap-2 flex-wrap  flex-1 '>
-              <div className='flex flex-col'>
-                <div className='flex items-center gap-x-2'>
+            <div className=' flex flex-col  sm:mt-0 mt-2 gap-2   flex-1  '>
+              <div className='flex flex-col sm:items-start  items-center '>
+                <div className='flex items-center  gap-x-2'>
                   <h2 className='text-2xl font-semibold'>
                     {' '}
                     {cartItem.product.name}
@@ -104,7 +104,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
                   {formatPrice(cartItem.product.price)}
                 </span>
               </div>
-              <div className='text-muted-foreground flex items-center gap-x-1 '>
+              <div className='text-muted-foreground  flex sm:justify-start  justify-center items-center gap-x-1 '>
                 <Button
                   disabled={cartItem.quantity === 1}
                   onClick={() =>
@@ -130,17 +130,17 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
                 >
                   <PlusCircle />
                 </Button>
-              </div>
-              <div className='text-muted-foreground'>
-                <Button
-                  // disabled={isPending}
-                  onClick={() => DeleteProduct(cartItem.productId, 0)}
-                  className='rounded-full'
-                  variant={'ghost'}
-                  size={'icon'}
-                >
-                  <X />
-                </Button>
+                <div className='text-muted-foreground ml-4'>
+                  <Button
+                    // disabled={isPending}
+                    onClick={() => DeleteProduct(cartItem.productId, 0)}
+                    className='rounded-full'
+                    variant={'ghost'}
+                    size={'icon'}
+                  >
+                    <X />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
