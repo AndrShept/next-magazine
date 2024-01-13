@@ -8,7 +8,6 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 import { ProductById } from '@/components/ProductById';
 
-
 export const generateMetadata = async ({
   params,
 }: {
@@ -31,6 +30,11 @@ const ProductPageById = async ({ params }: { params: { id: string } }) => {
     where: { id: params.id },
   });
   if (!product) notFound();
+  await prisma.product.update({
+    where: { id: params.id },
+    data: { view: { increment: 1 } },
+  });
+
   return <ProductById product={product} />;
 };
 

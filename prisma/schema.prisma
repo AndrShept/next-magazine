@@ -20,6 +20,7 @@ model Product {
   status      String
   isLeaf      Boolean    @default(false)
   view        Int?       @default(0)
+  rating      Int      @default(0)
   CartItem    CartItem[]
   category    Category[]
 
@@ -82,9 +83,9 @@ model Order {
 }
 
 model OrderItem {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
-  Order        Order?  @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  orderId      String? @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  Order        Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId      String?  @db.ObjectId
   productName  String
   imageUrl     String
   isLeaf       Boolean?

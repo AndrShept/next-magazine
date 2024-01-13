@@ -7,19 +7,20 @@ import { Product } from '@prisma/client';
 import { formatPrice } from '@/lib/format';
 import { Separator } from './ui/separator';
 import { cn } from '@/lib/utils';
+import { StarRating } from './StarRating';
+import { Eye, Star, StarHalf } from 'lucide-react';
+import { ActionTooltip } from './ActionTooltip';
 
 export const ProductById = ({ product }: { product: Product }) => {
   const [imgIndex, setImgIndex] = useState(0);
   const [isMount, setIsMount] = useState(false);
   useEffect(() => {
     setIsMount(true);
- 
-      window.scroll(0, 0);
 
+    window.scroll(0, 0);
   }, []);
 
   if (!isMount) return null;
-
 
   return (
     <section className=' py-8 border-y-[1px] mx-auto max-w-3xl rounded-md  flex justify-center   sm:gap-8 gap-4   mt-14'>
@@ -55,15 +56,35 @@ export const ProductById = ({ product }: { product: Product }) => {
         </div>
       </div>
       <div className=''>
-        <div className='text-left pb-2'>
+        <div className='text-left pb-2 space-y-2'>
           <h1 className='sm:text-4xl text-xl font-bold'>{product.name}</h1>
           <p className='sm:text-base mt-1 font-semibold'>
             {formatPrice(product.price)}
           </p>
+          <div className='flex '>
+            <StarRating />
+          </div>
+          <div className='flex gap-x-1'>
+            <ActionTooltip label='Рейтинг' sideOffset={3}>
+              <div className='flex w-max items-center p-2  hover:cursor-default hover:bg-zinc-100 rounded-full'>
+                <Star
+                  size={20}
+                  className='text-muted-foreground text-amber-500 '
+                />
+                <span className='ml-1'>{product.rating}</span>
+              </div>
+            </ActionTooltip>
+            <ActionTooltip label='Перегляди' sideOffset={3}>
+              <div className='flex w-max items-center p-2  hover:cursor-default hover:bg-zinc-100 rounded-full'>
+                <Eye size={20} className='text-muted-foreground  ' />
+                <span className='ml-1'>{product.view}</span>
+              </div>
+            </ActionTooltip>
+          </div>
         </div>
 
         <Separator />
-        <p className='text-left break-all text-muted-foreground py-2'>
+        <p className='text-left break-words text-muted-foreground py-2'>
           {product.description}
         </p>
         <AddToCartButton

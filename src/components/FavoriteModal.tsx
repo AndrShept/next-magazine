@@ -13,8 +13,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { formatPrice } from '@/lib/format';
 import { Indicator } from './Indicator';
+import { cn } from '@/lib/utils';
 
-export const FavoriteIconModal = () => {
+export const FavoriteModal = () => {
   const [isMount, setIsMount] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
@@ -30,12 +31,16 @@ export const FavoriteIconModal = () => {
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const totalPage = Math.ceil(favoriteProducts.length / itemsPerPage);
-
-
+  useEffect(() => {
+    if (favoriteProducts.length % itemsPerPage === 0 && page !== 1) {
+      decrementPage();
+    }
+  }, [decrementPage, favoriteProducts.length, itemsPerPage, page]);
   useEffect(() => {
     setIsMount(true);
   }, []);
   if (!isMount) return null;
+
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger>
@@ -52,7 +57,11 @@ export const FavoriteIconModal = () => {
           </Button>
         </ActionTooltip>
       </PopoverTrigger>
-      <PopoverContent className='sm:w-[500px] w-min min-h-[200px]  '>
+      <PopoverContent
+        className={cn('sm:w-[500px]  min-h-[200px]  ', {
+          ' w-min': favoriteProducts.length > 0,
+        })}
+      >
         {favoriteProducts.length > 0 && (
           <ul className='flex flex-col gap-1  '>
             {favoriteProducts.slice(startIndex, endIndex).map((product) => (
@@ -93,7 +102,7 @@ export const FavoriteIconModal = () => {
                   variant={'ghost'}
                   size={'icon'}
                 >
-                  <X size={20}/>
+                  <X size={20} />
                 </Button>
               </li>
             ))}

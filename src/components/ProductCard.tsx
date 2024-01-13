@@ -10,6 +10,8 @@ import { AddToCartButton } from './AddToCartButton';
 import { incrementProductQuantity } from '@/app/products/[id]/actions';
 import { useRouter } from 'next/navigation';
 import { FavoriteIconButton } from './FavoriteIconButton';
+import { Eye, Star, StarHalf } from 'lucide-react';
+import { ActionTooltip } from './ActionTooltip';
 
 interface ProductCardProps {
   products: Product[];
@@ -54,6 +56,16 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                 src={product.imageUrl}
               />
               <FavoriteIconButton product={product} />
+              <ActionTooltip label='Рейтинг' sideOffset={2}>
+                <div className='flex absolute items-center justify-center sm:p-2 p-1 sm:h-[34px] sm:w-[41px] h-[26px] w-[41px]   bg-white top-2 left-2  hover:cursor-default hover:bg-zinc-100 rounded-full'>
+                  <Star
+                    strokeWidth={0}
+                   
+                    className=' fill-amber-400   h-4 w-4 '
+                  />
+                  <span className='ml-[2px]'>{product.rating}</span>
+                </div>
+              </ActionTooltip>
             </div>
             <div className='flex flex-col justify-between p-2 '>
               <div className='flex items-start justify-between '>
@@ -85,6 +97,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
             </div>
             <div className='flex items-end justify-between p-2 '>
               <PriceTag price={product.price} />
+
               <AddToCartButton
                 classname='md:h-10 md:w-10 md:p-[10px]     h-8 w-8 p-[6px]'
                 isShowText={false}

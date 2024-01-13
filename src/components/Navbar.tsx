@@ -13,8 +13,8 @@ import { NavList } from './NavList';
 import { WrenchScrewdriverIcon } from '@heroicons/react/24/solid';
 import { SearchForm } from './SearchForm';
 import { Button } from './ui/button';
-import { FavoriteIconModal } from './FavoriteIconModal';
 import { ActionTooltip } from './ActionTooltip';
+import { FavoriteModal } from './FavoriteModal';
 
 export const Navbar = async () => {
   const cart = await getCart();
@@ -56,7 +56,7 @@ export const Navbar = async () => {
         <div>
           <NavList />
 
-          <FavoriteIconModal />
+          <FavoriteModal />
 
           <ShoppingCartButton cart={cart} />
 
