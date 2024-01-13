@@ -68,18 +68,20 @@ export const ProductList = ({ products }: ProductListProps) => {
         <TableCaption>Весь асортимент товарів</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className=''>Name</TableHead>
-            <TableHead className='w-[200px] '>Image</TableHead>
-            <TableHead>Price</TableHead>
-            <TableHead className='w-[50px] '>Button</TableHead>
+            <TableHead className='p-0'>Name</TableHead>
+            <TableHead className='sm:w-[200px] w-[150px] p-0  '>
+              Image
+            </TableHead>
+            <TableHead className='p-0 '>Price</TableHead>
+            <TableHead className='w-[50px] p-0 '>Button</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {products.map((product) => (
             <TableRow
-              className={`rounded-md  ${
+              className={`rounded-md   ${
                 product.status === 'inactive'
-                  ? 'bg-red-100 hover:bg-red-200'
+                  ? 'bg-red-100 hover:bg-red-200 opacity-50'
                   : ''
               } `}
               key={product.id}
@@ -87,16 +89,17 @@ export const ProductList = ({ products }: ProductListProps) => {
               <TableCell className='font-medium p-0 px-2'>
                 {product.name}
               </TableCell>
-              <TableCell className=' relative  '>
+              <TableCell className=' relative   '>
                 <Image
-                  sizes='100wh'
-                  className='object-cover'
+                  className='object-cover rounded-md  shadow-md border  '
                   fill
                   src={product.imageUrl}
                   alt={'img'}
                 />
               </TableCell>
-              <TableCell>{formatPrice(product.price)}</TableCell>
+              <TableCell className='px-1 text-center'>
+                {formatPrice(product.price)}
+              </TableCell>
               <TableCell className='font-medium p-0'>
                 {' '}
                 <TableIcons productId={product.id} />

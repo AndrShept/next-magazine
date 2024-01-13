@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { useToast } from './ui/use-toast';
 import { useRouter } from 'next/navigation';
+import { ActionTooltip } from './ActionTooltip';
 
 export const TableIcons = ({ productId }: { productId: string }) => {
   const router = useRouter();
@@ -43,15 +44,22 @@ export const TableIcons = ({ productId }: { productId: string }) => {
   };
   return (
     <>
-      <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer tooltip ' data-tip="Редагувати">
-        <FileEdit onClick={() => router.push('/add-product/' + productId)} />
-      </div>
+      <ActionTooltip label='Edit'>
+        <div className='text-gray-600 h-[38px] w-[38px] sm:p-2 p-1 rounded-md hover:bg-zinc-200 cursor-pointer  '>
+          <FileEdit
+            size={22}
+            onClick={() => router.push('/add-product/' + productId)}
+          />
+        </div>
+      </ActionTooltip>
       <>
         <AlertDialog>
           <AlertDialogTrigger>
-            <div className='text-gray-600 p-2 rounded-md hover:bg-zinc-200 cursor-pointer tooltip' data-tip="Видалити">
-              <Trash2 />
-            </div>
+            <ActionTooltip label='Delete'>
+              <div className='text-gray-600 sm:p-2 p-1 rounded-md hover:bg-zinc-200 cursor-pointer '>
+                <Trash2 size={22} />
+              </div>
+            </ActionTooltip>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
