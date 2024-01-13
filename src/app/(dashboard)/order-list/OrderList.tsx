@@ -58,31 +58,38 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
               key={order.id}
             >
               <AccordionItem
-                className='border bg-base-100 border-zinc-300 rounded-xl px-3 py-2 mt-2 hover:shadow-md'
+                className='border bg-base-100 border-zinc-300 rounded-xl sm:px-3 px-2 py-2 mt-2 hover:shadow-md'
                 value={`item-${idx + 1}`}
               >
-                <AccordionTrigger className='gap-2'>
-                  <span>{order.name}</span>
-                  <span className='text-sm '>{order.phoneNumber}</span>
+                <AccordionTrigger>
+                  <span className='flex-1 text-left truncate'>
+                    {order.name}
+                  </span>
+                  <span className='text-sm flex-1 text-left px-2'>
+                    {order.phoneNumber}
+                  </span>
 
-                  <span className='text-sm text-gray-400 '>
+                  <span className='text-sm text-muted-foreground flex-1 text-end px-2'>
                     {format(order.createdAt)}
                   </span>
                 </AccordionTrigger>
+
                 <div className='flex justify-between items-center gap-2'>
                   <span className='text-sm text-zinc-500'>{order.email}</span>
                   <div className='flex items-center gap-1'>
-                    <span className='text-sm text-pink-500'>
+                    <span className='text-sm text-pink-500  text-end'>
                       Загальна сума {formatPrice(order.subtotal)}
                     </span>
-                    <DeleteIcon orderId={order.id} />
+                    <div>
+                      <DeleteIcon orderId={order.id} />
+                    </div>
                   </div>
                 </div>
                 <Separator className='mt-4' />
                 {order.orderItem.map((item) => (
                   <AccordionContent className='mt-2 mb-0' key={item.id}>
-                    <div className='grid grid-cols-4 items-center justify-between bg-base-100 px-4 py-2 rounded-md'>
-                      <span className='font-medium text-zinc-500 text-left '>
+                    <div className='grid grid-cols-12 items-center justify-between bg-base-100  py-2 rounded-md'>
+                      <span className='font-medium text-zinc-500 text-left col-span-4 '>
                         {item.productName}
                         {item.isLeaf && (
                           <h3 className='text-green-600 text-sm font-normal'>
@@ -90,16 +97,18 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
                           </h3>
                         )}
                       </span>
-                      <div className='relative sm:h-20 h-14 max-w-md ml-2   '>
+                      <div className='relative col-span-4  sm:h-24 sm:w-[200px] h-16 w-[100px] ml-2 border shadow-md rounded-md   '>
                         <Image
                           src={item.imageUrl}
-                          className='object-cover '
+                          className='object-cover rounded-md '
                           alt='img'
                           fill
                         />
                       </div>
-                      <span className='text-center'>{item.quantity}шт.</span>
-                      <span className='text-pink-500 text-center '>
+                      <span className='text-center col-span-2  text-muted-foreground'>
+                        {item.quantity}шт.
+                      </span>
+                      <span className='text-pink-500 text-center col-span-2 truncate'>
                         {formatPrice(item.productPrice * item.quantity)}
                       </span>
                     </div>
