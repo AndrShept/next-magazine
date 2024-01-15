@@ -34,8 +34,9 @@ const ProductPageById = async ({ params }: { params: { id: string } }) => {
     where: { id: params.id },
     data: { view: { increment: 1 } },
   });
+  const rating = await prisma.rating.findMany()
 
-  return <ProductById product={product} />;
+  return <ProductById product={product} ratingArr={rating} />;
 };
 
 export default ProductPageById;

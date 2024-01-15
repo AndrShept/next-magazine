@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AddToCartButton } from '@/components/AddToCartButton';
 import { incrementProductQuantity } from '@/app/products/[id]/actions';
-import { Product } from '@prisma/client';
+import { Product, Rating } from '@prisma/client';
 import { formatPrice } from '@/lib/format';
 import { Separator } from './ui/separator';
 import { cn } from '@/lib/utils';
@@ -11,7 +11,13 @@ import { StarRating } from './StarRating';
 import { Eye, Star, StarHalf } from 'lucide-react';
 import { ActionTooltip } from './ActionTooltip';
 
-export const ProductById = ({ product }: { product: Product }) => {
+export const ProductById = ({
+  product,
+  ratingArr,
+}: {
+  product: Product;
+  ratingArr: Rating[];
+}) => {
   const [imgIndex, setImgIndex] = useState(0);
   const [isMount, setIsMount] = useState(false);
   useEffect(() => {
@@ -62,7 +68,7 @@ export const ProductById = ({ product }: { product: Product }) => {
             {formatPrice(product.price)}
           </p>
           <div className='flex '>
-            <StarRating />
+            <StarRating productId={product.id} ratingArr={ratingArr} />
           </div>
           <div className='flex gap-x-1'>
             <ActionTooltip label='Рейтинг' sideOffset={3}>
@@ -71,7 +77,7 @@ export const ProductById = ({ product }: { product: Product }) => {
                   size={20}
                   className='text-muted-foreground text-amber-500 '
                 />
-                <span className='ml-1'>{product.rating}</span>
+                <span className='ml-1'>{product.ratingValue}</span>
               </div>
             </ActionTooltip>
             <ActionTooltip label='Перегляди' sideOffset={3}>

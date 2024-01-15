@@ -8,23 +8,38 @@ datasource db {
 }
 
 model Product {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
   description String
   imageUrl    String
   imageArrUrl String[]
   name        String
   price       Int
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   categoryId  String
   status      String
-  isLeaf      Boolean    @default(false)
-  view        Int?       @default(0)
-  rating      Int      @default(0)
-  CartItem    CartItem[]
+  isLeaf      Boolean     @default(false)
+  view        Int?        @default(0)
+  ratingValue Float       @default(0)
+  cartItem    CartItem[]
   category    Category[]
+  rating      Rating[]
+  orderItem   OrderItem[]
 
   @@map("products")
+}
+
+model Rating {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rating    Int
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?  @db.ObjectId
+  product   Product? @relation(fields: [productId], references: [id])
+  productId String?  @db.ObjectId
+
+  @@map("ratings")
 }
 
 model Review {
@@ -52,7 +67,7 @@ model Cart {
   items     CartItem[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  User      User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String?    @db.ObjectId
 
   @@map("carts")
@@ -86,6 +101,8 @@ model OrderItem {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   Order        Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId      String?  @db.ObjectId
+  product      Product? @relation(fields: [productId], references: [id])
+  productId    String?  @db.ObjectId
   productName  String
   imageUrl     String
   isLeaf       Boolean?
@@ -135,6 +152,7 @@ model User {
   sessions      Session[]
   cart          Cart[]
   role          Role      @default(USER)
+  rating        Rating[]
 
   @@map("users")
 }

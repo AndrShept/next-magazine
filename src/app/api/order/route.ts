@@ -15,15 +15,17 @@ export const POST = async (req: Request) => {
         name,
         phoneNumber,
         subtotal,
+
         orderItem: {
           createMany: {
             data: items.map((item: any) => ({
               quantity: item.quantity,
-
               productName: item.product.name,
               imageUrl: item.product.imageUrl,
               productPrice: item.product.price,
               isLeaf: item.product.isLeaf,
+              productId: item.product.id
+
             })),
           },
         },

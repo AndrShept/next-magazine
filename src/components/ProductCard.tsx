@@ -57,13 +57,13 @@ export const ProductCard = ({ products }: ProductCardProps) => {
               />
               <FavoriteIconButton product={product} />
               <ActionTooltip label='Рейтинг' sideOffset={2}>
-                <div className='flex absolute items-center justify-center sm:p-2 p-1 sm:h-[34px] sm:w-[41px] h-[26px] w-[41px]   bg-white top-2 left-2  hover:cursor-default hover:bg-zinc-100 rounded-full'>
+                <div className='flex absolute items-center justify-center p-1 sm:h-[34px] sm:w-[41px] h-[26px] w-[41px]   bg-white top-2 left-2  hover:cursor-default hover:bg-zinc-100 rounded-full'>
                   <Star
+                  size={20}
                     strokeWidth={0}
-                   
-                    className=' fill-amber-400   h-4 w-4 '
+                    className=' fill-amber-400   '
                   />
-                  <span className='ml-[2px]'>{product.rating}</span>
+                  <span className='ml-[2px] text-[12px]'>{product.ratingValue}</span>
                 </div>
               </ActionTooltip>
             </div>
