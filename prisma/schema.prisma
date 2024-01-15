@@ -34,8 +34,8 @@ model Rating {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   rating    Int
-  user      User?    @relation(fields: [userId], references: [id])
-  userId    String?   @map("_userId")
+  userId    String?
+
   product   Product? @relation(fields: [productId], references: [id])
   productId String?  @db.ObjectId
 
@@ -54,8 +54,9 @@ model Review {
 }
 
 model Category {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+
   product   Product? @relation(fields: [productId], references: [id])
   productId String?  @db.ObjectId
 
@@ -64,22 +65,25 @@ model Category {
 
 model Cart {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  items     CartItem[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  user      User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String?    @db.ObjectId
+  items     CartItem[]
+
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @db.ObjectId
 
   @@map("carts")
 }
 
 model CartItem {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  quantity Int
+
   productId String  @db.ObjectId
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  quantity  Int
-  cartId    String  @db.ObjectId
-  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+
+  cartId String @db.ObjectId
+  cart   Cart   @relation(fields: [cartId], references: [id], onDelete: Cascade)
 
   @@map("cartitems")
 }
@@ -99,15 +103,17 @@ model Order {
 
 model OrderItem {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  Order        Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  orderId      String?  @db.ObjectId
-  product      Product? @relation(fields: [productId], references: [id])
-  productId    String?  @db.ObjectId
   productName  String
   imageUrl     String
   isLeaf       Boolean?
   productPrice Int
   quantity     Int
+
+  Order        Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId      String?  @db.ObjectId
+  
+  product      Product? @relation(fields: [productId], references: [id])
+  productId    String?  @db.ObjectId
 
   @@map("orderItems")
 }
@@ -152,7 +158,6 @@ model User {
   sessions      Session[]
   cart          Cart[]
   role          Role      @default(USER)
-  rating        Rating[]
 
   @@map("users")
 }
