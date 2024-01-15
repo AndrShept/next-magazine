@@ -30,7 +30,7 @@ export const AddToCartButton = ({
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className='flex items-center gap-2   mt-6 '
+      className='flex items-center gap-2     '
     >
       <Button
         variant={'default'}
@@ -53,13 +53,13 @@ export const AddToCartButton = ({
             error: 'Error',
           });
         }}
-        className={cn('rounded-full  gap-x-1 ', classname)}
+        className={cn('rounded-full  gap-x-1  ', classname)}
       >
         {isShowText && 'В Корзину'} <Wallet />
       </Button>
       {isPending && <Loader2 className='animate-spin' />}
       {!isPending && success && (
-        <span className='text-success animate-in duration-500 fade-in slide-in-from-right-20  '>
+        <span className='text-success   animate-in duration-500 fade-in slide-in-from-right-20  '>
           <CheckIcon className='h-6 w-6 text-green-500' />
         </span>
       )}
