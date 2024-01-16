@@ -23,6 +23,7 @@ interface useRatingProps {
   isLoading: Boolean;
   setRating: (rating: IRating) => void;
   setProduct: (product: ProductWithRating) => void;
+  
   getProductById: (id: string) => Promise<void>;
 }
 export const useRating = create<useRatingProps>()(

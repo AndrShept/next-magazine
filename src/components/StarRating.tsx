@@ -49,8 +49,8 @@ export function StarRating({ productId }: { productId: string }) {
     <>
       <RatingComponent
         // allowFraction
-        readonly={initialValue?.productId === productId}
-        initialValue={initialValue?.rating}
+        readonly={initialValue?.productId === productId || false}
+        initialValue={initialValue?.rating||0}
         transition
         size={25}
         onClick={handleRating}
