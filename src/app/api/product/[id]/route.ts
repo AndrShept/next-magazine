@@ -28,8 +28,16 @@ export const PUT = async (
 ) => {
   try {
     const body = await req.json();
-    const { name, description, price, categoryId,  status, imageUrl, imageArr ,isLeaf } =
-      body;
+    const {
+      name,
+      description,
+      price,
+      categoryId,
+      status,
+      imageUrl,
+      imageArr,
+      isLeaf,
+    } = body;
     if (!params.id && body) {
       throw new Error('Missing required fields');
     }
@@ -43,11 +51,30 @@ export const PUT = async (
         imageUrl: imageUrl,
         imageArrUrl: imageArr,
         status,
-        isLeaf
+        isLeaf,
       },
     });
     revalidatePath('/product-list');
     return NextResponse.json(updatedProduct, { status: 200 });
+  } catch (error) {
+    console.log(error, `UPDATE-PRODUCT-ERROR`);
+  }
+};
+
+export const GET = async (
+  req: Request,
+  { params }: { params: { id: string } }
+) => {
+  try {
+    if (!params.id) {
+      return NextResponse.json('Missing required fields', { status: 401 });
+    }
+    const product = await prisma.product.findUnique({
+      where: { id: params.id },
+      include: { rating: true },
+    });
+
+    return NextResponse.json(product, { status: 200 });
   } catch (error) {
     console.log(error, `UPDATE-PRODUCT-ERROR`);
   }

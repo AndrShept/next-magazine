@@ -68,7 +68,7 @@ export const ProductById = ({
             {formatPrice(product.price)}
           </p>
           <div className='flex '>
-            <StarRating productId={product.id} ratingArr={ratingArr} />
+            <StarRating productId={product.id} />
           </div>
           <div className='flex gap-x-1'>
             <ActionTooltip label='Рейтинг' sideOffset={3}>
