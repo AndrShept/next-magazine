@@ -4,6 +4,7 @@ import { createCart, getCart } from '@/lib/db/cart';
 import { prisma } from '@/lib/db/prisma';
 import { CartItem } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/dist/client/components/headers';
 
 export const incrementProductQuantity = async (productId: string) => {
   // await new Promise(resolve => setTimeout(resolve, 3000))
@@ -27,3 +28,5 @@ export const incrementProductQuantity = async (productId: string) => {
   // revalidatePath('/products/[id]')
   // revalidatePath('/')
 };
+
+

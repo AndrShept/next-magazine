@@ -13,10 +13,10 @@ import { ActionTooltip } from './ActionTooltip';
 
 export const ProductById = ({
   product,
-  ratingArr,
+ 
 }: {
   product: Product;
-  ratingArr: Rating[];
+ 
 }) => {
   const [imgIndex, setImgIndex] = useState(0);
   const [isMount, setIsMount] = useState(false);

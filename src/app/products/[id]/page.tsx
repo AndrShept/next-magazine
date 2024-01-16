@@ -7,6 +7,9 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { ProductById } from '@/components/ProductById';
+import { cookies } from 'next/dist/client/components/headers';
+import { useView } from '@/lib/store/view-store';
+import { revalidatePath } from 'next/cache';
 
 export const generateMetadata = async ({
   params,
@@ -26,17 +29,25 @@ export const generateMetadata = async ({
 };
 
 const ProductPageById = async ({ params }: { params: { id: string } }) => {
+  const setView = useView.getState().setView;
+  const view = useView.getState().view;
+  const findView = view.find((item) => item.productId === params.id);
+  if (!findView) {
+    await prisma.product.update({
+      where: { id: params.id },
+      data: { view: { increment: 1 } },
+    });
+    revalidatePath('/product/[id]');
+
+    setView({ productId: params.id });
+  }
+
   const product = await prisma.product.findUnique({
     where: { id: params.id },
   });
   if (!product) notFound();
-  await prisma.product.update({
-    where: { id: params.id },
-    data: { view: { increment: 1 } },
-  });
-  const rating = await prisma.rating.findMany()
 
-  return <ProductById product={product} ratingArr={rating} />;
+  return <ProductById product={product} />;
 };
 
 export default ProductPageById;
