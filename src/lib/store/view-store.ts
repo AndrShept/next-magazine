@@ -17,6 +17,6 @@ export const useView = create<useViewProps>()(
       view: [],
       setView: (view) => set((state) => ({ view: [...state.view, view] })),
     }),
-    { name: 'view-store' }
-  )
+    { name: 'view-store' },
+  ),
 );

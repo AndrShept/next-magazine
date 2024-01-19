@@ -25,13 +25,13 @@ export const useFavoriteStore = create<useFavoriteState>()(
       removeFavoriteProduct: (id) =>
         set((state) => ({
           favoriteProducts: state.favoriteProducts.filter(
-            (item) => item.id !== id
+            (item) => item.id !== id,
           ),
         })),
       clearAllFavoriteProduct: () => set({ favoriteProducts: [] }),
       incrementPage: () => set((state) => ({ page: state.page + 1 })),
       decrementPage: () => set((state) => ({ page: state.page - 1 })),
     }),
-    { name: 'favorite-store' }
-  )
+    { name: 'favorite-store' },
+  ),
 );

@@ -1,11 +1,12 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
-import { ToastProvider } from '@/components/ToastProvider';
+import { AuthProvider } from '@/components/AuthProvider';
 import { Footer } from '@/components/Footer';
 import { Navbar } from '@/components/Navbar';
-import { AuthProvider } from '@/components/AuthProvider';
+import { ToastProvider } from '@/components/ToastProvider';
 import { Toaster } from '@/components/ui/toaster';
-import { Toaster as  ToasterSonner} from 'sonner'
+import { Inter } from 'next/font/google';
+import { Toaster as ToasterSonner } from 'sonner';
+
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,14 +23,14 @@ export default function RootLayout({
   modal: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang="en">
       <AuthProvider>
         <body className={`${inter.className} `}>
           <ToastProvider />
 
           <Navbar />
           <ToasterSonner />
-          <main className=' mx-auto   max-w-7xl p-4   min-w-[300px] min-h-screen'>
+          <main className=" mx-auto   min-h-screen min-w-[300px]   max-w-7xl p-4">
             {children}
           </main>
 

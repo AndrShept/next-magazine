@@ -1,8 +1,3 @@
-import { ShoppingCart } from '@/lib/db/cart';
-import React from 'react';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -14,8 +9,13 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { ShoppingCart } from '@/lib/db/cart';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Flower } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -65,19 +65,19 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
   }
 
   return (
-    <div className=''>
+    <div className="">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
-            name='name'
+            name="name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
-                    placeholder='Ваше імя'
+                    placeholder="Ваше імя"
                     {...field}
                   />
                 </FormControl>
@@ -90,15 +90,15 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
           />
           <FormField
             control={form.control}
-            name='phoneNumber'
+            name="phoneNumber"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Phone number</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
-                    type='number'
-                    placeholder='номер телефону'
+                    type="number"
+                    placeholder="номер телефону"
                     {...field}
                   />
                 </FormControl>
@@ -109,14 +109,14 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
           />
           <FormField
             control={form.control}
-            name='email'
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Ваш email</FormLabel>
                 <FormControl>
                   <Input
                     disabled={isLoading}
-                    placeholder='example@gmail.com'
+                    placeholder="example@gmail.com"
                     {...field}
                   />
                 </FormControl>
@@ -130,17 +130,17 @@ export const CheckOut = ({ cart }: { cart: ShoppingCart | null }) => {
           {isLoading ? (
             <Button
               disabled={isLoading}
-              className=' w-full  rounded-full'
-              type='submit'
+              className=" w-full  rounded-full"
+              type="submit"
             >
               Загрузка...{' '}
-              <Flower className='animate-spin ml-2' strokeWidth={1.5} />
+              <Flower className="ml-2 animate-spin" strokeWidth={1.5} />
             </Button>
           ) : (
             <Button
               disabled={isLoading}
-              className='w-full  rounded-full'
-              type='submit'
+              className="w-full  rounded-full"
+              type="submit"
             >
               Замовити
             </Button>

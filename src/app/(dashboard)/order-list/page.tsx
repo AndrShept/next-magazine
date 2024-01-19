@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db/prisma';
 import React from 'react';
+
 import { OrderList } from './OrderList';
 
 const page = async () => {
@@ -9,11 +10,11 @@ const page = async () => {
   });
   if (!orders || orders === undefined || orders.length === 0) {
     return (
-      <div className='text-center text-4xl text-gray-500'>Замовлень немає</div>
+      <div className="text-center text-4xl text-gray-500">Замовлень немає</div>
     );
   }
   return (
-    <div className='h-full max-w-3xl mx-auto '>
+    <div className="mx-auto h-full max-w-3xl ">
       <OrderList orders={orders} />
     </div>
   );

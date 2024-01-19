@@ -1,21 +1,23 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { format } from 'timeago.js';
-import Image from 'next/image';
-import { formatPrice } from '@/lib/format';
-import { DeleteIcon } from './DeleteIcon';
-import { Separator } from '@/components/ui/separator';
-import { Order, OrderItem } from '@prisma/client';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { formatPrice } from '@/lib/format';
+import { Order, OrderItem } from '@prisma/client';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { format } from 'timeago.js';
+
+import { DeleteIcon } from './DeleteIcon';
 
 interface OrderListProps extends Order {
   orderItem: OrderItem[];
@@ -32,23 +34,23 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
   if (!isMount) return null;
   return (
     <div>
-      <div className='flex items-center gap-2'>
+      <div className="flex items-center gap-2">
         <div
           onClick={() => router.back()}
-          className='cursor-pointer rounded-full p-2 hover:bg-zinc-300'
+          className="cursor-pointer rounded-full p-2 hover:bg-zinc-300"
         >
-          <ArrowLeft className='text-gray-600' />
+          <ArrowLeft className="text-gray-600" />
         </div>
         <div>
-          <h3 className='text-lg font-medium'>Назад</h3>
-          <p className='text-sm text-muted-foreground'>
+          <h3 className="text-lg font-medium">Назад</h3>
+          <p className="text-sm text-muted-foreground">
             General information about your Product
           </p>
         </div>
       </div>
-      <Separator className='bg-primary/10 mb-8' />
+      <Separator className="mb-8 bg-primary/10" />
       <AnimatePresence initial={true}>
-        <Accordion type='single' collapsible>
+        <Accordion type="single" collapsible>
           {orders.map((order, idx) => (
             <motion.div
               initial={{ opacity: 0, x: 0 }}
@@ -58,26 +60,26 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
               key={order.id}
             >
               <AccordionItem
-                className='border bg-base-100 border-zinc-300 rounded-xl sm:px-3 px-2 py-2 mt-2 hover:shadow-md'
+                className="mt-2 rounded-xl border border-zinc-300 bg-base-100 px-2 py-2 hover:shadow-md sm:px-3"
                 value={`item-${idx + 1}`}
               >
                 <AccordionTrigger>
-                  <span className='flex-1 text-left truncate'>
+                  <span className="flex-1 truncate text-left">
                     {order.name}
                   </span>
-                  <span className='text-sm flex-1 text-left px-2'>
+                  <span className="flex-1 px-2 text-left text-sm">
                     {order.phoneNumber}
                   </span>
 
-                  <span className='text-sm text-muted-foreground flex-1 text-end px-2'>
+                  <span className="flex-1 px-2 text-end text-sm text-muted-foreground">
                     {format(order.createdAt)}
                   </span>
                 </AccordionTrigger>
 
-                <div className='flex justify-between items-center gap-2'>
-                  <span className='text-sm text-zinc-500'>{order.email}</span>
-                  <div className='flex items-center gap-1'>
-                    <span className='text-sm text-pink-500  text-end'>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-sm text-zinc-500">{order.email}</span>
+                  <div className="flex items-center gap-1">
+                    <span className="text-end text-sm  text-pink-500">
                       Загальна сума {formatPrice(order.subtotal)}
                     </span>
                     <div>
@@ -85,30 +87,30 @@ export const OrderList = ({ orders }: { orders: OrderListProps[] }) => {
                     </div>
                   </div>
                 </div>
-                <Separator className='mt-4' />
+                <Separator className="mt-4" />
                 {order.orderItem.map((item) => (
-                  <AccordionContent className='mt-2 mb-0' key={item.id}>
-                    <div className='grid grid-cols-12 items-center justify-between bg-base-100  py-2 rounded-md'>
-                      <span className='font-medium text-zinc-500 text-left col-span-4 '>
+                  <AccordionContent className="mb-0 mt-2" key={item.id}>
+                    <div className="grid grid-cols-12 items-center justify-between rounded-md  bg-base-100 py-2">
+                      <span className="col-span-4 text-left font-medium text-zinc-500 ">
                         {item.productName}
                         {item.isLeaf && (
-                          <h3 className='text-green-600 text-sm font-normal'>
+                          <h3 className="text-sm font-normal text-green-600">
                             (листок)
                           </h3>
                         )}
                       </span>
-                      <div className='relative col-span-4  sm:h-24 sm:w-[200px] h-16 w-[100px] ml-2 border shadow-md rounded-md   '>
+                      <div className="relative col-span-4  ml-2 h-16 w-[100px] rounded-md border shadow-md sm:h-24 sm:w-[200px]   ">
                         <Image
                           src={item.imageUrl}
-                          className='object-cover rounded-md '
-                          alt='img'
+                          className="rounded-md object-cover "
+                          alt="img"
                           fill
                         />
                       </div>
-                      <span className='text-center col-span-2  text-muted-foreground'>
+                      <span className="col-span-2 text-center  text-muted-foreground">
                         {item.quantity}шт.
                       </span>
-                      <span className='text-pink-500 text-center col-span-2 truncate'>
+                      <span className="col-span-2 truncate text-center text-pink-500">
                         {formatPrice(item.productPrice * item.quantity)}
                       </span>
                     </div>

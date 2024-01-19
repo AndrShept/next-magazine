@@ -10,11 +10,11 @@ export const Indicator = ({ number = 1, classname }: IndicatorProps) => {
   return (
     <div
       className={cn(
-        'absolute rounded-full h-[0.9rem] px-[0.438rem] leading-[0.9rem] right-[-2px] top-[1px] text-white bg-black',
-        classname
+        'absolute right-[-2px] top-[1px] h-[0.9rem] rounded-full bg-black px-[0.438rem] leading-[0.9rem] text-white',
+        classname,
       )}
     >
-      <span className='text-[12px]'>{number}</span>
+      <span className="text-[12px]">{number}</span>
     </div>
   );
 };

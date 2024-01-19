@@ -1,8 +1,15 @@
 'use client';
-import React from 'react';
-import z from 'zod';
-import { useForm } from 'react-hook-form';
+
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Flower } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import z from 'zod';
+
+import { Button } from '../../components/ui/button';
 import {
   Form,
   FormControl,
@@ -12,20 +19,19 @@ import {
   FormLabel,
   FormMessage,
 } from '../../components/ui/form';
-import { Separator } from '../../components/ui/separator';
-import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/components/ui/use-toast';
-import { useRouter } from 'next/navigation';
-import { Flower } from 'lucide-react';
+import { Separator } from '../../components/ui/separator';
 
 const reviewSchema = z.object({
   name: z.string().min(3).max(20),
   content: z.string().min(4).max(100),
 });
 
-export const ReviewForm = ({setIsOpen}: {setIsOpen: (bool: boolean)=> void}) => {
+export const ReviewForm = ({
+  setIsOpen,
+}: {
+  setIsOpen: (bool: boolean) => void;
+}) => {
   const { toast } = useToast();
   const router = useRouter();
   const form = useForm<z.infer<typeof reviewSchema>>({
@@ -45,12 +51,11 @@ export const ReviewForm = ({setIsOpen}: {setIsOpen: (bool: boolean)=> void}) => 
       if (res.ok) {
         router.refresh();
         router.push('/reviews');
-        setIsOpen(false)
+        setIsOpen(false);
         toast({
           title: 'Success',
           description: 'Відгук успішно добавлений!',
         });
-
       }
     } catch (error) {
       console.log(error);
@@ -65,32 +70,17 @@ export const ReviewForm = ({setIsOpen}: {setIsOpen: (bool: boolean)=> void}) => 
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name='name'
+            name="name"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Ім&apos;я</FormLabel>
                 <FormControl>
-                  <Input disabled={isLoading} placeholder='Ваше ім&apos;я' {...field} />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name='content'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Відгук</FormLabel>
-                <FormControl>
-                  <Textarea
-                    className='resize-none'
+                  <Input
                     disabled={isLoading}
-                    placeholder='Напишіть ваш відгук'
+                    placeholder="Ваше ім'я"
                     {...field}
                   />
                 </FormControl>
@@ -99,11 +89,34 @@ export const ReviewForm = ({setIsOpen}: {setIsOpen: (bool: boolean)=> void}) => 
               </FormItem>
             )}
           />
-          <Button disabled={isLoading} className='w-full rounded-full' type='submit'>
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Відгук</FormLabel>
+                <FormControl>
+                  <Textarea
+                    className="resize-none"
+                    disabled={isLoading}
+                    placeholder="Напишіть ваш відгук"
+                    {...field}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button
+            disabled={isLoading}
+            className="w-full rounded-full"
+            type="submit"
+          >
             Відправити{' '}
             {isLoading && (
               <span>
-                <Flower className='ml-2 animate-spin'/>
+                <Flower className="ml-2 animate-spin" />
               </span>
             )}
           </Button>

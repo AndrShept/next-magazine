@@ -1,12 +1,11 @@
 import { AddToCartButton } from '@/components/AddToCartButton';
-
+import { ProductById } from '@/components/ProductById';
 import { prisma } from '@/lib/db/prisma';
+import { useView } from '@/lib/store/view-store';
 import { Metadata } from 'next';
+import { revalidatePath } from 'next/cache';
 import { notFound } from 'next/navigation';
 import React from 'react';
-import { ProductById } from '@/components/ProductById';
-import { useView } from '@/lib/store/view-store';
-import { revalidatePath } from 'next/cache';
 
 export const generateMetadata = async ({
   params,

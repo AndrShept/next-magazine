@@ -24,8 +24,7 @@ export const POST = async (req: Request) => {
               imageUrl: item.product.imageUrl,
               productPrice: item.product.price,
               isLeaf: item.product.isLeaf,
-              productId: item.product.id
-
+              productId: item.product.id,
             })),
           },
         },

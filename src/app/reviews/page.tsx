@@ -1,6 +1,7 @@
-import React from 'react';
-import { ReviewForm } from './ReviewForm';
 import { prisma } from '@/lib/db/prisma';
+import React from 'react';
+
+import { ReviewForm } from './ReviewForm';
 import { ReviewsList } from './ReviewsList';
 
 export const metadata = {
@@ -12,9 +13,9 @@ const page = async () => {
     orderBy: { id: 'desc' },
   });
   return (
-    <div className='min-h-screen  space-2 max-w-3xl mx-auto '>
+    <div className="space-2  mx-auto min-h-screen max-w-3xl ">
       {/* <ReviewForm /> */}
-      <ReviewsList reviews={reviews}/>
+      <ReviewsList reviews={reviews} />
     </div>
   );
 };

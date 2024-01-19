@@ -4,12 +4,7 @@ import { Product } from '@prisma/client';
 import React from 'react';
 
 const page = async () => {
-
-  return (
-    <div className='h-full  space-2 max-w-3xl mx-auto '>
-
-    </div>
-  );
+  return <div className="space-2  mx-auto h-full max-w-3xl "></div>;
 };
 
 export default page;

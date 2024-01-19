@@ -29,7 +29,6 @@ export default async function Home({
     isFilteredLeaf,
   },
 }: HomeProps) {
-
   const currentPage = parseInt(page);
   const pageSize = 6;
   const heroItem = 1;
@@ -61,15 +60,15 @@ export default async function Home({
   }
   return (
     <>
-      <main className='flex flex-col '>
+      <main className="flex flex-col ">
         <SwiperComponent allImageUrl={allImageUrl} />
         <FilterBlock categories={categories} />
         {products.length ? (
-          <div className='grid max-w-md grid-cols-2 gap-6 mx-auto my-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 md:gap-6 md:max-w-full'>
+          <div className="mx-auto my-4 grid max-w-md grid-cols-2 gap-6 md:max-w-full md:grid-cols-3 md:gap-6 lg:grid-cols-4 xl:grid-cols-4">
             <ProductCard products={products} />
           </div>
         ) : (
-          <h1 className='mt-20 text-3xl text-center text-gray-400'>
+          <h1 className="mt-20 text-center text-3xl text-gray-400">
             Нічого не знайдено
           </h1>
         )}

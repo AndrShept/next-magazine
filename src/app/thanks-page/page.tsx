@@ -10,8 +10,8 @@ export const metadata = {
 
 const page = () => {
   return (
-    <div className='mx-auto max-w-4xl h-screen'>
-      <div className='flex flex-col items-center justify-center text-center bg-base-100 p-5 rounded-2xl gap-2'>
+    <div className="mx-auto h-screen max-w-4xl">
+      <div className="flex flex-col items-center justify-center gap-2 rounded-2xl bg-base-100 p-5 text-center">
         {/* <div className='relative  h-24 w-24 mb-8 '>
           <Image
             alt='img'
@@ -19,16 +19,16 @@ const page = () => {
             src={'https://cdn-icons-png.flaticon.com/128/5610/5610944.png'}
           />
         </div> */}
-        <CheckSquare className='text-muted-foreground' size={80} />
-        <h1 className='text-3xl font-bold text-black/80'>
+        <CheckSquare className="text-muted-foreground" size={80} />
+        <h1 className="text-3xl font-bold text-black/80">
           Дякую за замолення{' '}
         </h1>
-        <p className='text-muted-foreground'>Ваше замовлення отримано</p>
-        <p className='text-muted-foreground'>
+        <p className="text-muted-foreground">Ваше замовлення отримано</p>
+        <p className="text-muted-foreground">
           Ми зв&apos;яжемося з вами найближчим часом.
         </p>
 
-        <Button className='mt-4 rounded-full' asChild>
+        <Button className="mt-4 rounded-full" asChild>
           <Link href={'/'}>Перейти на головну</Link>
         </Button>
       </div>

@@ -28,5 +28,3 @@ export const incrementProductQuantity = async (productId: string) => {
   // revalidatePath('/products/[id]')
   // revalidatePath('/')
 };
-
-

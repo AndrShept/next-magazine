@@ -1,4 +1,5 @@
 'use client';
+
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -13,17 +14,17 @@ export const navList = [
 export const NavList = ({ className = '' }) => {
   const pathname = usePathname();
   return (
-    <nav className=''>
-      <ul className=' gap-2 md:flex items-center hidden mr-3'>
+    <nav className="">
+      <ul className=" mr-3 hidden items-center gap-2 md:flex">
         {navList.map((nav, idx) => (
           <Link
             className={cn(
-              'py-2 px-1 border-b-2 border-transparent hover:border-pink-200 text-muted-foreground  ',
+              'border-b-2 border-transparent px-1 py-2 text-muted-foreground hover:border-pink-200  ',
               {
-                'border-pink-500 duration-300 hover:border-pink-500 text-primary  ':
+                'border-pink-500 text-primary duration-300 hover:border-pink-500  ':
                   pathname === nav.href,
               },
-              className
+              className,
             )}
             key={idx}
             href={nav.href}

@@ -1,8 +1,9 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { Cart, CartItem, Prisma } from "@prisma/client";
-import { getServerSession } from "next-auth";
-import { cookies } from "next/dist/client/components/headers";
-import { prisma } from "./prisma";
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { Cart, CartItem, Prisma } from '@prisma/client';
+import { getServerSession } from 'next-auth';
+import { cookies } from 'next/dist/client/components/headers';
+
+import { prisma } from './prisma';
 
 export type CartWithProducts = Prisma.CartGetPayload<{
   include: { items: { include: { product: true } } };
@@ -28,7 +29,7 @@ export async function getCart(): Promise<ShoppingCart | null> {
       include: { items: { include: { product: true } } },
     });
   } else {
-    const localCartId = cookies().get("localCartId")?.value;
+    const localCartId = cookies().get('localCartId')?.value;
     cart = localCartId
       ? await prisma.cart.findUnique({
           where: { id: localCartId },
@@ -46,7 +47,7 @@ export async function getCart(): Promise<ShoppingCart | null> {
     size: cart.items.reduce((acc, item) => acc + item.quantity, 0),
     subtotal: cart.items.reduce(
       (acc, item) => acc + item.quantity * item.product.price,
-      0
+      0,
     ),
   };
 }
@@ -66,7 +67,7 @@ export async function createCart(): Promise<ShoppingCart> {
     });
 
     // Note: Needs encryption + secure settings in real production app
-    cookies().set("localCartId", newCart.id);
+    cookies().set('localCartId', newCart.id);
   }
 
   return {
@@ -78,7 +79,7 @@ export async function createCart(): Promise<ShoppingCart> {
 }
 
 export async function mergeAnonymCartIntoUserCart(userId: string) {
-  const localCartId = cookies().get("localCartId")?.value;
+  const localCartId = cookies().get('localCartId')?.value;
 
   const localCart = localCartId
     ? await prisma.cart.findUnique({
@@ -135,7 +136,7 @@ export async function mergeAnonymCartIntoUserCart(userId: string) {
       where: { id: localCart.id },
     });
     // throw Error("Transaction failed");
-    cookies().set("localCartId", "");
+    cookies().set('localCartId', '');
   });
 }
 

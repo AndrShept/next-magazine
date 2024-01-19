@@ -1,5 +1,3 @@
-import { FileEdit, Trash2 } from 'lucide-react';
-import React from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,9 +9,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { useToast } from './ui/use-toast';
+import { FileEdit, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import React from 'react';
+
 import { ActionTooltip } from './ActionTooltip';
+import { useToast } from './ui/use-toast';
 
 export const TableIcons = ({ productId }: { productId: string }) => {
   const router = useRouter();
@@ -44,8 +45,8 @@ export const TableIcons = ({ productId }: { productId: string }) => {
   };
   return (
     <>
-      <ActionTooltip label='Edit'>
-        <div className='text-gray-600 h-[38px] w-[38px] sm:p-2 p-1 rounded-md hover:bg-zinc-200 cursor-pointer  '>
+      <ActionTooltip label="Edit">
+        <div className="h-[38px] w-[38px] cursor-pointer rounded-md p-1 text-gray-600 hover:bg-zinc-200 sm:p-2  ">
           <FileEdit
             size={22}
             onClick={() => router.push('/add-product/' + productId)}
@@ -55,8 +56,8 @@ export const TableIcons = ({ productId }: { productId: string }) => {
       <>
         <AlertDialog>
           <AlertDialogTrigger>
-            <ActionTooltip label='Delete'>
-              <div className='text-gray-600 sm:p-2 p-1 rounded-md hover:bg-zinc-200 cursor-pointer '>
+            <ActionTooltip label="Delete">
+              <div className="cursor-pointer rounded-md p-1 text-gray-600 hover:bg-zinc-200 sm:p-2 ">
                 <Trash2 size={22} />
               </div>
             </ActionTooltip>

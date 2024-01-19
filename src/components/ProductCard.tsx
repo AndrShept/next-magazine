@@ -1,17 +1,18 @@
 'use client';
-import { Product } from '@prisma/client';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import { PriceTag } from './PriceTag';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
 
-import { AddToCartButton } from './AddToCartButton';
 import { incrementProductQuantity } from '@/app/products/[id]/actions';
-import { useRouter } from 'next/navigation';
-import { FavoriteIconButton } from './FavoriteIconButton';
+import { Product } from '@prisma/client';
+import { motion } from 'framer-motion';
 import { Eye, Star, StarHalf } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+
 import { ActionTooltip } from './ActionTooltip';
+import { AddToCartButton } from './AddToCartButton';
+import { FavoriteIconButton } from './FavoriteIconButton';
+import { PriceTag } from './PriceTag';
 
 interface ProductCardProps {
   products: Product[];
@@ -39,7 +40,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
             delay: 0.1 * i,
           }}
           // exit={{ opacity: 0 }}
-          className='static overflow-hidden group'
+          className="group static overflow-hidden"
           key={product.id}
           onClick={() =>
             router.push(`/products/${product.id}`, {
@@ -47,32 +48,34 @@ export const ProductCard = ({ products }: ProductCardProps) => {
             })
           }
         >
-          <div className='rounded-xl group    cursor-pointer grid grid-rows-4 hover:shadow-md transition md:h-[300px] md:w-[240px] sm:h-[260px] sm:w-[200px] h-[230px] w-[160px] border  '>
-            <div className='relative w-full h-full row-span-2 overflow-hidden rounded-t-xl'>
+          <div className="group grid    h-[230px] w-[160px] cursor-pointer grid-rows-4 rounded-xl border transition hover:shadow-md sm:h-[260px] sm:w-[200px] md:h-[300px] md:w-[240px]  ">
+            <div className="relative row-span-2 h-full w-full overflow-hidden rounded-t-xl">
               <Image
-                className='object-cover transition duration-300 scale-100 border group-hover:scale-105 rounded-t-xl'
-                alt='img'
+                className="scale-100 rounded-t-xl border object-cover transition duration-300 group-hover:scale-105"
+                alt="img"
                 fill
                 src={product.imageUrl}
               />
               <FavoriteIconButton product={product} />
-              <ActionTooltip label='Рейтинг' sideOffset={2}>
-                <div className='flex absolute items-center justify-center p-1 sm:h-[34px] sm:w-[41px] h-[26px] w-[41px]   bg-white top-2 left-2  hover:cursor-default hover:bg-zinc-100 rounded-full'>
+              <ActionTooltip label="Рейтинг" sideOffset={2}>
+                <div className="absolute left-2 top-2 flex h-[26px] w-[41px] items-center justify-center rounded-full   bg-white p-1 hover:cursor-default  hover:bg-zinc-100 sm:h-[34px] sm:w-[41px]">
                   <Star
-                  size={20}
+                    size={20}
                     strokeWidth={0}
-                    className=' fill-amber-400   '
+                    className=" fill-amber-400   "
                   />
-                  <span className='ml-[2px] text-[12px]'>{product.ratingValue}</span>
+                  <span className="ml-[2px] text-[12px]">
+                    {product.ratingValue}
+                  </span>
                 </div>
               </ActionTooltip>
             </div>
-            <div className='flex flex-col justify-between p-2 '>
-              <div className='flex items-start justify-between '>
-                <h2 className='text-sm font-semibold md:text-lg '>
+            <div className="flex flex-col justify-between p-2 ">
+              <div className="flex items-start justify-between ">
+                <h2 className="text-sm font-semibold md:text-lg ">
                   {product.name}
                   {product.isLeaf && (
-                    <h3 className='text-sm font-normal text-green-600'>
+                    <h3 className="text-sm font-normal text-green-600">
                       (листок)
                     </h3>
                   )}
@@ -82,9 +85,9 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                     <div className='font-semibold text-muted'>NEW!</div>
                   )} */}
                 {product.isLeaf && (
-                  <div className='relative flex items-center justify-center p-1 border rounded-full sm:h-10 sm:w-10 sm:p-2 w-7 h-7'>
+                  <div className="relative flex h-7 w-7 items-center justify-center rounded-full border p-1 sm:h-10 sm:w-10 sm:p-2">
                     <Image
-                      alt='img'
+                      alt="img"
                       width={1000}
                       height={1000}
                       src={'/leaf.png'}
@@ -95,11 +98,11 @@ export const ProductCard = ({ products }: ProductCardProps) => {
 
               {/* <p className='text-muted-foreground '>{product.description}</p> */}
             </div>
-            <div className='flex items-end justify-between p-2 '>
+            <div className="flex items-end justify-between p-2 ">
               <PriceTag price={product.price} />
 
               <AddToCartButton
-                classname='md:h-10 md:w-10 md:p-[10px]     h-8 w-8 p-[6px]'
+                classname="md:h-10 md:w-10 md:p-[10px]     h-8 w-8 p-[6px]"
                 isShowText={false}
                 productId={product.id}
                 incrementProductQuantity={incrementProductQuantity}

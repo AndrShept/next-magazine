@@ -1,10 +1,12 @@
 'use client';
+
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { usePathname, useRouter } from 'next/navigation';
-import React, { useEffect, useState, useTransition } from 'react';
-import { Input } from './ui/input';
-import qs from 'query-string';
 import { Loader2 } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import qs from 'query-string';
+import React, { useEffect, useState, useTransition } from 'react';
+
+import { Input } from './ui/input';
 
 export const SearchForm = () => {
   const pathname = usePathname();
@@ -17,7 +19,7 @@ export const SearchForm = () => {
       url: pathname,
       query: { searchValue },
     },
-    { skipEmptyString: true, skipNull: true }
+    { skipEmptyString: true, skipNull: true },
   );
 
   const handleClearInput = () => {
@@ -30,24 +32,24 @@ export const SearchForm = () => {
     });
   }, [router, searchValue, url]);
   return (
-    <form className=' px-2 md:px-4  items-center grid xl:grid-cols-10 sm:grid-cols-8 grid-cols-4    '>
-      <div className='relative flex  lg:w-[340px] md:w-[280] sm:w-[280px] xl:col-span-8 col-span-6'>
-        <MagnifyingGlassIcon className='h-6 w-6 text-gray-500 left-2 top-2 absolute' />
+    <form className=" grid grid-cols-4  items-center px-2 sm:grid-cols-8 md:px-4 xl:grid-cols-10    ">
+      <div className="relative col-span-6  flex sm:w-[280px] md:w-[280] lg:w-[340px] xl:col-span-8">
+        <MagnifyingGlassIcon className="absolute left-2 top-2 h-6 w-6 text-gray-500" />
         <Input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value.trimStart())}
-          placeholder='пошук...'
-          className=' w-full min-w-[50px] px-9 h-10 '
+          placeholder="пошук..."
+          className=" h-10 w-full min-w-[50px] px-9 "
         />
         {searchValue && (
           <XMarkIcon
             onClick={handleClearInput}
-            className='h-6 w-6 text-gray-500 absolute right-2 top-2 opacity-70 hover:opacity-100 '
+            className="absolute right-2 top-2 h-6 w-6 text-gray-500 opacity-70 hover:opacity-100 "
           />
         )}
       </div>
-      <div className='col-span-2 sm:block hidden'>
-        {isPending && <Loader2 className=' ml-2 animate-spin' />}
+      <div className="col-span-2 hidden sm:block">
+        {isPending && <Loader2 className=" ml-2 animate-spin" />}
       </div>
     </form>
   );

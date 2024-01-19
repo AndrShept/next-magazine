@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/db/prisma';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
+
 import { authOptions } from '../auth/[...nextauth]/route';
 
 export const POST = async (req: Request) => {
@@ -13,7 +14,7 @@ export const POST = async (req: Request) => {
       throw new Error('Missing required fields ');
     }
     const newReview = await prisma.review.create({
-      data: { content, name, userImage: session?.user.image},
+      data: { content, name, userImage: session?.user.image },
     });
     return NextResponse.json(newReview, { status: 201 });
   } catch (error) {

@@ -10,9 +10,9 @@ const nextConfig = {
       'img.freepik.com',
       'lh3.googleusercontent.com',
       'res.cloudinary.com',
-      "w7.pngwing.com",
-      "www.freepik.com",
-      "cdn-icons-png.flaticon.com",
+      'w7.pngwing.com',
+      'www.freepik.com',
+      'cdn-icons-png.flaticon.com',
     ],
   },
 };

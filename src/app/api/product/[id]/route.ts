@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) => {
   try {
     // const body = await req.json()
@@ -24,7 +24,7 @@ export const DELETE = async (
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) => {
   try {
     const body = await req.json();
@@ -63,7 +63,7 @@ export const PUT = async (
 
 export const GET = async (
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) => {
   try {
     if (!params.id) {

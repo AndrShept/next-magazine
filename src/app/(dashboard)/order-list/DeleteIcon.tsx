@@ -1,4 +1,5 @@
 'use client';
+
 import { useToast } from '@/components/ui/use-toast';
 import { Loader2, Trash2, Trash2Icon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -35,12 +36,12 @@ export const DeleteIcon = ({ orderId }: { orderId: string }) => {
   return (
     <>
       {isPending ? (
-        <Loader2 className='animate-spin ml-2' size={20} />
+        <Loader2 className="ml-2 animate-spin" size={20} />
       ) : (
         <Trash2Icon
           onClick={handleClick}
           size={20}
-          className='ml-2 cursor-pointer hover:text-red-600 duration-200'
+          className="ml-2 cursor-pointer duration-200 hover:text-red-600"
         />
       )}
     </>

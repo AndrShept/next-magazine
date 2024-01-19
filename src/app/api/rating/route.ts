@@ -3,24 +3,23 @@ import { NextResponse } from 'next/server';
 
 export const POST = async (req: Request) => {
   try {
-
     const { productId, rating, userId } = await req.json();
     if (!productId) {
       return NextResponse.json(
         { message: 'Missing fields productId ' },
-        { status: 401 }
+        { status: 401 },
       );
     }
     if (!rating) {
       return NextResponse.json(
         { message: 'Missing fields rating ' },
-        { status: 401 }
+        { status: 401 },
       );
     }
     if (!userId) {
       return NextResponse.json(
         { message: 'Missing fields useId ' },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -33,19 +32,19 @@ export const POST = async (req: Request) => {
     });
     const sumProductRating = product?.rating.reduce(
       (acc, item) => acc + item.rating,
-      0
+      0,
     );
     if (!product || !sumProductRating) {
       return NextResponse.json(
         { message: 'product not found' },
-        { status: 401 }
+        { status: 401 },
       );
     }
     await prisma.product.update({
       where: { id: productId },
       data: {
         ratingValue: Number(
-          (sumProductRating / product?.rating.length).toFixed(1)
+          (sumProductRating / product?.rating.length).toFixed(1),
         ),
       },
     });
@@ -54,7 +53,7 @@ export const POST = async (req: Request) => {
     console.log('create-rating', error);
     return NextResponse.json(
       { error: 'Internal Server Error ' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 };

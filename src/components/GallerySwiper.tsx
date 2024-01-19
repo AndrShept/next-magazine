@@ -1,31 +1,28 @@
 'use client';
 
+import Image from 'next/image';
 import React from 'react';
-
-import {
-  Navigation,
-  Pagination,
-  Scrollbar,
-  A11y,
-  EffectFade,
-  Autoplay,
-} from 'swiper/modules';
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import 'swiper/css/effect-fade';
-import Image from 'next/image';
+import {
+  A11y,
+  Autoplay,
+  EffectFade,
+  Navigation,
+  Pagination,
+  Scrollbar,
+} from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const GallerySwiper = ({ imageArrUrl }: { imageArrUrl: string[] }) => {
   return (
     <Swiper
       // effect='fade'
-     
+
       // install Swiper modules
       modules={[Navigation, Pagination, Scrollbar, A11y, EffectFade, Autoplay]}
       spaceBetween={50}
@@ -39,11 +36,13 @@ export const GallerySwiper = ({ imageArrUrl }: { imageArrUrl: string[] }) => {
       }}
     >
       {imageArrUrl.map((imageUrl) => (
-        <SwiperSlide className='' key={imageUrl}>
-          <div onClick={(e)=>  e.stopPropagation()} className=' relative md:max-w-[1000px]  rounded-lg md:h-[700px] max-w-[600px] lg:left-[20%]  h-[400px]'>
+        <SwiperSlide className="" key={imageUrl}>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className=" relative h-[400px]  max-w-[600px] rounded-lg md:h-[700px] md:max-w-[1000px]  lg:left-[20%]"
+          >
             <Image
-              className=''
-             
+              className=""
               width={1000}
               height={1000}
               alt={'sa'}

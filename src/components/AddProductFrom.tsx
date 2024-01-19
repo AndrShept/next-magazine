@@ -1,7 +1,15 @@
 'use client';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Category, Product } from '@prisma/client';
+import { ArrowLeft, Flower, Flower2, Loader2, Wand2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import z from 'zod';
+
+import { ImageUpload } from './ImageUpload';
+import { Button } from './ui/button';
 import {
   Form,
   FormControl,
@@ -11,8 +19,7 @@ import {
   FormLabel,
   FormMessage,
 } from './ui/form';
-import { Separator } from './ui/separator';
-import { Button } from './ui/button';
+import { Input } from './ui/input';
 import {
   Select,
   SelectContent,
@@ -21,14 +28,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select';
-import { Input } from './ui/input';
-import { ArrowLeft, Flower, Flower2, Loader2, Wand2 } from 'lucide-react';
-import z from 'zod';
-import { ImageUpload } from './ImageUpload';
-import { Category, Product } from '@prisma/client';
-import { useRouter } from 'next/navigation';
-import { useToast } from './ui/use-toast';
+import { Separator } from './ui/separator';
 import { Switch } from './ui/switch';
+import { useToast } from './ui/use-toast';
 
 export const formSchema = z.object({
   name: z.string().min(1, {
@@ -133,34 +135,34 @@ export const AddProductFrom = ({
     window.scroll(0, 0);
   }, []);
   return (
-    <div className='h-full px-4 space-2 max-w-3xl mx-auto '>
+    <div className="space-2 mx-auto h-full max-w-3xl px-4 ">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-8 pb-10'
+          className="space-y-8 pb-10"
         >
-          <div className='space-y-2 w-full  '>
-            <div className='flex items-center gap-2'>
+          <div className="w-full space-y-2  ">
+            <div className="flex items-center gap-2">
               <div
                 onClick={() => router.back()}
-                className='cursor-pointer rounded-full p-2 hover:bg-zinc-300'
+                className="cursor-pointer rounded-full p-2 hover:bg-zinc-300"
               >
-                <ArrowLeft className='text-gray-600' />
+                <ArrowLeft className="text-gray-600" />
               </div>
               <div>
-                <h3 className='text-lg font-medium'>Назад</h3>
-                <p className='text-sm text-muted-foreground'>
+                <h3 className="text-lg font-medium">Назад</h3>
+                <p className="text-sm text-muted-foreground">
                   General information about your Product
                 </p>
               </div>
             </div>
-            <Separator className='bg-primary/10' />
+            <Separator className="bg-primary/10" />
           </div>
           <FormField
-            name='imageUrl'
+            name="imageUrl"
             control={form.control}
             render={({ field }) => (
-              <FormItem className='flex flex-col items-center justify-center space-y-4 '>
+              <FormItem className="flex flex-col items-center justify-center space-y-4 ">
                 <FormControl>
                   <ImageUpload
                     imageArr={imageArr}
@@ -176,17 +178,17 @@ export const AddProductFrom = ({
               </FormItem>
             )}
           />
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4  '>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2  ">
             <FormField
-              name='name'
+              name="name"
               control={form.control}
               render={({ field }) => (
-                <FormItem className=''>
+                <FormItem className="">
                   <FormLabel>Імя</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isLoading}
-                      placeholder='назва продукту'
+                      placeholder="назва продукту"
                       {...field}
                     />
                   </FormControl>
@@ -198,16 +200,15 @@ export const AddProductFrom = ({
               )}
             />
             <FormField
-            
-              name='description'
+              name="description"
               control={form.control}
               render={({ field }) => (
-                <FormItem className=''>
+                <FormItem className="">
                   <FormLabel>Опис</FormLabel>
                   <FormControl>
                     <Input
                       disabled={isLoading}
-                      placeholder='описання продукту'
+                      placeholder="описання продукту"
                       {...field}
                     />
                   </FormControl>
@@ -219,16 +220,16 @@ export const AddProductFrom = ({
               )}
             />
             <FormField
-              name='price'
+              name="price"
               control={form.control}
               render={({ field }) => (
-                <FormItem className=''>
+                <FormItem className="">
                   <FormLabel>Ціна</FormLabel>
                   <FormControl>
                     <Input
-                      type='number'
+                      type="number"
                       disabled={isLoading}
-                      placeholder='price'
+                      placeholder="price"
                       {...field}
                     />
                   </FormControl>
@@ -241,7 +242,7 @@ export const AddProductFrom = ({
               )}
             />
             <FormField
-              name='categoryId'
+              name="categoryId"
               control={form.control}
               render={({ field }) => (
                 <FormItem>
@@ -254,7 +255,7 @@ export const AddProductFrom = ({
                     defaultValue={field.value}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder='Select category' />
+                      <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
                       {categories.map((category) => (
@@ -272,7 +273,7 @@ export const AddProductFrom = ({
             />
 
             <FormField
-              name='status'
+              name="status"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Статус</FormLabel>
@@ -283,11 +284,11 @@ export const AddProductFrom = ({
                     defaultValue={field.value}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder='select status' />
+                      <SelectValue placeholder="select status" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value='active'>Включити</SelectItem>
-                      <SelectItem value='inactive'>Виключити</SelectItem>
+                      <SelectItem value="active">Включити</SelectItem>
+                      <SelectItem value="inactive">Виключити</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -297,11 +298,11 @@ export const AddProductFrom = ({
             />
             <FormField
               control={form.control}
-              name='isLeaf'
+              name="isLeaf"
               render={({ field }) => (
-                <FormItem className=''>
-                  <FormLabel className='text-base'>Листок</FormLabel>
-                  <div className='space-y-0.5 flex border p-[6px] rounded-md items-center mt-0'>
+                <FormItem className="">
+                  <FormLabel className="text-base">Листок</FormLabel>
+                  <div className="mt-0 flex items-center space-y-0.5 rounded-md border p-[6px]">
                     {/* <FormDescription>
                       Receive emails about your account security.
                     </FormDescription> */}
@@ -317,20 +318,20 @@ export const AddProductFrom = ({
               )}
             />
           </div>
-          <div className='space-y-2 w-full'>
-            <Separator className='bg-primary/10' />
+          <div className="w-full space-y-2">
+            <Separator className="bg-primary/10" />
           </div>
 
-          <div className='w-full flex justify-center'>
+          <div className="flex w-full justify-center">
             {isLoading ? (
-              <Button size='lg' disabled={isLoading}>
-                <Flower className='animate-spin mr-3' />
+              <Button size="lg" disabled={isLoading}>
+                <Flower className="mr-3 animate-spin" />
                 Загрузка...
               </Button>
             ) : (
-              <Button size='lg' disabled={isLoading}>
+              <Button size="lg" disabled={isLoading}>
                 {product ? 'Оновити продукт' : 'Створити продукт'}
-                <Flower2 className='w-6 h-6 ml-3' />
+                <Flower2 className="ml-3 h-6 w-6" />
               </Button>
             )}
           </div>

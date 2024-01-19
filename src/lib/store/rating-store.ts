@@ -64,6 +64,6 @@ export const useRatingStore = create<useRatingState>()(
         }
       },
     }),
-    { name: 'rating-store' }
-  )
+    { name: 'rating-store' },
+  ),
 );

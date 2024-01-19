@@ -1,17 +1,19 @@
 'use client';
+
+import { cn } from '@/lib/utils';
 import { CheckIcon } from '@heroicons/react/24/outline';
-import React, { useTransition, useState } from 'react';
-import { Button } from './ui/button';
+import { CartItem, Product } from '@prisma/client';
 import { Loader, Loader2, Wallet } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import React, { useState, useTransition } from 'react';
 import { toast } from 'sonner';
-import { CartItem, Product } from '@prisma/client';
+
+import { Button } from './ui/button';
 
 interface AddToCartButtonProps {
   productId: string;
   incrementProductQuantity: (
-    productId: string
+    productId: string,
   ) => Promise<CartItem & { product: Product }>;
   isShowText?: boolean;
   classname?: string;
@@ -30,7 +32,7 @@ export const AddToCartButton = ({
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className='flex items-center gap-2     '
+      className="flex items-center gap-2     "
     >
       <Button
         variant={'default'}
@@ -53,14 +55,14 @@ export const AddToCartButton = ({
             error: 'Error',
           });
         }}
-        className={cn('rounded-full  gap-x-1  ', classname)}
+        className={cn('gap-x-1  rounded-full  ', classname)}
       >
         {isShowText && 'В Корзину'} <Wallet />
       </Button>
-      {isPending && <Loader2 className='animate-spin' />}
+      {isPending && <Loader2 className="animate-spin" />}
       {!isPending && success && (
-        <span className='text-success   animate-in duration-500 fade-in slide-in-from-right-20  '>
-          <CheckIcon className='h-6 w-6 text-green-500' />
+        <span className="text-success   animate-in fade-in slide-in-from-right-20 duration-500  ">
+          <CheckIcon className="h-6 w-6 text-green-500" />
         </span>
       )}
     </div>

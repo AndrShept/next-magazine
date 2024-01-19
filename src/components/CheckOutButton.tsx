@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+
 import { CheckOut } from '@/components/CheckOut';
 import {
   Dialog,
@@ -10,6 +10,8 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { ShoppingCart } from '@/lib/db/cart';
+import React from 'react';
+
 import { Button } from './ui/button';
 
 export const CheckOutButton = ({ cart }: { cart: ShoppingCart | null }) => {
@@ -17,7 +19,7 @@ export const CheckOutButton = ({ cart }: { cart: ShoppingCart | null }) => {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className='rounded-full mt-4'>Chekout</Button>
+          <Button className="mt-4 rounded-full">Chekout</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>

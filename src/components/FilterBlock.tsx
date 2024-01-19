@@ -1,7 +1,6 @@
 'use client';
 
-import * as React from 'react';
-
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -28,12 +27,13 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Category } from '@prisma/client';
+import { Leaf, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import qs from 'query-string';
-import { Leaf, X } from 'lucide-react';
-import { Toggle } from './ui/toggle';
-import { Button } from '@/components/ui/button';
+import * as React from 'react';
+
 import { ActionTooltip } from './ActionTooltip';
+import { Toggle } from './ui/toggle';
 
 interface FilterBlockProps {
   categories: Category[];
@@ -59,7 +59,7 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
       url: '/',
       query,
     },
-    { skipNull: true, skipEmptyString: true }
+    { skipNull: true, skipEmptyString: true },
   );
   const clearAllFilter = () => {
     setFilter('popular');
@@ -80,12 +80,12 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
   }, [router, url]);
 
   return (
-    <div className='overflow-x-auto flex-wrap w-full  justify-center  p-3 border-y flex items-center lg:gap-6 md:gap-3 gap-2'>
+    <div className="flex w-full flex-wrap  items-center  justify-center gap-2 overflow-x-auto border-y p-3 md:gap-3 lg:gap-6">
       <Select value={categoryId} onValueChange={setCategoryId}>
-        <SelectTrigger className='max-w-[140px] rounded-full '>
-          <SelectValue placeholder='Виберіть категорію' />
+        <SelectTrigger className="max-w-[140px] rounded-full ">
+          <SelectValue placeholder="Виберіть категорію" />
         </SelectTrigger>
-        <SelectContent side='top'>
+        <SelectContent side="top">
           <SelectGroup>
             <SelectLabel>Категорії</SelectLabel>
             <SelectItem value={''}>Всі</SelectItem>
@@ -99,16 +99,16 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
       </Select>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className=' rounded-full font-normal w-32' variant='outline'>
+          <Button className=" w-32 rounded-full font-normal" variant="outline">
             {filter === 'price' ? 'Ціна' : 'Популярні'}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent side='top'>
+        <DropdownMenuContent side="top">
           <DropdownMenuLabel>Фільтрувати</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup value={filter} onValueChange={setFilter}>
-            <DropdownMenuRadioItem value='price'>Ціна</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value='rating'>
+            <DropdownMenuRadioItem value="price">Ціна</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="rating">
               Популярні
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
@@ -116,21 +116,21 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
       </DropdownMenu>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button className=' rounded-full font-normal w-32' variant='outline'>
+          <Button className=" w-32 rounded-full font-normal" variant="outline">
             {sortDirection === 'asc' ? `за зростанням` : ` за спаданням`}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent side='top'>
+        <DropdownMenuContent side="top">
           <DropdownMenuLabel>Фільтрувати</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup
             value={sortDirection}
             onValueChange={setSortDirection}
           >
-            <DropdownMenuRadioItem value='asc'>
+            <DropdownMenuRadioItem value="asc">
               за зростанням
             </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value='desc'>
+            <DropdownMenuRadioItem value="desc">
               за спаданням
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
@@ -148,21 +148,21 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
         </div>
       </div> */}
 
-      <div className='gap-0 flex items-center'>
+      <div className="flex items-center gap-0">
         <Toggle
           pressed={isFilteredLeaf}
           onPressedChange={setIsFilteredLeaf}
-          className='rounded-full '
-          aria-label='Toggle italic'
+          className="rounded-full "
+          aria-label="Toggle italic"
         >
           <Leaf size={20} />
         </Toggle>
 
-        <ActionTooltip label='Очистити фільтри'>
+        <ActionTooltip label="Очистити фільтри">
           <Button
             disabled={defaultState}
             onClick={clearAllFilter}
-            className='rounded-full'
+            className="rounded-full"
             variant={'ghost'}
             size={'icon'}
           >

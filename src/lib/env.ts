@@ -1,4 +1,4 @@
-import zod from 'zod'
+import zod from 'zod';
 
 const envSchema = zod.object({
   DATABASE_URL: zod.string().nonempty(),
@@ -8,5 +8,4 @@ const envSchema = zod.object({
   NEXTAUTH_SECRET: zod.string().nonempty(),
 });
 
-
-export const env = envSchema.parse(process.env)
+export const env = envSchema.parse(process.env);

@@ -1,10 +1,12 @@
 'use client';
+
+import { useFavorite } from '@/lib/store/favorite-store';
+import { cn } from '@/lib/utils';
+import { Product } from '@prisma/client';
 import { Star } from 'lucide-react';
 import React from 'react';
+
 import { Button } from './ui/button';
-import { useFavorite } from '@/lib/store/favorite-store';
-import { Product } from '@prisma/client';
-import { cn } from '@/lib/utils';
 
 interface FavoriteIconButton {
   product: Product;
@@ -15,7 +17,7 @@ export const FavoriteIconButton = ({ product }: FavoriteIconButton) => {
     useFavorite();
 
   const isFavoriteExist = favoriteProducts.some(
-    (favorite) => favorite.id === product.id
+    (favorite) => favorite.id === product.id,
   );
   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
@@ -35,7 +37,7 @@ export const FavoriteIconButton = ({ product }: FavoriteIconButton) => {
         'absolute right-2 top-2 h-8 w-8 rounded-full text-yellow-500   md:h-10 md:w-10',
         {
           'bg-yellow-500 hover:bg-yellow-400': isFavoriteExist,
-        }
+        },
       )}
       variant={'secondary'}
       size={'icon'}

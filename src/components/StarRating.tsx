@@ -1,7 +1,7 @@
 'use client';
+
 import { useRatingStore } from '@/lib/store/rating-store';
 import { Rating } from '@prisma/client';
-import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { Rating as RatingComponent } from 'react-simple-star-rating';
