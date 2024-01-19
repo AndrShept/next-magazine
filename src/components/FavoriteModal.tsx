@@ -8,7 +8,7 @@ import {
 import { ChevronLeft, ChevronRight, Star, X } from 'lucide-react';
 import { Button } from './ui/button';
 import { ActionTooltip } from './ActionTooltip';
-import { useFavorite } from '@/lib/store/favorite-store';
+import { useFavoriteStore } from '@/lib/store/favorite-store';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { formatPrice } from '@/lib/format';
@@ -27,7 +27,7 @@ export const FavoriteModal = () => {
     itemsPerPage,
     decrementPage,
     incrementPage,
-  } = useFavorite();
+  } = useFavoriteStore();
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const totalPage = Math.ceil(favoriteProducts.length / itemsPerPage);
@@ -62,7 +62,7 @@ export const FavoriteModal = () => {
           ' w-min': favoriteProducts.length > 0,
         })}
       >
-        {favoriteProducts.length > 0 && (
+        {!!favoriteProducts.length && (
           <ul className='flex flex-col gap-1  '>
             {favoriteProducts.slice(startIndex, endIndex).map((product) => (
               <li

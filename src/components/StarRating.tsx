@@ -1,5 +1,5 @@
 'use client';
-import { useRating } from '@/lib/store/rating-store';
+import { useRatingStore } from '@/lib/store/rating-store';
 import { Rating } from '@prisma/client';
 import { Loader } from 'lucide-react';
 import { useRouter } from 'next/navigation';
@@ -8,31 +8,33 @@ import { Rating as RatingComponent } from 'react-simple-star-rating';
 import { v4 as uuidv4 } from 'uuid';
 
 export function StarRating({ productId }: { productId: string }) {
-  const { setRating, getProductById, isLoading, data, rating } = useRating();
-  // const { product } = data;
+  const { setRating, rating, setRatingByProductId } = useRatingStore();
 
   const router = useRouter();
   const initialValue = rating.find((item) => item.productId === productId);
 
   // Catch Rating value
   const handleRating = async (rate: number) => {
-
     setRating({ productId, rating: rate, userId: uuidv4() });
-    const rating = useRating.getState().rating;
-    const findRating = rating.find((item) => item.productId === productId);
-
-    try {
-      const res = await fetch(`/api/rating`, {
-        method: 'POST',
-        body: JSON.stringify(findRating),
-      });
-      if (res.ok) {
-        router.refresh();
-        // getProductById(productId);
-      }
-    } catch (error) {
-      console.log('error', error);
+    const res = await setRatingByProductId(productId);
+    if (res.rating) {
+      router.refresh();
     }
+    // const rating = useRating.getState().rating;
+    // const findRating = rating.find((item) => item.productId === productId);
+
+    // try {
+    //   const res = await fetch(`/api/rating`, {
+    //     method: 'POST',
+    //     body: JSON.stringify(findRating),
+    //   });
+    //   if (res.ok) {
+    //     router.refresh();
+
+    //   }
+    // } catch (error) {
+    //   console.log('error', error);
+    // }
 
     // other logic
   };
@@ -50,7 +52,7 @@ export function StarRating({ productId }: { productId: string }) {
       <RatingComponent
         // allowFraction
         readonly={initialValue?.productId === productId || false}
-        initialValue={initialValue?.rating||0}
+        initialValue={initialValue?.rating || 0}
         transition
         size={25}
         onClick={handleRating}

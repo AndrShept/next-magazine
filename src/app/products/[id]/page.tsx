@@ -1,13 +1,10 @@
 import { AddToCartButton } from '@/components/AddToCartButton';
 
-import { Separator } from '@/components/ui/separator';
 import { prisma } from '@/lib/db/prisma';
-import { formatPrice } from '@/lib/format';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { ProductById } from '@/components/ProductById';
-import { cookies } from 'next/dist/client/components/headers';
 import { useView } from '@/lib/store/view-store';
 import { revalidatePath } from 'next/cache';
 

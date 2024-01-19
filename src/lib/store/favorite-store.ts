@@ -2,19 +2,17 @@ import { Product } from '@prisma/client';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface FavoriteDataProps extends Product {}
-
-interface useFavoriteProps {
+interface useFavoriteState {
   page: number;
   itemsPerPage: number;
-  favoriteProducts: FavoriteDataProps[];
-  addFavoriteProduct: (product: FavoriteDataProps) => void;
+  favoriteProducts: Product[];
+  addFavoriteProduct: (product: Product) => void;
   removeFavoriteProduct: (id: string) => void;
   clearAllFavoriteProduct: () => void;
   incrementPage: () => void;
   decrementPage: () => void;
 }
-export const useFavorite = create<useFavoriteProps>()(
+export const useFavoriteStore = create<useFavoriteState>()(
   persist(
     (set) => ({
       page: 1,
