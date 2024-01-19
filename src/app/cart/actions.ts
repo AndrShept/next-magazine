@@ -50,3 +50,23 @@ export async function setProductQuantity(productId: string, quantity: number) {
 
   revalidatePath('/cart');
 }
+
+export const DeleteProduct = async (productId: string, quantity: number) => {
+  // const quantity = Number(e.target.value);
+
+  await setProductQuantity(productId, quantity);
+  revalidatePath('/cart');
+};
+
+export const increaseQuantity = async (productId: string, quantity: number) => {
+  if (quantity >= 1) {
+    await setProductQuantity(productId, quantity + 1);
+    revalidatePath('/cart');
+  }
+};
+export const decreaseQuantity = async (productId: string, quantity: number) => {
+  if (quantity > 1) {
+    await setProductQuantity(productId, quantity - 1);
+    revalidatePath('/cart');
+  }
+};

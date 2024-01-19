@@ -1,6 +1,6 @@
 'use client';
 
-import { useFavorite } from '@/lib/store/favorite-store';
+import { useFavoriteStore } from '@/lib/store/favorite-store';
 import { cn } from '@/lib/utils';
 import { Product } from '@prisma/client';
 import { Star } from 'lucide-react';
@@ -14,7 +14,7 @@ interface FavoriteIconButton {
 
 export const FavoriteIconButton = ({ product }: FavoriteIconButton) => {
   const { addFavoriteProduct, favoriteProducts, removeFavoriteProduct } =
-    useFavorite();
+  useFavoriteStore();
 
   const isFavoriteExist = favoriteProducts.some(
     (favorite) => favorite.id === product.id,

@@ -3,21 +3,15 @@
 import { CheckOutButton } from '@/components/CheckOutButton';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import {
-  CartItemWithProduct,
-  ShoppingCart,
-  createCart,
-  getCart,
-} from '@/lib/db/cart';
+import { ShoppingCart } from '@/lib/db/cart';
 import { formatPrice } from '@/lib/format';
-import { CheckIcon } from '@heroicons/react/24/solid';
-import { Loader2, MinusCircle, PlusCircle, X } from 'lucide-react';
+import { MinusCircle, PlusCircle, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { ChangeEvent, useEffect, useState, useTransition } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { setProductQuantity } from './actions';
+import { DeleteProduct, decreaseQuantity, increaseQuantity } from './actions';
 
 interface CartEntryProps {
   cart: ShoppingCart;
@@ -25,38 +19,7 @@ interface CartEntryProps {
 
 export const CartEntry = ({ cart }: CartEntryProps) => {
   const [isMount, setIsMount] = useState(false);
-  const [isPending, startTransition] = useTransition();
-  const [success, setSuccess] = useState(false);
   const router = useRouter();
-  const quantityOptions = [...new Array(5)].map(
-    (item, index) => (item = index),
-  );
-  const DeleteProduct = (productId: string, quantity: number) => {
-    // const quantity = Number(e.target.value);
-    startTransition(async () => {
-      await setProductQuantity(productId, quantity);
-      router.refresh();
-      // setSuccess(true);
-    });
-  };
-  const increaseQuantity = (productId: string, quantity: number) => {
-    if (quantity >= 1) {
-      startTransition(async () => {
-        await setProductQuantity(productId, quantity + 1);
-        router.refresh();
-        // setSuccess(true);
-      });
-    }
-  };
-  const decreaseQuantity = (productId: string, quantity: number) => {
-    if (quantity > 1) {
-      startTransition(async () => {
-        await setProductQuantity(productId, quantity - 1);
-        router.refresh();
-        // setSuccess(true);
-      });
-    }
-  };
 
   useEffect(() => {
     setIsMount(true);
@@ -156,7 +119,7 @@ export const CartEntry = ({ cart }: CartEntryProps) => {
           <span className="">Order total</span>
           <span>{formatPrice(cart.subtotal)}</span>
         </div>
-        {/* <Button className='rounded-full mt-4'>Chekout</Button> */}
+
         <CheckOutButton cart={cart} />
       </div>
     </section>
