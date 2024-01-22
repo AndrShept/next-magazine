@@ -61,7 +61,7 @@ export const DeleteProduct = async (productId: string, quantity: number) => {
 export const increaseQuantity = async (productId: string, quantity: number) => {
   if (quantity >= 1) {
     await setProductQuantity(productId, quantity + 1);
-    revalidatePath('/cart');
+    // revalidatePath('/cart');
   }
 };
 export const decreaseQuantity = async (productId: string, quantity: number) => {

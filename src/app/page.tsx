@@ -4,6 +4,7 @@ import { ProductCard } from '@/components/ProductCard';
 import { SwiperComponent } from '@/components/SwiperComponent';
 import { prisma } from '@/lib/db/prisma';
 
+
 interface HomeProps {
   searchParams: {
     page: string;
@@ -65,7 +66,9 @@ export default async function Home({
         <FilterBlock categories={categories} />
         {products.length ? (
           <div className="mx-auto my-4 grid max-w-md grid-cols-2 gap-6 md:max-w-full md:grid-cols-3 md:gap-6 lg:grid-cols-4 xl:grid-cols-4">
-            <ProductCard products={products} />
+           
+              <ProductCard products={products} />
+      
           </div>
         ) : (
           <h1 className="mt-20 text-center text-3xl text-gray-400">

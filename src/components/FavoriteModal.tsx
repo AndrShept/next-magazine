@@ -8,7 +8,7 @@ import {
 import { formatPrice } from '@/lib/format';
 import { useFavoriteStore } from '@/lib/store/favorite-store';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight, Star, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, HeartIcon, Star, X } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -52,7 +52,7 @@ export const FavoriteModal = () => {
             variant={'ghost'}
             size={'icon'}
           >
-            <Star />
+            <HeartIcon />
             {favoriteProducts.length > 0 && (
               <Indicator number={favoriteProducts.length} />
             )}

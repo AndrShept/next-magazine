@@ -25,8 +25,10 @@ export const ProductCard = ({ products }: ProductCardProps) => {
   useEffect(() => setIsMount(true), []);
   if (!isMount) return null;
 
+
   return (
     <>
+
       {products.map((product, i) => (
         <motion.div
           initial={{
