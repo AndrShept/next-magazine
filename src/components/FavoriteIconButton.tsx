@@ -14,7 +14,7 @@ interface FavoriteIconButton {
 
 export const FavoriteIconButton = ({ product }: FavoriteIconButton) => {
   const { addFavoriteProduct, favoriteProducts, removeFavoriteProduct } =
-  useFavoriteStore();
+    useFavoriteStore();
 
   const isFavoriteExist = favoriteProducts.some(
     (favorite) => favorite.id === product.id,

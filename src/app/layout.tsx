@@ -27,7 +27,7 @@ export default function RootLayout({
       <AuthProvider>
         <body className={`${inter.className}  `}>
           <ToastProvider />
-          <div className="sticky top-0 z-50  w-full border-b p-1 drop-shadow-sm bg-zinc-100/80 backdrop-blur-md">
+          <div className="sticky top-0 z-50  w-full border-b bg-zinc-100/80 p-1 drop-shadow-sm backdrop-blur-md">
             <Navbar />
           </div>
           <ToasterSonner />

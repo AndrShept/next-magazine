@@ -24,12 +24,8 @@ export const UserMenuButton = () => {
   const { data: session, status } = useSession();
   const isPending = status === 'loading';
   const isAuthenticated = status === 'authenticated';
-  console.log(isPending);
-  console.log(status);
-  const user = session?.user;
   const handleSignIn = async () => {
-    await signIn('google');
-    toast.success('Login Success');
+    await signIn('google').then(() => toast.success('Login Success'));
   };
 
   const handleSingOut = async () => {
@@ -43,7 +39,7 @@ export const UserMenuButton = () => {
           <div className=" relative flex h-7 w-7  items-center justify-center rounded-full text-muted-foreground  sm:h-9 sm:w-9 ">
             {isAuthenticated && !isPending && (
               <Image
-                src={user?.image || ''}
+                src={session?.user.image || ''}
                 alt="avatar image"
                 fill
                 className="rounded-full"
@@ -66,26 +62,34 @@ export const UserMenuButton = () => {
               <Link href="/dashboard">Dashboard</Link>
             </li>
             {isAuthenticated && (
-              <li className="flex p-2 hover:bg-zinc-100">
+              <button
+                disabled={isPending}
+                onClick={handleSingOut}
+                className="flex p-2 hover:bg-zinc-100"
+              >
                 <ArrowLeftOnRectangleIcon className="mr-2 h-5 w-5 " />{' '}
-                <button disabled={isPending} onClick={handleSingOut}>
+                <span>
                   Sign Out{' '}
                   {isPending && (
                     <span className="loading loading-spinner loading-sm" />
                   )}
-                </button>
-              </li>
+                </span>
+              </button>
             )}
             {!isAuthenticated && (
-              <li className="flex p-2 hover:bg-zinc-100">
+              <button
+                disabled={isPending}
+                onClick={handleSignIn}
+                className="flex p-2 hover:bg-zinc-100"
+              >
                 <ArrowLeftOnRectangleIcon className="mr-2 h-5 w-5 " />{' '}
-                <button disabled={isPending} onClick={handleSignIn}>
+                <span>
                   login
                   {isPending && (
                     <span className="loading loading-spinner loading-sm" />
                   )}
-                </button>
-              </li>
+                </span>
+              </button>
             )}
           </section>
         </PopoverContent>

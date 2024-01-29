@@ -17,11 +17,10 @@ import {
   Scrollbar,
 } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
 import { Skeleton } from './ui/skeleton';
 
 export const SwiperComponent = ({ allImageUrl }: { allImageUrl: string[] }) => {
-
-
   return (
     <Swiper
       // effect='fade'

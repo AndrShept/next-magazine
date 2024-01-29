@@ -12,7 +12,7 @@ export interface SearchParamsProps {
     categoryId: string;
     searchQuery: string;
     categoryState: string;
-    filter: string ;
+    filter: string;
     isNew: boolean;
     sortDirection: string;
     searchValue: string;
