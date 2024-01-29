@@ -20,14 +20,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { Category } from '@prisma/client';
-import { Leaf, X } from 'lucide-react';
+import {
+  ArrowDownUpIcon,
+  LayoutGridIcon,
+  Leaf,
+  StarHalfIcon,
+  X,
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import qs from 'query-string';
 import * as React from 'react';
@@ -41,18 +41,18 @@ interface FilterBlockProps {
 
 export const FilterBlock = ({ categories }: FilterBlockProps) => {
   const router = useRouter();
-  const [filter, setFilter] = React.useState('popular');
+  const [filter, setFilter] = React.useState('rating');
   const [isNew, setIsNew] = React.useState(false);
   const [isFilteredLeaf, setIsFilteredLeaf] = React.useState(false);
   const [categoryId, setCategoryId] = React.useState('');
-  const [sortDirection, setSortDirection] = React.useState('asc');
+  const [sortDirection, setSortDirection] = React.useState('desc');
   const query = { filter, isNew, categoryId, sortDirection, isFilteredLeaf };
   const defaultState =
-    filter === 'popular' &&
+    filter === 'rating' &&
     isNew === false &&
     isFilteredLeaf === false &&
     categoryId === '' &&
-    sortDirection === 'asc';
+    sortDirection === 'desc';
 
   const url = qs.stringifyUrl(
     {
@@ -62,11 +62,11 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
     { skipNull: true, skipEmptyString: true },
   );
   const clearAllFilter = () => {
-    setFilter('popular');
+    setFilter('rating');
     setIsNew(false);
     setIsFilteredLeaf(false);
     setCategoryId('');
-    setSortDirection('asc');
+    setSortDirection('desc');
   };
 
   React.useEffect(() => {
@@ -82,13 +82,17 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
   return (
     <div className="flex w-full flex-wrap  items-center  justify-center gap-2 overflow-x-auto border-y p-3 md:gap-3 lg:gap-6">
       <Select value={categoryId} onValueChange={setCategoryId}>
-        <SelectTrigger className="max-w-[140px] rounded-full ">
-          <SelectValue placeholder="Виберіть категорію" />
-        </SelectTrigger>
-        <SelectContent side="top">
+        <section className="flex items-center">
+          <LayoutGridIcon className="mr-2 h-6 w-6 text-muted-foreground" />
+          <SelectTrigger className="min-w-[100px] max-w-[140px] rounded-full ">
+            <SelectValue placeholder="Виберіть категорію" />
+          </SelectTrigger>
+        </section>
+
+        <SelectContent className="w-32" side="top">
           <SelectGroup>
             <SelectLabel>Категорії</SelectLabel>
-            <SelectItem value={''}>Всі</SelectItem>
+            <SelectItem value={''}>Всі категорії</SelectItem>
             {categories.map((category) => (
               <SelectItem key={category.id} value={category.id}>
                 {category.name}
@@ -98,11 +102,17 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
         </SelectContent>
       </Select>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button className=" w-32 rounded-full font-normal" variant="outline">
-            {filter === 'price' ? 'Ціна' : 'Популярні'}
-          </Button>
-        </DropdownMenuTrigger>
+        <section className="flex items-center">
+          <StarHalfIcon className="mr-2 h-5 w-5 text-muted-foreground" />
+          <DropdownMenuTrigger asChild>
+            <Button
+              className=" w-32 rounded-full font-normal"
+              variant="outline"
+            >
+              {filter === 'price' ? 'Ціна' : 'Популярні'}
+            </Button>
+          </DropdownMenuTrigger>
+        </section>
         <DropdownMenuContent side="top">
           <DropdownMenuLabel>Фільтрувати</DropdownMenuLabel>
           <DropdownMenuSeparator />
@@ -115,11 +125,18 @@ export const FilterBlock = ({ categories }: FilterBlockProps) => {
         </DropdownMenuContent>
       </DropdownMenu>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button className=" w-32 rounded-full font-normal" variant="outline">
-            {sortDirection === 'asc' ? `за зростанням` : ` за спаданням`}
-          </Button>
-        </DropdownMenuTrigger>
+        <section className="flex items-center text-muted-foreground">
+          <ArrowDownUpIcon className="mr-2 h-5 w-5" />
+          <DropdownMenuTrigger asChild>
+            <Button
+              className=" min-w-32 max-w-[300px] rounded-full font-normal"
+              variant="outline"
+            >
+              {sortDirection === 'asc' ? `за зростанням` : ` за спаданням`}
+            </Button>
+          </DropdownMenuTrigger>
+        </section>
+
         <DropdownMenuContent side="top">
           <DropdownMenuLabel>Фільтрувати</DropdownMenuLabel>
           <DropdownMenuSeparator />

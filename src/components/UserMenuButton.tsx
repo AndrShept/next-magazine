@@ -1,93 +1,95 @@
 'use client';
 
 import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
   ArrowLeftOnRectangleIcon,
   WrenchScrewdriverIcon,
 } from '@heroicons/react/24/outline';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { UserCircle2Icon, UserIcon } from 'lucide-react';
 import { Session } from 'next-auth';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState, useTransition } from 'react';
+import React from 'react';
 import { toast } from 'react-hot-toast';
 
-interface UserMenuButtonProps {
-  session: Session;
-}
+import { Skeleton } from './ui/skeleton';
 
-export const UserMenuButton = ({ session }: UserMenuButtonProps) => {
+export const UserMenuButton = () => {
+  const { data: session, status } = useSession();
+  const isPending = status === 'loading';
+  const isAuthenticated = status === 'authenticated';
+  console.log(isPending);
+  console.log(status);
   const user = session?.user;
-  const [isPending, startTransition] = useTransition();
-  const handleSignIn = () => {
-    startTransition(async () => {
-      await signIn('google');
-      toast.success('Login Success');
-    });
+  const handleSignIn = async () => {
+    await signIn('google');
+    toast.success('Login Success');
   };
 
-  const handleSingOut = () => {
-    startTransition(async () => {
-      await signOut({ callbackUrl: '/' });
-    });
+  const handleSingOut = async () => {
+    await signOut({ callbackUrl: '/' });
   };
 
   return (
-    <div>
-      <div className="dropdown-end dropdown ">
-        <label tabIndex={0} className="btn-ghost btn-circle avatar btn ">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full text-center ">
-            {user ? (
+    <>
+      <Popover>
+        <PopoverTrigger>
+          <div className=" relative flex h-7 w-7  items-center justify-center rounded-full text-muted-foreground  sm:h-9 sm:w-9 ">
+            {isAuthenticated && !isPending && (
               <Image
                 src={user?.image || ''}
                 alt="avatar image"
-                height={50}
-                width={50}
+                fill
                 className="rounded-full"
               />
-            ) : (
-              <UserCircleIcon className="h-9 w-9 text-gray-500" />
             )}
 
-            {/* <img src='/images/stock/photo-1534528741775-53994a69daeb.jpg' /> */}
-          </div>
-        </label>
-        <ul
-          tabIndex={0}
-          className="dropdown-content menu rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow"
-        >
-          <li>
-            <a className="justify-between">
-              Profile
-              <span className="badge">New</span>
-            </a>
-          </li>
-          <li>
-            <Link href="/dashboard">
-              <WrenchScrewdriverIcon className="h-5 w-5 text-gray-500" />{' '}
-              Dashboard
-            </Link>
-          </li>
-          <li>
-            {user ? (
-              <button onClick={handleSingOut}>
-                <ArrowLeftOnRectangleIcon className="h-5 w-5 text-gray-500" />{' '}
-                Sign Out{' '}
-                {isPending && (
-                  <span className="loading loading-spinner loading-sm" />
-                )}
-              </button>
-            ) : (
-              <button onClick={handleSignIn}>
-                Login{' '}
-                {isPending && (
-                  <span className="loading loading-spinner loading-sm" />
-                )}
-              </button>
+            {!isAuthenticated && !isPending && (
+              <UserIcon className="hover:text-primary" />
             )}
-          </li>
-        </ul>
-      </div>
-    </div>
+
+            {isPending && (
+              <Skeleton className="h-7 w-7 rounded-full bg-zinc-400 sm:h-9 sm:w-9" />
+            )}
+          </div>
+        </PopoverTrigger>
+        <PopoverContent className="w-fit p-1">
+          <section className=" flex cursor-pointer flex-col text-gray-500">
+            <li className="flex p-2 hover:bg-zinc-100">
+              <WrenchScrewdriverIcon className="mr-2 h-5 w-5 text-muted-foreground" />{' '}
+              <Link href="/dashboard">Dashboard</Link>
+            </li>
+            {isAuthenticated && (
+              <li className="flex p-2 hover:bg-zinc-100">
+                <ArrowLeftOnRectangleIcon className="mr-2 h-5 w-5 " />{' '}
+                <button disabled={isPending} onClick={handleSingOut}>
+                  Sign Out{' '}
+                  {isPending && (
+                    <span className="loading loading-spinner loading-sm" />
+                  )}
+                </button>
+              </li>
+            )}
+            {!isAuthenticated && (
+              <li className="flex p-2 hover:bg-zinc-100">
+                <ArrowLeftOnRectangleIcon className="mr-2 h-5 w-5 " />{' '}
+                <button disabled={isPending} onClick={handleSignIn}>
+                  login
+                  {isPending && (
+                    <span className="loading loading-spinner loading-sm" />
+                  )}
+                </button>
+              </li>
+            )}
+          </section>
+        </PopoverContent>
+      </Popover>
+    </>
   );
 };

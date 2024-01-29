@@ -1,4 +1,4 @@
-import { ProductList } from '@/components/ProductList';
+import { ProductList } from '@/components/AllProductListDashboard';
 import { prisma } from '@/lib/db/prisma';
 import { Product } from '@prisma/client';
 import React from 'react';

@@ -24,7 +24,7 @@ interface ProductListProps {
   products: Product[];
 }
 
-export const ProductList = ({ products }: ProductListProps) => {
+export const AllProductListDashboard = ({ products }: ProductListProps) => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
 

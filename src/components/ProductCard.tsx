@@ -25,10 +25,8 @@ export const ProductCard = ({ products }: ProductCardProps) => {
   useEffect(() => setIsMount(true), []);
   if (!isMount) return null;
 
-
   return (
     <>
-
       {products.map((product, i) => (
         <motion.div
           initial={{
@@ -87,7 +85,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                     <div className='font-semibold text-muted'>NEW!</div>
                   )} */}
                 {product.isLeaf && (
-                  <div className="relative flex h-7 w-7 items-center justify-center rounded-full border p-1 sm:h-10 sm:w-10 sm:p-2">
+                  <div className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full  p-1 sm:h-10 sm:w-10 sm:p-2">
                     <Image
                       alt="img"
                       width={1000}

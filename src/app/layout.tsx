@@ -25,10 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={`${inter.className} `}>
+        <body className={`${inter.className}  `}>
           <ToastProvider />
-
-          <Navbar />
+          <div className="sticky top-0 z-50  w-full border-b p-1 drop-shadow-sm bg-zinc-100/80 backdrop-blur-md">
+            <Navbar />
+          </div>
           <ToasterSonner />
           <main className=" mx-auto   min-h-screen min-w-[300px]   max-w-7xl p-4">
             {children}
