@@ -41,7 +41,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
       <main className="flex flex-col ">
         <SwiperComponent allImageUrl={allImageUrl} />
         <FilterBlock categories={categories} />
-        <Suspense fallback={<SkeletonProductList />}>
+        <Suspense  fallback={<SkeletonProductList />}>
           <ProductList searchParams={searchParams} />
         </Suspense>
         {totalPage > 1 && false && (
